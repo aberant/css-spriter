@@ -1,0 +1,7 @@
+Manifest
+.DS_Store
+pkg/*
+doc/*
+coverage/*
+html/*
+rdoc/*
