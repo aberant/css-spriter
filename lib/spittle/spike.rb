@@ -40,8 +40,13 @@ module PNG
     def handle(type, data)
       case(type)
       when "IHDR"
-        raw = data.unpack("N2C5")
-        @width, @height, @depth, @color_type, _, _, _ = raw
+        @ihdr = PNG::IHDR.new( data )
+        
+        @width = @ihdr.width
+        @height = @ihdr.height
+        @depth = @ihdr.depth
+        @color_type = @ihdr.color_type
+        
       when "IDAT"
         @raw_data << data 
       when "IEND"
