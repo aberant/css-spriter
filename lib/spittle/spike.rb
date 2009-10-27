@@ -1,6 +1,5 @@
 module PNG
   class Spike
-    HEADER = [137, 80, 78, 71, 13, 10, 26, 10].pack("C*")
     class << self
       def open(file_name)
         png = Spike.new
@@ -20,6 +19,7 @@ module PNG
       @raw_data = ""
       File.open(file_name, "r") do |f|
         header = f.read(8)
+        
         while(! f.eof?) do 
           parse_chunk(f)
         end
@@ -142,6 +142,8 @@ module PNG
     end
   
     def generate_png
+      header = PNG::Header.new.encode
+      
       raw_data = @data.pack("C*")
       ihdr_data = [
        width,height,
@@ -150,7 +152,7 @@ module PNG
       ihdr = chunk("IHDR", ihdr_data)
       idat = chunk("IDAT", Zlib::Deflate.deflate(raw_data))
       iend = chunk("IEND", "")
-      HEADER + ihdr + idat + iend
+      header + ihdr + idat + iend
     end
 
     def chunk(type, data)
