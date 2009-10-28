@@ -20,5 +20,10 @@ module PNG
     def to_a
       [@width, @height, @depth, @color_type, 0, 0, 0]
     end
+    
+    def to_chunk
+      to_check = "IHDR" + encode
+      [encode.length].pack("N") + to_check + [Zlib.crc32(to_check)].pack("N")
+    end
   end
 end

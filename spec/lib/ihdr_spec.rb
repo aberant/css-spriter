@@ -8,6 +8,7 @@ describe PNG::IHDR do
     @color_type = 2
     
     @raw = [@width, @height, @bit_depth, @color_type, 0, 0, 0].pack("N2C5")
+    @chunk = chunk( "IHDR", @raw )
   end
   
   it "pulls out the width from the ihdr block" do
@@ -30,8 +31,13 @@ describe PNG::IHDR do
     @header.color_type.should == @color_type  
   end
   
-  it "encodes it's self propperly" do
+  it "encodes it's self properly" do
     @header = PNG::IHDR.new_from_raw( @raw )
     @header.encode.should == @raw
+  end
+  
+  it "should be able to make a header chunk" do
+    @header = PNG::IHDR.new_from_raw( @raw )
+    @header.to_chunk.should == @chunk
   end
 end

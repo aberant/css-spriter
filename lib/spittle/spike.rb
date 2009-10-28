@@ -144,11 +144,10 @@ module PNG
   
     def generate_png
       header = PNG::FileHeader.new.encode
-      ihdr_data = PNG::IHDR.new( width, height ).encode
       
       raw_data = @data.pack("C*")
 
-      ihdr = chunk("IHDR", ihdr_data)
+      ihdr = PNG::IHDR.new( width, height ).to_chunk
       idat = chunk("IDAT", Zlib::Deflate.deflate(raw_data))
       iend = chunk("IEND", "")
       header + ihdr + idat + iend
