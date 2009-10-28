@@ -16,7 +16,6 @@ module PNG
     end
 
     def open(file_name)
-      @raw_data = ""
       File.open(file_name, "r") do |f|
         header = f.read(8)
         
@@ -44,7 +43,7 @@ module PNG
         
         @width, @height, @depth, @color_type = @ihdr.to_a
       when "IDAT"
-        @raw_data << data 
+        @idat = PNG::IDAT.new( data ) 
       when "IEND"
         # NOOP
       else
@@ -53,7 +52,7 @@ module PNG
     end
   
     def decompress
-      @data = Zlib::Inflate.inflate(@raw_data).unpack("C*")
+      @data = @idat.decompress
     end
 
     def rows
