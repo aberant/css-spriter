@@ -5,3 +5,4 @@ doc/*
 coverage/*
 html/*
 rdoc/*
+examples/pic_data/out.png
