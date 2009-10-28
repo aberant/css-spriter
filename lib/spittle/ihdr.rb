@@ -18,7 +18,7 @@ module PNG
     end
     
     def to_a
-      [@width, @height, @bit_depth, @color_type, 0, 0, 0]
+      [@width, @height, @depth, @color_type, 0, 0, 0]
     end
   end
 end
