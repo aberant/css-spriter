@@ -11,22 +11,22 @@ describe PNG::IHDR do
   end
   
   it "pulls out the width from the ihdr block" do
-    @header = PNG::IHDR.new( @raw )
+    @header = PNG::IHDR.new_from_raw( @raw )
     @header.width.should == @width  
   end
   
   it "pulls out the height from the ihdr block" do
-    @header = PNG::IHDR.new( @raw )
+    @header = PNG::IHDR.new_from_raw( @raw )
     @header.height.should == @height  
   end
   
   it "pulls out the bit depth from the ihdr block" do
-    @header = PNG::IHDR.new( @raw )
+    @header = PNG::IHDR.new_from_raw( @raw )
     @header.depth.should == @bit_depth  
   end  
   
   it "pulls out the color type from the ihdr block" do
-    @header = PNG::IHDR.new( @raw )
+    @header = PNG::IHDR.new_from_raw( @raw )
     @header.color_type.should == @color_type  
   end
 end

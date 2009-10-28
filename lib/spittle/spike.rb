@@ -40,13 +40,9 @@ module PNG
     def handle(type, data)
       case(type)
       when "IHDR"
-        @ihdr = PNG::IHDR.new( data )
+        @ihdr = PNG::IHDR.new_from_raw( data )
         
-        @width = @ihdr.width
-        @height = @ihdr.height
-        @depth = @ihdr.depth
-        @color_type = @ihdr.color_type
-        
+        @width, @height, @depth, @color_type = @ihdr.to_a
       when "IDAT"
         @raw_data << data 
       when "IEND"
@@ -147,7 +143,7 @@ module PNG
     end
   
     def generate_png
-      header = PNG::Header.new.encode
+      header = PNG::FileHeader.new.encode
       
       raw_data = @data.pack("C*")
       ihdr_data = [
