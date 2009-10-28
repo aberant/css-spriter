@@ -29,4 +29,9 @@ describe PNG::IHDR do
     @header = PNG::IHDR.new_from_raw( @raw )
     @header.color_type.should == @color_type  
   end
+  
+  it "encodes it's self propperly" do
+    @header = PNG::IHDR.new_from_raw( @raw )
+    @header.encode.should == @raw
+  end
 end
