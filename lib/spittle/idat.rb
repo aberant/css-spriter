@@ -1,11 +1,21 @@
 module PNG
-  class IDAT
-    def initialize( compressed )
-      @compressed = compressed
+  class IDAT < Chunk
+    attr_reader :uncompressed
+    
+    def self.new_from_compressed( compressed )
+      new( Zlib::Inflate.inflate( compressed ).unpack("C*") )
     end
     
-    def decompress
-      Zlib::Inflate.inflate( @compressed ).unpack("C*")
+    def initialize( uncompressed )
+      @uncompressed = uncompressed
+    end
+
+    def encode
+      Zlib::Deflate.deflate( @uncompressed )
+    end
+    
+    def chunk_name
+      "IDAT"
     end
   end
 end

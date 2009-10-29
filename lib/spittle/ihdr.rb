@@ -1,5 +1,5 @@
 module PNG
-  class IHDR
+  class IHDR < Chunk
     attr_accessor :width, :height, :depth, :color_type
     # attr_accessor :compression_method, :filter_method, :interlace_method
     
@@ -21,9 +21,8 @@ module PNG
       [@width, @height, @depth, @color_type, 0, 0, 0]
     end
     
-    def to_chunk
-      to_check = "IHDR" + encode
-      [encode.length].pack("N") + to_check + [Zlib.crc32(to_check)].pack("N")
+    def chunk_name
+      "IHDR"
     end
   end
 end

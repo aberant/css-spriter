@@ -8,7 +8,7 @@ module PNG
       end
     end
 
-    attr_reader :width, :height, :depth, :color_type, :data
+    attr_reader :width, :height, :depth, :color_type
 
     def initialize(data = [], width = 0, height = 0, depth = 8, color_type = 2)
       @data, @width, @height = data, width, height
@@ -16,6 +16,9 @@ module PNG
     end
 
     def open(file_name)
+      # @idats = []
+      @raw_data = ""
+      
       File.open(file_name, "r") do |f|
         header = f.read(8)
         
@@ -43,7 +46,7 @@ module PNG
         
         @width, @height, @depth, @color_type = @ihdr.to_a
       when "IDAT"
-        @idat = PNG::IDAT.new( data ) 
+        @raw_data << PNG::IDAT.new( data ).uncompressed
       when "IEND"
         # NOOP
       else
@@ -52,7 +55,8 @@ module PNG
     end
   
     def decompress
-      @data = @idat.decompress
+      # @png_data = @idats.map{|i| i.data}.join
+       @data = Zlib::Inflate.inflate(@raw_data).unpack("C*")
     end
 
     def rows
