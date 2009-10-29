@@ -16,8 +16,7 @@ module PNG
     end
 
     def open(file_name)
-      # @idats = []
-      @raw_data = ""
+      @idats = []
       
       File.open(file_name, "r") do |f|
         header = f.read(8)
@@ -46,7 +45,7 @@ module PNG
         
         @width, @height, @depth, @color_type = @ihdr.to_a
       when "IDAT"
-        @raw_data << PNG::IDAT.new( data ).uncompressed
+        @idats << PNG::IDAT.new_from_compressed( data )
       when "IEND"
         # NOOP
       else
@@ -55,8 +54,8 @@ module PNG
     end
   
     def decompress
-      # @png_data = @idats.map{|i| i.data}.join
-       @data = Zlib::Inflate.inflate(@raw_data).unpack("C*")
+      # it's late and there's probably a much easier way to do this 
+      @data = @idats.inject( [] ){ |array, idat| array + idat.uncompressed }
     end
 
     def rows
