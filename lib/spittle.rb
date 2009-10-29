@@ -7,4 +7,5 @@ require 'spittle/spike'
 require 'spittle/chunk'
 require 'spittle/ihdr'
 require 'spittle/idat'
+require 'spittle/iend'
 

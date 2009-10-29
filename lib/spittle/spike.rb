@@ -150,14 +150,9 @@ module PNG
 
       ihdr = PNG::IHDR.new( width, height ).to_chunk
       idat = PNG::IDAT.new( raw_data ).to_chunk
-      iend = chunk("IEND", "")
+      iend = PNG::IEND.new.to_chunk
+      
       header + ihdr + idat + iend
     end
-
-    def chunk(type, data)
-      to_check = type + data
-      [data.length].pack("N") + to_check + [Zlib.crc32(to_check)].pack("N")
-    end
-  
   end
 end
