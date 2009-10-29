@@ -150,7 +150,7 @@ module PNG
       raw_data = @data.pack("C*")
 
       ihdr = PNG::IHDR.new( width, height ).to_chunk
-      idat = chunk("IDAT", Zlib::Deflate.deflate(raw_data))
+      idat = PNG::IDAT.new( raw_data ).to_chunk
       iend = chunk("IEND", "")
       header + ihdr + idat + iend
     end
