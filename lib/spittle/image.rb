@@ -1,12 +1,10 @@
 module PNG
   class Image
-    
     def self.fetch_pixel(idx, row)
       return 0 if row.empty?
       return 0 if idx < 0
       return row[idx] || 0
     end
-    
     
     def initialize( ihdr, idats )
       @ihdr = ihdr
@@ -20,13 +18,11 @@ module PNG
     def depth; @ihdr.depth end
     def color_type; @ihdr.color_type end
     
-    
     def rows
      out = []
      offset = 0
      
      pixel_width = (width * 3) + 1 #1 filter byte * 3 for 3 rgb bytes  TODO: incompatible with other color types
-     
      
      height.times do |c_row| 
        end_row = pixel_width + offset
@@ -66,7 +62,6 @@ module PNG
       
       Image.new( ihdr, [idat] )
     end
-    
     
     def write(file_name)
       File.open(file_name, 'w') do |f|
