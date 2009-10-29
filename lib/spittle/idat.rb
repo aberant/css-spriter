@@ -6,14 +6,14 @@ module PNG
       idats.inject( [] ){ |array, idat| array + idat.uncompressed }
     end
     
-    def self.new_from_compressed( compressed )
-      new( Zlib::Inflate.inflate( compressed ).unpack("C*") )
-    end
-    
-    def initialize( uncompressed )
+    def initialize( uncompressed=[] )
       @uncompressed = uncompressed
     end
 
+    def <<( compressed )
+      @uncompressed += Zlib::Inflate.inflate( compressed ).unpack("C*")
+    end
+    
     def encode
       Zlib::Deflate.deflate( @uncompressed )
     end

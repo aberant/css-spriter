@@ -6,11 +6,12 @@ module PNG
       return row[idx] || 0
     end
     
-    def initialize( ihdr, idats )
+    def initialize( ihdr, idat )
       @ihdr = ihdr
-      @idats = idats
+      @idat = idat
       
-      @uncompressed = IDAT.concat_to_uncompressed( @idats )
+      # doubling image memory
+      @uncompressed = @idat.uncompressed
     end
     
     def width; @ihdr.width end
@@ -60,7 +61,7 @@ module PNG
       ihdr = IHDR.new( width + other.width, height, depth, color_type)
       idat = IDAT.new( data )
       
-      Image.new( ihdr, [idat] )
+      Image.new( ihdr, idat )
     end
     
     def write(file_name)

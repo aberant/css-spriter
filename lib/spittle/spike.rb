@@ -36,7 +36,8 @@ module PNG
         @ihdr = PNG::IHDR.new_from_raw( data )
         @width, @height, @depth, @color_type = @ihdr.to_a
       when "IDAT"
-        @idats << PNG::IDAT.new_from_compressed( data )
+        @idat ||= PNG::IDAT.new
+        @idat << data 
       when "IEND"
         # NOOP
       else
@@ -45,7 +46,7 @@ module PNG
     end
   
     def decompress
-      @image = PNG::Image.new( @ihdr, @idats )
+      @image = PNG::Image.new( @ihdr, @idat )
     end
 
   end
