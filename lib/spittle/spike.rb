@@ -54,8 +54,7 @@ module PNG
     end
   
     def decompress
-      # it's late and there's probably a much easier way to do this 
-      @data = @idats.inject( [] ){ |array, idat| array + idat.uncompressed }
+      @data = PNG::IDAT.concat_to_uncompressed( @idats )
     end
 
     def rows

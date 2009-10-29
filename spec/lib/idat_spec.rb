@@ -25,4 +25,12 @@ describe PNG::IDAT do
     
     @idat.to_chunk.should == @chunk
   end
+  
+  it "concatenates idats" do
+    idat1 = OpenStruct.new :uncompressed => [ 1, 2, 3 ]
+    idat2 = OpenStruct.new :uncompressed => [ 4, 5, 6 ]
+    
+    result = PNG::IDAT.concat_to_uncompressed( [ idat1, idat2 ])
+    result.should == idat1.uncompressed + idat2.uncompressed 
+  end
 end
