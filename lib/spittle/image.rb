@@ -1,5 +1,21 @@
 module PNG
   class Image
+    
+    def self.open( file_name )
+      @parser = Parser.new
+      
+      File.open(file_name, "r") do |f|
+        
+        # TODO: check header validity
+        header = f.read(8)
+        
+        ihdr, idat = @parser.go!( f )
+        
+        Image.new( ihdr, idat )
+      end
+      
+    end
+    
     def initialize( ihdr, idat )
       @ihdr = ihdr
       @idat = idat
@@ -13,34 +29,10 @@ module PNG
     def depth; @ihdr.depth end
     def color_type; @ihdr.color_type end
     
-    def rows
-     out = []
-     offset = 0
-     
-     pixel_width = (width * 3) + 1 #1 filter byte * 3 for 3 rgb bytes  TODO: incompatible with other color types
-     
-     height.times do |c_row| 
-       end_row = pixel_width + offset
-       row = @uncompressed.slice(offset, pixel_width)
-       out << decode(c_row, row, out)
-       offset = end_row
-     end
-     out
-    end
-    
-    def decode(c_row, row, data)
-      last_row = (c_row - 1 < 0 ? [] : data[c_row - 1])
-      type = row.shift
-      filter = Filters[type]
-      process_row(row, last_row, filter)
-    end
-    
-    def process_row(row, last_row, filter)
-      o = []
-      row.each_with_index do |e, i|
-        o[i] = filter.call(e, i, o, last_row)
+    def write(file_name)
+      File.open(file_name, 'w') do |f|
+        f.write(generate_png)
       end
-      o
     end
     
     def merge_right(other)
@@ -58,11 +50,40 @@ module PNG
       Image.new( ihdr, idat )
     end
     
-    def write(file_name)
-      File.open(file_name, 'w') do |f|
-        f.write(generate_png)
-      end
+    
+  
+    def rows
+     out = []
+     offset = 0
+     
+     #1 filter byte * 3 for 3 rgb bytes  TODO: incompatible with other color types
+     pixel_width = (width * 3) + 1 
+     
+     height.times do |c_row| 
+       end_row = pixel_width + offset
+       row = @uncompressed.slice(offset, pixel_width)
+       out << decode(c_row, row, out)
+       offset = end_row
+     end
+     out
     end
+  private
+    
+    def decode(c_row, row, data)
+      last_row = (c_row - 1 < 0 ? [] : data[c_row - 1])
+      type = row.shift
+      filter = Filters[type]
+      process_row(row, last_row, filter)
+    end
+    
+    def process_row(row, last_row, filter)
+      o = []
+      row.each_with_index do |e, i|
+        o[i] = filter.call(e, i, o, last_row)
+      end
+      o
+    end
+    
   
     def generate_png
       file_header = PNG::FileHeader.new.encode
