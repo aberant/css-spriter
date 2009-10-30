@@ -1,11 +1,5 @@
 module PNG
   class Image
-    def self.fetch_pixel(idx, row)
-      return 0 if row.empty?
-      return 0 if idx < 0
-      return row[idx] || 0
-    end
-    
     def initialize( ihdr, idat )
       @ihdr = ihdr
       @idat = idat
@@ -37,7 +31,7 @@ module PNG
     def decode(c_row, row, data)
       last_row = (c_row - 1 < 0 ? [] : data[c_row - 1])
       type = row.shift
-      filter = FILTERS[type]
+      filter = Filters[type]
       process_row(row, last_row, filter)
     end
     
