@@ -6,6 +6,7 @@ describe 'PNG' do
     @expected_dir = File.dirname(__FILE__) + '/expected_output'
     @tmp_dir = File.dirname(__FILE__) + '/tmp'
   end
+
   it 'can read and write a PNG' do 
     img = PNG::Image.open("#{@img_dir}/lightening.png")
     img.write("#{@tmp_dir}/write_test.png")
