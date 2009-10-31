@@ -10,4 +10,5 @@ require 'spittle/ihdr'
 require 'spittle/idat'
 require 'spittle/iend'
 require 'spittle/image'
+require 'spittle/sprite'
 
