@@ -5,10 +5,6 @@ module PNG
       @parser = Parser.new
       
       File.open(file_name, "r") do |f|
-        
-        # TODO: check header validity
-        header = f.read(8)
-        
         ihdr, idat = @parser.go!( f )
         
         Image.new( ihdr, idat )

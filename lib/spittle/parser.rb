@@ -2,6 +2,11 @@ module PNG
   class Parser
     
     def go!( file )
+      # TODO: check header validity
+      header = file.read(8)
+      
+      raise "Invalid PNG file header" unless ( header == FileHeader.new.encode)
+      
       while(! file.eof?) do 
         parse_chunk(file)
       end
