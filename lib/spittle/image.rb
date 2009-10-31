@@ -63,6 +63,10 @@ module PNG
      end
      out
     end
+    
+    def inspect
+      "color type: #{color_type}, depth: #{depth}, width: #{width}, height: #{height}"
+    end
   private
     
     def decode(c_row, row, data)
