@@ -15,9 +15,6 @@ module PNG
     def initialize( ihdr, idat )
       @ihdr = ihdr
       @idat = idat
-      
-      # doubling image memory
-      @uncompressed = @idat.uncompressed
     end
     
     def width; @ihdr.width end
@@ -57,7 +54,7 @@ module PNG
      
      height.times do |c_row| 
        end_row = pixel_width + offset
-       row = @uncompressed.slice(offset, pixel_width)
+       row = @idat.uncompressed.slice(offset, pixel_width)
        out << decode(c_row, row, out)
        offset = end_row
      end
@@ -88,7 +85,7 @@ module PNG
     def generate_png
       file_header = PNG::FileHeader.new.encode
       
-      raw_data = @uncompressed.pack("C*")
+      raw_data = @idat.uncompressed.pack("C*")
 
       ihdr = PNG::IHDR.new( width, height ).to_chunk
       idat = PNG::IDAT.new( raw_data ).to_chunk
