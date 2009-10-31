@@ -2,7 +2,6 @@ module PNG
   class Filters
     #TODO: feature envy, this behavior belongs to a row. 
     def self.fetch_pixel(idx, row)
-      return 0 if row.empty?
       return 0 if idx < 0
       return row[idx] || 0
     end
