@@ -33,7 +33,9 @@ module PNG
       r = other.rows
 
       data = l.zip r
-      data.each { |row| row.unshift(0) } #prepend the filter byte o = no filter
+      
+      #prepend the filter byte 0 = no filter
+      data.each { |row| row.unshift(0) } 
       r = nil
       data.flatten!
       

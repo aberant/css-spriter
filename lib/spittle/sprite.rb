@@ -1,18 +1,25 @@
 module PNG
   class Sprite
-    # imagining a setup where a sprite is just an array of images
-    # nothing is calculated until render time
-    # so merge_right would look like
+    attr_reader :images
     
-    # def merge_right( other_img )
-    #   images << other_img
-    # end
+    def initialize
+      @images = []
+    end
     
-    # and merge_left would be
-    # def merge_left( other_image )
-    #  images.unshift( other_image )
-    # end
+    def merge_right( image )
+      @images << image
+    end
     
-    # render would then take the head and merge_right the tail
+    def merge_left( image )
+      @images.unshift( image )
+    end
+
+    def write( output_filename )
+      head, *tail = @images
+      
+      result = tail.inject( head ){|head, image|  head.merge_right( image )}
+      
+      result.write( output_filename )
+    end
   end
 end

@@ -4,6 +4,8 @@ require 'spittle'
 require 'spec'
 require 'spec/autorun'
 
+require 'builders/image_builder'
+
 Spec::Runner.configure do |config|
   
 end
