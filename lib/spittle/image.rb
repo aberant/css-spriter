@@ -4,19 +4,23 @@ module PNG
     def self.open( file_name )
       @parser = Parser.new
       
+      name = File.basename( file_name, ".png" )
+      
       File.open(file_name, "r") do |f|
         ihdr, idat = @parser.go!( f )
         
-        Image.new( ihdr, idat )
+        Image.new( ihdr, idat, name )
       end
       
     end
     
-    def initialize( ihdr, idat )
+    def initialize( ihdr, idat, name )
       @ihdr = ihdr
       @idat = idat
+      @name = name
     end
     
+    attr_reader :name
     def width; @ihdr.width end
     def height; @ihdr.height end
     def depth; @ihdr.depth end
@@ -41,8 +45,9 @@ module PNG
       
       ihdr = IHDR.new( width + other.width, height, depth, color_type)
       idat = IDAT.new( data )
+      img_name  = "#{name}_#{other.name}"
       
-      Image.new( ihdr, idat )
+      Image.new( ihdr, idat, img_name )
     end
     
     
