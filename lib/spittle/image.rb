@@ -50,7 +50,23 @@ module PNG
       Image.new( ihdr, idat, img_name )
     end
     
-    
+    def merge_left( other )
+      l = other.rows
+      r = self.rows
+      
+      data = l.zip r
+      
+      #prepend the filter byte 0 = no filter
+      data.each { |row| row.unshift(0) } 
+      r = nil
+      data.flatten!
+      
+      ihdr = IHDR.new( width + other.width, height, depth, color_type)
+      idat = IDAT.new( data )
+      img_name  = "#{name}_#{other.name}"
+      
+      Image.new( ihdr, idat, img_name )
+    end
   
     def rows
      out = []
