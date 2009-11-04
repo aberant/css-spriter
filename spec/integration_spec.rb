@@ -14,9 +14,9 @@ describe 'PNG' do
   end
 
   it 'can merge one PNG on the right of another' do 
-    left = PNG::Image.open("#{@img_dir}/lightening.png")
-    right = PNG::Image.open("#{@img_dir}/lightening.png")
-    merged = left.merge_right right
+    one = PNG::Image.open("#{@img_dir}/lightening.png")
+    two = PNG::Image.open("#{@img_dir}/lightening.png")
+    merged = one.merge_left two
     merged.write("#{@tmp_dir}/merge_right_test.png")
     read("#{@expected_dir}/merge_right_test.png").should == read("#{@tmp_dir}/merge_right_test.png")
   end
