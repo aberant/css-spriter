@@ -3,3 +3,7 @@ get ready for something awesome. 0_o
 It takes your PNG's, chews them up and spits out sprites!
 
 see examples dir.
+
+currently only supports images of the same height - this will change soon.
+
+thx to tjennings for the initial spike and help
