@@ -6,8 +6,8 @@ describe PNG::Sprite do
     
     @builder = ImageBuilder.new
     
-    @image1 = @builder.build( :width => 50, :height => 50)
-    @image2 = @builder.build( :width => 50, :height => 50)
+    @image1 = @builder.build( :width => 50, :height => 50, :name => "image1")
+    @image2 = @builder.build( :width => 50, :height => 50, :name => "image2")
   end
   
   it "can merge an image to the right" do
@@ -24,15 +24,12 @@ describe PNG::Sprite do
     @sprite.images.should == [@image2, @image1]
   end
   
-  it "can output sprites by delegating to the images" do
-    @image3 = @builder.build( :width => 100, :height => 50)
-    
+  it "knows the location of each image in the sprite" do
     @sprite.merge_right( @image1 )
     @sprite.merge_right( @image2 )
     
-    @image1.should_receive( :merge_right ).with( @image2 ).and_return( @image3 )
-    @image3.should_receive( :write ).with( "test.png" )
-    
-    @sprite.write( 'test.png' )
+    @sprite.locations[@image1.name.to_sym].should == {:x => -( @image1.width + @image2.width ), :width=> @image1.width } 
+    @sprite.locations[@image2.name.to_sym].should == {:x => -( @image2.width ),  :width=> @image2.width } 
   end
+    
 end
