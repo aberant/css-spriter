@@ -6,8 +6,14 @@ module PNG
       @uncompressed = uncompressed
     end
 
-    def <<( compressed )
-      @uncompressed += Zlib::Inflate.inflate( compressed ).unpack("C*")
+    def <<( data )
+      @uncompressed += Zlib::Inflate.inflate( data ).unpack("C*")
+      
+    rescue Zlib::BufError
+    rescue Zlib::DataError
+      # guess it's not compressed
+      # probably a better way to check for this
+      data.unpack("C*")
     end
     
     def encode

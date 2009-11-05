@@ -1,10 +1,12 @@
 require File.join( File.dirname( __FILE__ ), '..', 'lib', 'spittle' )
 
-one = PNG::Image.open( "pic_data/png_test.png" )
-two = PNG::Image.open( "pic_data/png_test_inverted.png" )
+# broken for now
+cat = PNG::Image.open( "pic_data/cat.png" )
+dog = PNG::Image.open( "pic_data/dog.png" )
+trash = PNG::Image.open( "pic_data/trash.png" )
 
 sprite = PNG::Sprite.new
-sprite.merge_right one
-sprite.merge_right two
-
-sprite.write( "pic_data/sprite_test.png" )
+sprite.merge_right cat
+sprite.merge_right dog
+sprite.merge_right trash
+sprite.write( "pic_data/animal.png")
