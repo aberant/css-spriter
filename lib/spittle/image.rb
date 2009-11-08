@@ -91,14 +91,13 @@ module PNG
   
     def generate_png
       file_header = PNG::FileHeader.new.encode
+      raw_data = @idat.uncompressed
       
       ihdr = PNG::IHDR.new( width, height, depth, color_type ).to_chunk
-      idat = PNG::IDAT.new
-      idat << @idat.encode 
-      idat_data = idat.to_chunk
+      idat = PNG::IDAT.new( raw_data ).to_chunk
       iend = PNG::IEND.new.to_chunk
       
-      file_header + ihdr + idat_data + iend
+      file_header + ihdr + idat + iend
     end
   end
 end
