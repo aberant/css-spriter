@@ -10,20 +10,20 @@ module PNG
       FILTERS[ filter_num ]
     end
 
-    NONE = lambda {|value, index, row, last_row| value}
-    LEFT = lambda {|value, index, row, last_row|
-             (value + fetch_pixel(index - 3, row)) % 256
+    NONE = lambda {|value, index, row, last_row, record_width| value}
+    LEFT = lambda {|value, index, row, last_row, record_width|
+             (value + fetch_pixel(index - record_width, row)) % 256
            }
-    UP  = lambda {|value, index, row, last_row|
+    UP  = lambda {|value, index, row, last_row, record_width|
              (value + fetch_pixel(index, last_row)) % 256
            }
-    AVG  = lambda {|value, index, row, last_row| 
-             (value + ( (fetch_pixel(index - 3, row) + fetch_pixel(index, last_row)) / 2 ).floor) % 256
+    AVG  = lambda {|value, index, row, last_row, record_width| 
+             (value + ( (fetch_pixel(index - record_width, row) + fetch_pixel(index, last_row)) / 2 ).floor) % 256
            }
-    PAETH  = lambda {|value, index, row, last_row| 
-               a = fetch_pixel(index - 3, row)
+    PAETH  = lambda {|value, index, row, last_row, record_width| 
+               a = fetch_pixel(index - record_width, row)
                b = fetch_pixel(index, last_row)
-               c = fetch_pixel(index - 3, last_row)
+               c = fetch_pixel(index - record_width, last_row)
                p = a + b - c
                pa = (p - a).abs
                pb = (p - b).abs

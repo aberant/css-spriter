@@ -62,7 +62,7 @@ module PNG
      height.times do |c_row| 
        end_row = pixel_width + offset
        row = @idat.uncompressed.slice(offset, pixel_width)
-       out << decode(c_row, row, out)
+       out << decode(c_row, row, out, record_width)
        offset = end_row
      end
      out
@@ -73,17 +73,17 @@ module PNG
     end
   private
     
-    def decode(c_row, row, data)
+    def decode(c_row, row, data, record_width)
       last_row = (c_row - 1 < 0 ? [] : data[c_row - 1])
       type = row.shift
       filter = Filters[type]
-      process_row(row, last_row, filter)
+      process_row(row, last_row, filter, record_width)
     end
     
-    def process_row(row, last_row, filter)
+    def process_row(row, last_row, filter, record_width)
       o = []
       row.each_with_index do |e, i|
-        o[i] = filter.call(e, i, o, last_row)
+        o[i] = filter.call(e, i, o, last_row, record_width)
       end
       o
     end
