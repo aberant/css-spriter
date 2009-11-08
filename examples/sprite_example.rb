@@ -10,3 +10,6 @@ sprite.merge_right cat
 sprite.merge_right dog
 sprite.merge_right trash
 sprite.write( "pic_data/animal.png")
+
+`open pic_data/animal.png`
+

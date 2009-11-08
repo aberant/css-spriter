@@ -11,7 +11,7 @@ module PNG
     
     def initialize( width, height, depth=8, color_type=2 )
       raise "for now, spittle only supports images with a bit depth of 8" unless depth == 8
-      raise "for now, spittle only supports color type 2" unless color_type == 2
+      raise "for now, spittle only supports color type 2 or 6" unless color_type == 2 || color_type == 6
       @width, @height, @depth, @color_type = width, height, depth, color_type
     end
     

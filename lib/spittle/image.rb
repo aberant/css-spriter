@@ -54,8 +54,10 @@ module PNG
      out = []
      offset = 0
      
-     #1 filter byte * 3 for 3 rgb bytes  TODO: incompatible with other color types
-     pixel_width = (width * 3) + 1 
+     # check for RGB or RGBA
+     record_width = ( color_type == 2 ? 3 : 4)
+     
+     pixel_width = (width * record_width) + 1 
      
      height.times do |c_row| 
        end_row = pixel_width + offset
@@ -92,7 +94,7 @@ module PNG
       
       raw_data = @idat.uncompressed
 
-      ihdr = PNG::IHDR.new( width, height ).to_chunk
+      ihdr = PNG::IHDR.new( width, height, depth, color_type ).to_chunk
       idat = PNG::IDAT.new( raw_data ).to_chunk
       iend = PNG::IEND.new.to_chunk
       
