@@ -23,6 +23,9 @@ module PNG
       type = f.read(4)
       data = f.read(len[0])
       crc = f.read(4)
+      
+      raise "invalid CRC for chunk type #{type}" if crc_invalid?( type, data, crc )
+      
       handle(type, data)
     end
     
@@ -41,6 +44,9 @@ module PNG
       end
     end
     
+    def crc_invalid?( type, data, crc )
+      [Zlib.crc32( type + data )] != crc.unpack("N")
+    end
     
   end
 end
