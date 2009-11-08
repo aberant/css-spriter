@@ -1,17 +1,21 @@
 module PNG
   class IDAT < Chunk
-    attr_reader :uncompressed
-    
-    def initialize( uncompressed=[] )
-      @uncompressed = uncompressed
+        
+    def initialize( uncompressed="" )
+      @compressed = ""
+      @compressed += Zlib::Deflate.deflate( uncompressed.pack("C*") ) unless uncompressed == ""
     end
 
     def <<( data )
-      @uncompressed += Zlib::Inflate.inflate( data ).unpack("C*")
+      @compressed << data
     end
     
     def encode
-      Zlib::Deflate.deflate( @uncompressed )
+      @compressed
+    end
+    
+    def uncompressed
+      @uncompressed ||= Zlib::Inflate.inflate( @compressed ).unpack("C*")
     end
     
     def chunk_name

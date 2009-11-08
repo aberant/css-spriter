@@ -1,27 +1,30 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe PNG::IDAT do
-  it "accepts compressed data" do
-    @data = "compressed png data"
-    @idat = PNG::IDAT.new
-    
-    Zlib::Inflate.should_receive( :inflate ).with( @data ).and_return( "uncompressed data" )
-    
-    @idat << @data
+  before :each do
+    # it's just "Hello, World!" encoded
+    @data = "x\234\363H\315\311\311\327Q\b\317/\312IQ\004\000\037\236\004j"
   end
   
-  it "encodes its self" do
-    @data = "this is raw data"
-    @idat = PNG::IDAT.new( @data )
+  it "accepts compressed data" do
+    @idat = PNG::IDAT.new
     
-    @idat.encode.should == Zlib::Deflate.deflate( @data )
+    @idat << @data
+    
+    @idat.encode.should == @data
   end
   
   it "can chunk its self" do
-    @data = "this is raw data"
-    @idat = PNG::IDAT.new( @data )
+    @idat = PNG::IDAT.new
+    @idat << @data
     @chunk = chunk( "IDAT", @idat.encode )
     
     @idat.to_chunk.should == @chunk
+  end
+  
+  it "accepts uncompressed data for it's constructor" do
+    @idat = PNG::IDAT.new( "Hello, World!".unpack("C*") )
+    
+    @idat.encode.should == @data
   end
 end

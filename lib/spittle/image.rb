@@ -90,7 +90,7 @@ module PNG
     def generate_png
       file_header = PNG::FileHeader.new.encode
       
-      raw_data = @idat.uncompressed.pack("C*")
+      raw_data = @idat.uncompressed
 
       ihdr = PNG::IHDR.new( width, height ).to_chunk
       idat = PNG::IDAT.new( raw_data ).to_chunk

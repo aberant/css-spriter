@@ -8,4 +8,5 @@ rdoc/*
 examples/pic_data/out.png
 examples/pic_data/sprite_test.png
 examples/pic_data/test.png
+examples/pic_data/animal.png
 *.swp
