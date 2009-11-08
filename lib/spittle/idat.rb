@@ -1,5 +1,3 @@
-require 'stringio'
-
 module PNG
   class IDAT < Chunk
     attr_reader :uncompressed
