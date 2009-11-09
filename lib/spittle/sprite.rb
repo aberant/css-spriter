@@ -1,7 +1,6 @@
 module PNG
   class Sprite
     def self.[]( dir )
-      
     end
     
     attr_reader :images
@@ -19,16 +18,13 @@ module PNG
     end
     
     def locations
-      x_sum = 0
-      
-      @images.reverse.each do |image|  
-        x_sum = image.width + x_sum
-        @locations[image.name.to_sym] = { :x => -(x_sum), :width => image.width }
+      @images.reverse.inject(0) do |x, image|  
+        x = image.width + x
+        @locations[image.name.to_sym] = { :x => -(x), :width => image.width }
+        x
       end
-      
       @locations
     end
-    
 
     def write( output_filename )
       # head is the last image, then we merge left
