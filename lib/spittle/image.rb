@@ -2,13 +2,10 @@ module PNG
   class Image
     
     def self.open( file_name )
-      @parser = Parser.new
-      
       name = File.basename( file_name, ".png" )
       
       File.open(file_name, "r") do |f|
-        ihdr, idat = @parser.go!( f )
-        
+        ihdr, idat = Parser.go!( f )
         Image.new( ihdr, idat, name )
       end
       
@@ -40,7 +37,6 @@ module PNG
       
       #prepend the filter byte 0 = no filter
       data.each { |row| row.unshift(0) } 
-      r = nil
       data.flatten!
       
       ihdr = IHDR.new( width + other.width, height, depth, color_type)
@@ -49,20 +45,29 @@ module PNG
       
       Image.new( ihdr, idat, img_name )
     end
+    
+    #color types
+    RGB = 2
+    RGBA = 3
+
+    # check for RGB or RGBA
+    def pixel_width
+      ( color_type == RGB ? 3 : 4)
+    end
+
+    def scanline_width
+      # + 1 adds filter byte
+      (width * pixel_width) + 1
+    end
   
     def rows
      out = []
      offset = 0
      
-     # check for RGB or RGBA
-     record_width = ( color_type == 2 ? 3 : 4)
-     
-     pixel_width = (width * record_width) + 1 
-     
-     height.times do |c_row| 
-       end_row = pixel_width + offset
-       row = @idat.uncompressed.slice(offset, pixel_width)
-       out << decode(c_row, row, out, record_width)
+     height.times do |scanline|
+       end_row = scanline_width + offset
+       row = @idat.uncompressed.slice(offset, scanline_width)
+       out << decode(scanline, row, out, pixel_width)
        offset = end_row
      end
      out
@@ -72,23 +77,25 @@ module PNG
       "color type: #{color_type}, depth: #{depth}, width: #{width}, height: #{height}"
     end
   private
-    
-    def decode(c_row, row, data, record_width)
-      last_row = (c_row - 1 < 0 ? [] : data[c_row - 1])
+
+    def last_scanline(current, data)
+      (current - 1 < 0 ? [] : data[current - 1])
+    end
+      
+    def decode(current, row, data, pixel_width)
       type = row.shift
       filter = Filters[type]
-      process_row(row, last_row, filter, record_width)
+      process_row(row, last_scanline(current, data), filter, pixel_width)
     end
     
-    def process_row(row, last_row, filter, record_width)
+    def process_row(row, last_scanline, filter, pixel_width)
       o = []
       row.each_with_index do |e, i|
-        o[i] = filter.call(e, i, o, last_row, record_width)
+        o[i] = filter.call(e, i, o, last_scanline, pixel_width)
       end
       o
     end
     
-  
     def generate_png
       file_header = PNG::FileHeader.new.encode
       raw_data = @idat.uncompressed
@@ -101,4 +108,3 @@ module PNG
     end
   end
 end
-  

@@ -31,5 +31,5 @@ describe PNG::Sprite do
     @sprite.locations[@image1.name.to_sym].should == {:x => -( @image1.width + @image2.width ), :width=> @image1.width } 
     @sprite.locations[@image2.name.to_sym].should == {:x => -( @image2.width ),  :width=> @image2.width } 
   end
-    
+
 end

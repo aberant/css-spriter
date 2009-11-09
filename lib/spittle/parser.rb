@@ -1,34 +1,37 @@
 module PNG
   class Parser
-    
+    def self.go!(file)
+      #TODO: Wanted to remove instance go! and use initialize, didn't work.  
+      #Weird
+      Parser.new.go!(file)
+    end
     def go!( file )
       check_header( file )
-      
-      while(! file.eof?) do 
+
+      while(not file.eof?) do 
         parse_chunk(file)
       end
-      
+
       [ @ihdr, @idat ]
     end
-    
+
   private
     def check_header( file )
       header = file.read(8)
-      
       raise "Invalid PNG file header" unless ( header == FileHeader.new.encode)
     end
-    
+
     def parse_chunk(f)
       len = f.read(4).unpack("N")
       type = f.read(4)
       data = f.read(len[0])
       crc = f.read(4)
-      
+
       raise "invalid CRC for chunk type #{type}" if crc_invalid?( type, data, crc )
-      
+
       handle(type, data)
     end
-    
+
     def handle(type, data)
       case(type)
       when "IHDR"
@@ -43,10 +46,9 @@ module PNG
         puts "Ignoring chunk type #{type}"
       end
     end
-    
+
     def crc_invalid?( type, data, crc )
       [Zlib.crc32( type + data )] != crc.unpack("N")
     end
-    
   end
 end
