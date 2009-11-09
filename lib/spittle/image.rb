@@ -6,7 +6,6 @@ module PNG
       
       File.open(file_name, "r") do |f|
         ihdr, idat = Parser.go!( f )
-        
         Image.new( ihdr, idat, name )
       end
       
@@ -46,7 +45,8 @@ module PNG
       
       Image.new( ihdr, idat, img_name )
     end
-
+    
+    #color types
     RGB = 2
     RGBA = 3
 
