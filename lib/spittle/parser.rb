@@ -43,7 +43,7 @@ module PNG
       when "IEND"
         # NOOP
       else
-        puts "Ignoring chunk type #{type}"
+        # puts "Ignoring chunk type #{type}"
       end
     end
 
