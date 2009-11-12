@@ -13,8 +13,7 @@ module Spittle
     end
 
     def directories
-      #better way to find all directories than this?
-      Dir.glob(@options[:source] + "/**").select{|e| File.directory? e }
+      Dir.glob(@options[:source] + "/**/")
     end
 
     def dir_processors

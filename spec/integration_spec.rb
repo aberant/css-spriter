@@ -1,3 +1,4 @@
+require 'benchmark'
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe 'PNG' do
@@ -34,6 +35,7 @@ describe "Dir sprite" do
     @css_file = @dir + "/fragment.css"
     @spriter.write
   end
+
   after :all do 
     @spriter.cleanup
   end
