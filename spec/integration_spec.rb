@@ -111,7 +111,7 @@ describe "Complete spriting process" do
 
   after :all do 
     @spittle.cleanup
-
+    #making sure it cleans things up - shitty place for these
     File.exists?(@css_file).should be_false
     File.exists?(@dir + "/words/sprite.png").should be_false
   end
@@ -124,6 +124,7 @@ describe "Complete spriting process" do
   it "generates the css file at the appropriate location" do 
     File.exists?(@css_file).should be_true
   end
+
   it "creates sprites/css for all subfolders" do 
     File.exists?(@dir + "/words/sprite.png").should be_true
     File.exists?(@dir + "/words/fragment.css").should be_true
