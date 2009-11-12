@@ -15,4 +15,8 @@ class StylesheetBuilder
   def write
     File.open(@output_file, 'w') {|f| f.write(css)}
   end
+
+  def cleanup
+    File.delete(@output_file) rescue {}
+  end
 end

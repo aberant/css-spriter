@@ -1,4 +1,4 @@
-class DirectorySpriter
+class DirectoryProcessor
   def initialize(dir)
     @dir = dir
     files = images
@@ -10,11 +10,24 @@ class DirectorySpriter
     Dir.glob(@dir + "/*.png").reject{|i| i.match /sprite\.png/}
   end
 
-  def process
-    @sprite.write(@dir + "/sprite.png")
-    File.open(@dir + "/fragment.css", 'w') do |f|
+  def write
+    @sprite.write(sprite_file)
+    File.open(css_file, 'w') do |f|
       f.write(css)
     end
+  end
+
+  def cleanup
+    File.delete(sprite_file) rescue {}
+    File.delete(css_file) rescue {}
+  end
+
+  def sprite_file
+    @dir + "/sprite.png"
+  end
+
+  def css_file
+    @dir + "/fragment.css"
   end
 
   def dir_name
