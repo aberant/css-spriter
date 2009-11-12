@@ -9,12 +9,8 @@ module PNG
       @locations = {}
     end
     
-    def merge_right( image )
+    def append( image )
       @images << image
-    end
-    
-    def merge_left( image )
-      @images.unshift( image )
     end
     
     def locations

@@ -5,7 +5,7 @@ dog = PNG::Image.open( "pic_data/dog.png" )
 trash = PNG::Image.open( "pic_data/trash.png" )
 
 sprite = PNG::Sprite.new
-sprite.merge_right cat
-sprite.merge_right dog
-sprite.merge_right trash
+sprite.append cat
+sprite.append dog
+sprite.append trash
 sprite.write( "pic_data/animal.png")
