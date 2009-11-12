@@ -56,15 +56,48 @@ describe "Dir sprite" do
   end
 
   describe "CSS fragments" do 
-    it "should generate correct css" do 
-      css = @spriter.css
-      css.include?(".words_latitude").should be_true
-      css.include?(".words_of").should be_true
+    before :all do 
+      @css = @spriter.css
     end
+
+    it "should compose class names" do 
+      @css.should include ".words_latitude"
+      @css.should include ".words_of"
+    end
+
+    it "has the correct image path" do 
+      @css.should include "/sprite_dirs/words/sprite.png"
+    end
+
     it "should write css fragments for a sprite" do 
       File.exists?(@css_file).should be_true
     end
   end
 end
 
+describe 'Stylesheet generator' do 
+  before :all do 
+    @dir = File.dirname(__FILE__) + "/css_fragments"
+    @out = @dir + "/complete.css"
+    @builder = StylesheetBuilder.new(@dir)
+    @builder.output_file(@out)
+    @css = @builder.css
+  end
 
+  after :all do 
+    File.delete @out rescue {}
+  end
+
+  it "takes the css fragments and concatonates them into a single stylesheet" do 
+    @css.should include ".some_style"
+  end
+
+  it "can handle nested folder structures" do 
+    @css.should include ".deep"
+  end
+
+  it "writes the css file to the specified location" do 
+    @builder.write
+    File.exists?(@out).should be_true
+  end
+end
