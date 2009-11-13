@@ -1,0 +1,20 @@
+  .words_specified {
+    background: transparent url(words/sprite.png) -70px 0px no-repeat;
+    width:70;
+  }
+
+  .words_set {
+    background: transparent url(words/sprite.png) -96px 0px no-repeat;
+    width:26;
+  }
+
+  .words_of {
+    background: transparent url(words/sprite.png) -115px 0px no-repeat;
+    width:19;
+  }
+
+  .words_latitude {
+    background: transparent url(words/sprite.png) -181px 0px no-repeat;
+    width:66;
+  }
+
