@@ -36,7 +36,7 @@ class DirectoryProcessor
 
   FRAG = <<-EOF
   .<name>_<image_name> {
-    background: transparent url(<image_loc>)<offset>px 0px no-repeat;
+    background: transparent url(<image_loc>) <offset>px 0px no-repeat;
     width:<width>;
   }
 

@@ -4,7 +4,7 @@ module Spittle
       @options = opts
       @d_processors = dir_processors
       @css_builder = StylesheetBuilder.new(@options[:source])
-      @css_builder.output_file(@options[:css_file])
+      @css_builder.output_file(@options[:css_file] || @options[:source] + "/sprite.css")
     end
 
     def write
@@ -13,7 +13,7 @@ module Spittle
     end
 
     def directories
-      Dir.glob(@options[:source] + "/**/")
+      Dir.glob(@options[:source] + "/**/").map{|d| d.gsub(/\/$/, "")}
     end
 
     def dir_processors
