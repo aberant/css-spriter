@@ -60,12 +60,12 @@ describe "Dir sprite" do
     end
 
     it "should compose class names" do 
-      @css.should include ".words_latitude"
-      @css.should include ".words_of"
+      @css.should include( ".words_latitude")
+      @css.should include( ".words_of" )
     end
 
     it "has the correct image path" do 
-      @css.should include "/sprite_dirs/words/sprite.png"
+      @css.should include( "/sprite_dirs/words/sprite.png" )
     end
 
     it "should write css fragments for a sprite" do 
@@ -88,11 +88,11 @@ describe 'Stylesheet generator' do
   end
 
   it "takes the css fragments and concatonates them into a single stylesheet" do 
-    @css.should include ".some_style"
+    @css.should include( ".some_style" )
   end
 
   it "can handle nested folder structures" do 
-    @css.should include ".deep"
+    @css.should include( ".deep" )
   end
 
   it "writes the css file to the specified location" do 
@@ -118,7 +118,7 @@ describe "Complete spriting process" do
 
   it "can find all the sprite directories" do 
     dirs = @spittle.directories.map{|d| d.split('/').last}
-    dirs.should include "words"
+    dirs.should include( "words" )
   end
 
   it "generates the css file at the appropriate location" do 
