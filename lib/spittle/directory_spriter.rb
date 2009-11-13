@@ -38,6 +38,7 @@ class DirectoryProcessor
   .<name>_<image_name> {
     background: transparent url(<image_loc>) <offset>px 0px no-repeat;
     width:<width>;
+    text-indent:-5000px;
   }
 
   EOF
@@ -50,7 +51,7 @@ class DirectoryProcessor
              gsub("<image_name>", image_name.to_s).
              gsub("<width>", properties[:width].to_s).
              gsub("<offset>", properties[:x].to_s).
-             gsub("<image_loc>", @dir + "/sprite.png")
+             gsub("<image_loc>", "/" + @dir + "/sprite.png")
     end
     out
   end

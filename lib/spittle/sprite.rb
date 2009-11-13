@@ -12,10 +12,9 @@ module PNG
     end
     
     def locations
-      @images.reverse.inject(0) do |x, image|  
-        x = image.width + x
+      @images.inject(0) do |x, image|  
         @locations[image.name.to_sym] = { :x => -(x), :width => image.width }
-        x
+        image.width + x
       end
       @locations
     end
