@@ -1,0 +1,24 @@
+  .words_of {
+    background: transparent url(/words/sprite.png) -66px 0px no-repeat;
+    width:19;
+    text-indent:-5000px;
+  }
+
+  .words_set {
+    background: transparent url(/words/sprite.png) -85px 0px no-repeat;
+    width:26;
+    text-indent:-5000px;
+  }
+
+  .words_specified {
+    background: transparent url(/words/sprite.png) -111px 0px no-repeat;
+    width:70;
+    text-indent:-5000px;
+  }
+
+  .words_latitude {
+    background: transparent url(/words/sprite.png) 0px 0px no-repeat;
+    width:66;
+    text-indent:-5000px;
+  }
+

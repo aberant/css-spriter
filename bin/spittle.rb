@@ -1,7 +1,8 @@
-#!/usr/local/bin/ruby
+#!/usr/bin/env ruby
 
 require File.dirname(__FILE__) + "/../lib/spittle.rb"
 
 dir = ARGV[0]
-p = Spittle::Processor.new(:source => dir)
-p.write
+raise "a directory must be specified" unless dir
+
+Spittle::Processor.new(:source => dir).write
