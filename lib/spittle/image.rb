@@ -83,15 +83,15 @@ module PNG
     end
       
     def decode(current, row, data, pixel_width)
-      type = row.shift
-      filter = Filters[type]
-      process_row(row, last_scanline(current, data), filter, pixel_width)
+      filter_type = row.shift
+      
+      process_row(row, last_scanline(current, data), filter_type, pixel_width)
     end
     
-    def process_row(row, last_scanline, filter, pixel_width)
+    def process_row(row, last_scanline, filter_type, pixel_width)
       o = []
       row.each_with_index do |e, i|
-        o[i] = filter.call(e, i, o, last_scanline, pixel_width)
+        o[i] = Filters.call(filter_type, e, i, o, last_scanline, pixel_width)
       end
       o
     end
