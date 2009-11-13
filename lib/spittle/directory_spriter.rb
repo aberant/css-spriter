@@ -44,15 +44,13 @@ class DirectoryProcessor
   EOF
 
   def css
-    locations = @sprite.locations
-    out = ""
-    locations.each do |image_name, properties|
+    @sprite.locations.inject("") do |out, image|
+      image_name, properties = image
       out << FRAG.gsub("<name>", dir_name).
              gsub("<image_name>", image_name.to_s).
              gsub("<width>", properties[:width].to_s).
              gsub("<offset>", properties[:x].to_s).
              gsub("<image_loc>", "/" + @dir + "/sprite.png")
     end
-    out
   end
 end

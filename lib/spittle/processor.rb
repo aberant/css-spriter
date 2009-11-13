@@ -2,13 +2,13 @@ module Spittle
   class Processor
     def initialize(opts)
       @options = opts
-      @d_processors = dir_processors
+      @processors = dir_processors
       @css_builder = StylesheetBuilder.new(@options[:source])
       @css_builder.output_file(@options[:css_file] || @options[:source] + "/sprite.css")
     end
 
     def write
-      @d_processors.each{|d| d.write}
+      @processors.each{|d| d.write}
       @css_builder.write
     end
 
@@ -21,7 +21,7 @@ module Spittle
     end
 
     def cleanup
-      @d_processors.each{|d| d.cleanup}
+      @processors.each{|d| d.cleanup}
       @css_builder.cleanup
     end
   end
