@@ -11,4 +11,6 @@ require 'spittle/idat'
 require 'spittle/iend'
 require 'spittle/image'
 require 'spittle/sprite'
-
+require 'spittle/directory_spriter'
+require 'spittle/stylesheet_builder'
+require 'spittle/processor'
