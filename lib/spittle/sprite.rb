@@ -1,9 +1,7 @@
 module PNG
   class Sprite
-    def self.[]( dir )
-    end
-    
     attr_reader :images
+
     def initialize
       @images = []
       @locations = {}
