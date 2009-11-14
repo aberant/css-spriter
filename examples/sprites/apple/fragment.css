@@ -1,10 +1,3 @@
-  .apple_iphone {
-    background: transparent url(/apple/sprite.png) -234px 0px no-repeat;
-    width:116;
-    height:38;
-    text-indent:-5000px;
-  }
-
   .apple_itunes {
     background: transparent url(/apple/sprite.png) -350px 0px no-repeat;
     width:116;
@@ -22,6 +15,13 @@
   .apple_apple {
     background: transparent url(/apple/sprite.png) 0px 0px no-repeat;
     width:117;
+    height:38;
+    text-indent:-5000px;
+  }
+
+  .apple_store {
+    background: transparent url(/apple/sprite.png) -744px 0px no-repeat;
+    width:116;
     height:38;
     text-indent:-5000px;
   }
@@ -47,15 +47,15 @@
     text-indent:-5000px;
   }
 
-  .apple_store {
-    background: transparent url(/apple/sprite.png) -744px 0px no-repeat;
+  .apple_downloads {
+    background: transparent url(/apple/sprite.png) -118px 0px no-repeat;
     width:116;
     height:38;
     text-indent:-5000px;
   }
 
-  .apple_downloads {
-    background: transparent url(/apple/sprite.png) -118px 0px no-repeat;
+  .apple_iphone {
+    background: transparent url(/apple/sprite.png) -234px 0px no-repeat;
     width:116;
     height:38;
     text-indent:-5000px;
