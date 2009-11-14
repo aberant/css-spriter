@@ -22,6 +22,10 @@ module PNG
     def height; @ihdr.height end
     def depth; @ihdr.depth end
     def color_type; @ihdr.color_type end
+
+    def compatible?(image)
+      self.height == image.height
+    end
     
     def write(file_name)
       File.open(file_name, 'w') do |f|

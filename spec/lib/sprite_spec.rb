@@ -24,4 +24,13 @@ describe PNG::Sprite do
     @sprite.locations[@image2.name.to_sym].should == {:x => -( @image2.width ),  :width=> @image2.width } 
   end
 
+  it "raises a pretty exception when the images are incompatible" do 
+    taller_image = @builder.build( :width => 50, :height => 60, :name => "image")
+    
+    lambda do 
+      @sprite.append taller_image
+      @sprite.append @image1
+    end.should raise_error(PNG::ImageFormatException)
+  end
+
 end

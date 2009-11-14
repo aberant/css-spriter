@@ -1,4 +1,5 @@
 module PNG
+  class ImageFormatException < Exception; end
   class Sprite
     attr_reader :images
 
@@ -8,6 +9,11 @@ module PNG
     end
     
     def append( image )
+      @images.each do |i|
+       unless i.compatible? image
+         raise ImageFormatException.new("Incompatible images")
+       end
+      end
       @images << image
     end
     
