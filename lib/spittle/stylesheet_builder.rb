@@ -9,7 +9,7 @@ class StylesheetBuilder
   end
 
   def css
-    @css ||= Dir.glob(@dir + "/**/*.css").inject("") {|acc, f| acc + File.read(f)}
+    @css ||= Dir.glob(@dir + "/**/fragment.css").inject("") {|acc, f| acc + File.read(f)}
   end
 
   def write
