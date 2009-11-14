@@ -1,0 +1,5 @@
+The sprites here are pre generated.  If you want to see it work yourself delete the the two sprite.png files and all the *.css.  Then simply run '../bin/spittle' and it should regenreate the sprites. 
+
+The server script will start a WEBrick server on port 3000 and serve from this directory.  If everything worked out you should see the two sprite samples displayed in index.html. 
+
+. 
