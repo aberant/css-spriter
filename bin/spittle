@@ -3,6 +3,13 @@
 require File.dirname(__FILE__) + "/../lib/spittle.rb"
 
 dir = ARGV[0]
-raise "a directory must be specified" unless dir
 
-Spittle::Processor.new(:source => dir).write
+if dir
+  Spittle::Processor.new(:source => dir).write
+else
+  puts
+  puts "spittle! it chews up your PNG's and spits out sprites!"
+  puts "useage: spittle DIRECTORY"
+  puts "eg. spittle my_images"
+  puts
+end
