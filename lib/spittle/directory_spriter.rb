@@ -43,6 +43,7 @@ class DirectoryProcessor
   .<name>_<image_name> {
     background: transparent url(<image_loc>) <offset>px 0px no-repeat;
     width:<width>;
+    height:<height>;
     text-indent:-5000px;
   }
 
@@ -54,6 +55,7 @@ class DirectoryProcessor
       out << FRAG.gsub("<name>", dir_name).
              gsub("<image_name>", image_name.to_s).
              gsub("<width>", properties[:width].to_s).
+             gsub("<height>", properties[:height].to_s).
              gsub("<offset>", properties[:x].to_s).
              gsub("<image_loc>", image_loc)
     end

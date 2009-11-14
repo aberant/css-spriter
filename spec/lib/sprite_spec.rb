@@ -20,8 +20,8 @@ describe PNG::Sprite do
     @sprite.append( @image1 )
     @sprite.append( @image2 )
 
-    @sprite.locations[@image1.name.to_sym].should == {:x => -( 0 ), :width=> @image1.width } 
-    @sprite.locations[@image2.name.to_sym].should == {:x => -( @image2.width ),  :width=> @image2.width } 
+    @sprite.locations[@image1.name.to_sym].should == {:x => -( 0 ), :width=> @image1.width, :height => @image1.height } 
+    @sprite.locations[@image2.name.to_sym].should == {:x => -( @image2.width ),  :width=> @image2.width, :height => @image2.height } 
   end
 
   it "raises a pretty exception when the images are incompatible" do 
