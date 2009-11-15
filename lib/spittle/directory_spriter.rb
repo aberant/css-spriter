@@ -1,4 +1,15 @@
 class DirectoryProcessor
+
+  DEFAULT_TEMPLATE = <<-EOF
+  .<name>_<image_name> {
+    background: transparent url(<image_loc>) <offset>px 0px no-repeat;
+    width:<width>;
+    height:<height>;
+    text-indent:-5000px;
+  }
+
+  EOF
+
   def initialize(dir, options = {})
     @options = options
     @dir = dir
@@ -42,20 +53,21 @@ class DirectoryProcessor
     base
   end
 
-  FRAG = <<-EOF
-  .<name>_<image_name> {
-    background: transparent url(<image_loc>) <offset>px 0px no-repeat;
-    width:<width>;
-    height:<height>;
-    text-indent:-5000px;
-  }
+  def template_file
+    @dir + "/template.css"
+  end
 
-  EOF
+  def template
+    if File.exists?(template_file)
+      return File.read(template_file)
+    end
+    return DEFAULT_TEMPLATE
+  end
 
   def css
     @sprite.locations.inject("") do |out, image|
       image_name, properties = image
-      out << FRAG.gsub("<name>", dir_name).
+      out << template.gsub("<name>", dir_name).
              gsub("<image_name>", image_name.to_s).
              gsub("<width>", properties[:width].to_s).
              gsub("<height>", properties[:height].to_s).

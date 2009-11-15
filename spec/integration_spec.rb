@@ -55,7 +55,12 @@ describe "Dir sprite" do
 
   describe "CSS fragments" do 
     before :all do 
+      @template = @dir + "/template.css"
       @css = @spriter.css
+    end
+
+    after do 
+      File.delete(@template) rescue {}
     end
 
     it "should compose class names" do 
@@ -69,6 +74,12 @@ describe "Dir sprite" do
 
     it "should write css fragments for a sprite" do 
       File.exists?(@css_file).should be_true
+    end
+
+    it "can be overidden by including a template.css in the sprite directory" do 
+      File.open(@template, 'w'){|f| f.write("override")}
+      @spriter.write
+      @spriter.css.should include("override")
     end
   end
 end
