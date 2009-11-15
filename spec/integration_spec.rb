@@ -22,9 +22,6 @@ describe 'PNG' do
     read("#{@expected_dir}/merge_right_test.png").should == read("#{@tmp_dir}/merge_right_test.png")
   end
 
-  def read(file_name)
-    File.read(file_name)
-  end
 end
 
 describe "Dir sprite" do 
@@ -107,7 +104,7 @@ describe "Complete spriting process" do
   before :all do 
     @dir = File.dirname(__FILE__) + "/sprite_dirs"
     @css_file = @dir + "/sprite.css"
-    @spittle = Spittle::Processor.new(:source => @dir, :css_file => @css_file)
+    @spittle = Spittle::Processor.new(:path_prefix => "/images", :source => @dir, :css_file => @css_file)
     @spittle.write
   end
 
@@ -116,6 +113,11 @@ describe "Complete spriting process" do
     #making sure it cleans things up - shitty place for these
     File.exists?(@css_file).should be_false
     File.exists?(@dir + "/words/sprite.png").should be_false
+  end
+
+  it "prepends a path prefix to all sprites in the css file" do 
+    file = read(@css_file)
+    file.should include("/images/spec/sprite_dirs/words")
   end
 
   it "can find all the sprite directories" do 
@@ -132,3 +134,8 @@ describe "Complete spriting process" do
     File.exists?(@dir + "/words/fragment.css").should be_true
   end
 end
+
+def read(file_name)
+  File.read(file_name)
+end
+

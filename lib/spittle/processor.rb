@@ -17,7 +17,7 @@ module Spittle
     end
 
     def dir_processors
-      directories.map{|d| DirectoryProcessor.new(d)}
+      directories.map{|d| DirectoryProcessor.new(d, @options)}
     end
 
     def cleanup

@@ -1,5 +1,6 @@
 class DirectoryProcessor
-  def initialize(dir)
+  def initialize(dir, options = {})
+    @options = options
     @dir = dir
     files = images
     @sprite = PNG::Sprite.new
@@ -36,7 +37,9 @@ class DirectoryProcessor
 
   def image_loc
     #TODO: Lame!
-    ("/" + @dir + "/sprite.png").gsub("/./", "/")
+    base = ("/" + @dir + "/sprite.png").gsub("/./", "/").gsub("//", "/")
+    base = @options[:path_prefix] + base if @options[:path_prefix]
+    base
   end
 
   FRAG = <<-EOF

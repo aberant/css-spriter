@@ -12,6 +12,10 @@ opts = OptionParser.new do |opts|
     options[:css_file] = file
   end
 
+  opts.on("-p", "--path-prefix PREFIX", "prepend sprite paths with the given string") do |prefix|
+    options[:path_prefix] = prefix
+  end
+
   opts.on_tail("-h", "--help", "Prints this message") do 
     puts opts
     exit
