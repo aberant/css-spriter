@@ -12,8 +12,42 @@ It takes your PNG's, chews them up and spits out sprites!
 
 point bin/spittle at a directory, and watch it sprite away!
 
+INSTALLATION
 
+We're hosted at gemcutter.  I believe 'sudo gem install gemcutter' then 'gem tumble'.
+Then you can run: 
 
-currently only supports images of the same height - this will change soon.
+> sudo gem install spittle
 
-thx to tjennings for the initial spike and help
+USAGE
+
+> spittle <directory>
+
+For a full list of options:
+
+> spittle -h
+
+LIMITATIONS
+
+- only supports images of the same height and color type.
+- only supports RGB and RGBA color types
+- does not support color profiles (can cause a slight change in color from the source image)
+
+FEATURES
+
+- automatically generates PNG sprites from a set of PNG images
+- automatically generates css classes to access images within the sprite
+- customize the css template for each sprite 
+
+ROADMAP - by priority
+
+- Rails plugin & rake tasks
+- Support varying height in source images
+- Use mtime tracking to prevent regeneration of sprites that have not changed
+- Support color profiles
+- Support global css template override
+
+AUTHORS
+
+aberant - Colin Harris
+tjennings - Tyler Jennings
