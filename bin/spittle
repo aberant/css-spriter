@@ -1,15 +1,32 @@
 #!/usr/bin/env ruby
 
+require 'optparse'
 require File.dirname(__FILE__) + "/../lib/spittle.rb"
+
+
+options = {}
+opts = OptionParser.new do |opts|
+  opts.banner = "Usage: spittle [options] directory"
+
+  opts.on("-o", "--out FILE", "Write css output to an alternate location") do |file|
+    options[:css_file] = file
+  end
+
+  opts.on_tail("-h", "--help", "Prints this message") do 
+    puts opts
+    exit
+  end
+
+  opts.parse!(ARGV)
+end
 
 dir = ARGV[0]
 
-if dir
-  Spittle::Processor.new(:source => dir).write
-else
-  puts
-  puts "spittle! it chews up your PNG's and spits out sprites!"
-  puts "useage: spittle DIRECTORY"
-  puts "eg. spittle my_images"
-  puts
+unless dir
+  puts opts.help
+  exit
 end
+
+options[:source] = dir
+Spittle::Processor.new(options).write
+
