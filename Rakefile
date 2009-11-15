@@ -7,7 +7,7 @@ begin
     gem.name = "spittle"
     gem.summary = %Q{pure ruby PNG}
     gem.description = %Q{pure ruby PNG}
-    gem.email = "qzzzq1@gmail.com"
+    gem.email = ["qzzzq1@gmail.com", "tyler.jennings@gmail.com"]
     gem.homepage = "http://github.com/aberant/spittle"
     gem.authors = ["aberant", "tjennings"]
     gem.add_development_dependency "rspec" #, ">= 1.2.9"
