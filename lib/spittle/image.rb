@@ -32,6 +32,10 @@ module PNG
         f.write(generate_png)
       end
     end
+
+    def to_s
+      "#{@name} (#{height} x #{width})"
+    end
     
     def merge_left( other )
       l = other.rows

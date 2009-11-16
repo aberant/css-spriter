@@ -1,6 +1,7 @@
 module Spittle
   class Processor
     def initialize(opts)
+      #puts "Processing Directory #{opts[:source]}"
       @options = opts
       @processors = dir_processors
       @css_builder = StylesheetBuilder.new(@options[:source])
