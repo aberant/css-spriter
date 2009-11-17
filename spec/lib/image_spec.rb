@@ -16,4 +16,10 @@ describe PNG::Image do
     
     result.rows.should == [[4,5,6,1,2,3]]
   end
+  
+  it "can insert empty rows to convert an image to a specific height" do
+    @image1.fill_to_height!(2)
+    @image1.rows.should == [[1, 2, 3],
+                           [0, 0, 0]]
+  end
 end

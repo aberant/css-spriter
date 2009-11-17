@@ -27,4 +27,5 @@ describe PNG::IDAT do
     
     @idat.encode.should == @data
   end
+  
 end
