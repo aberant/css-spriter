@@ -1,24 +1,26 @@
 module PNG
   class ImageFormatException < Exception; end
   class Sprite
-    attr_reader :images
+    attr_reader :images, :max_height
 
     def initialize
       @images = []
       @locations = {}
     end
-    
+
     def append( image )
       @images.each do |i|
        unless i.compatible? image
          raise ImageFormatException.new("Incompatible image #{i}")
        end
       end
+
       @images << image
+      @max_height = @images.map{ |i| i.height }.max
     end
-    
+
     def locations
-      @images.inject(0) do |x, image|  
+      @images.inject(0) do |x, image|
         @locations[image.name.to_sym] = { :x => -(x),
           :width => image.width,
           :height => image.height}

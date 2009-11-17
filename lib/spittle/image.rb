@@ -23,8 +23,10 @@ module PNG
     def depth; @ihdr.depth end
     def color_type; @ihdr.color_type end
 
+    # need better checks, because currently compatible is
+    # similar color type, or depth.. maybe it doesn't matter...
     def compatible?(image)
-      self.height == image.height
+      true
     end
 
     def write(file_name)

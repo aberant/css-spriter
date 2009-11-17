@@ -20,17 +20,19 @@ describe PNG::Sprite do
     @sprite.append( @image1 )
     @sprite.append( @image2 )
 
-    @sprite.locations[@image1.name.to_sym].should == {:x => -( 0 ), :width=> @image1.width, :height => @image1.height } 
-    @sprite.locations[@image2.name.to_sym].should == {:x => -( @image2.width ),  :width=> @image2.width, :height => @image2.height } 
+    @sprite.locations[@image1.name.to_sym].should == {:x => -( 0 ), :width=> @image1.width, :height => @image1.height }
+    @sprite.locations[@image2.name.to_sym].should == {:x => -( @image2.width ),  :width=> @image2.width, :height => @image2.height }
   end
 
-  it "raises a pretty exception when the images are incompatible" do 
-    taller_image = @builder.build( :width => 50, :height => 60, :name => "image")
-    
-    lambda do 
-      @sprite.append taller_image
-      @sprite.append @image1
-    end.should raise_error(PNG::ImageFormatException)
+  it "knows the height of the tallest image" do
+    max_height = 70
+
+    @image3 = @builder.build( :width => 50, :height => max_height, :name => "image3")
+
+    @sprite.append( @image1 )
+    @sprite.append( @image3 )
+
+    @sprite.max_height.should == max_height
   end
 
 end
