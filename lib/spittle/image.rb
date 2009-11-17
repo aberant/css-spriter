@@ -44,7 +44,7 @@ module PNG
       data = l.zip r
       
       #prepend the filter byte 0 = no filter
-      data.each { |row| row.unshift(0) } 
+      data.each { |row| row.unshift(0) }
       data.flatten!
       
       ihdr = IHDR.new( width + other.width, height, depth, color_type)
@@ -69,13 +69,14 @@ module PNG
     end
   
     def rows
-     out = []
+     uncompressed = @idat.uncompressed
+     out = Array.new(height)
      offset = 0
      
      height.times do |scanline|
        end_row = scanline_width + offset
-       row = @idat.uncompressed.slice(offset, scanline_width)
-       out << decode(scanline, row, out, pixel_width)
+       row = uncompressed.slice(offset, scanline_width)
+       out[scanline] = decode(scanline, row, out, pixel_width)
        offset = end_row
      end
      out
@@ -97,7 +98,7 @@ module PNG
     end
     
     def process_row(row, last_scanline, filter_type, pixel_width)
-      o = []
+      o = Array.new(row.size)
       row.each_with_index do |e, i|
         o[i] = Filters.call(filter_type, e, i, o, last_scanline, pixel_width)
       end
