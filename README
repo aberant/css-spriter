@@ -38,10 +38,10 @@ FEATURES
 - automatically generates PNG sprites from a set of PNG images
 - automatically generates css classes to access images within the sprite
 - customize the css template for each sprite 
+- Rails plugin & rake tasks
 
 ROADMAP - by priority
 
-- Rails plugin & rake tasks
 - Support varying height in source images
 - Use mtime tracking to prevent regeneration of sprites that have not changed
 - Support color profiles

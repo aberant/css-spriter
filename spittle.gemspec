@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{spittle}
-  s.version = "0.9.0"
+  s.version = "0.9.1.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["aberant", "tjennings"]
-  s.date = %q{2009-11-14}
+  s.date = %q{2009-11-17}
   s.default_executable = %q{spittle}
   s.description = %q{pure ruby PNG}
   s.email = ["qzzzq1@gmail.com", "tyler.jennings@gmail.com"]
@@ -46,6 +46,7 @@ Gem::Specification.new do |s|
      "examples/sprites/words/specified.png",
      "examples/sprites/words/sprite.css",
      "examples/sprites/words/sprite.png",
+     "init.rb",
      "lib/spittle.rb",
      "lib/spittle/chunk.rb",
      "lib/spittle/directory_spriter.rb",
@@ -79,7 +80,9 @@ Gem::Specification.new do |s|
      "spec/sprite_dirs/words/set.png",
      "spec/sprite_dirs/words/specified.png",
      "spec/tmp/merge_right_test.png",
-     "spec/tmp/write_test.png"
+     "spec/tmp/write_test.png",
+     "spittle.gemspec",
+     "tasks/spittle_tasks.rake"
   ]
   s.homepage = %q{http://github.com/aberant/spittle}
   s.rdoc_options = ["--charset=UTF-8"]

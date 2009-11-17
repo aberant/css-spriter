@@ -16,6 +16,7 @@ class DirectoryProcessor
     files = images
     @sprite = PNG::Sprite.new
     files.each {|f| @sprite.append(PNG::Image.open(f))}
+    #puts "#{@dir} #{files.size} files"
   end
 
   def images
