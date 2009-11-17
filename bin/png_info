@@ -1,0 +1,61 @@
+#!/usr/bin/env ruby
+require File.join( File.dirname( __FILE__ ), '..', 'lib', 'spittle' )
+
+module PNG
+  class Parser
+    def go!( file )
+      check_header( file )
+
+      while(! file.eof?) do
+        parse_chunk(file)
+      end
+    end
+
+  private
+    def check_header( file )
+      header = file.read(8)
+      raise "Invalid PNG file header" unless ( header == FileHeader.new.encode)
+    end
+
+    def parse_chunk(f)
+      len = f.read(4).unpack("N")
+      type = f.read(4)
+      data = f.read(len[0])
+      crc = f.read(4)
+      handle(type, len, data )
+    end
+
+    def handle( type, len, data )
+      case type
+      when "IHDR"
+        attrs = data.unpack("N2C5")
+        puts "PNG width: #{attrs[0]}"
+        puts "PNG height: #{attrs[1]}"
+        puts "PNG depth: #{attrs[2]}"
+        puts "PNG color type: #{attrs[3]}"
+        puts "PNG compression method: #{attrs[4]}"
+        puts "PNG filter method: #{attrs[5]}"
+        puts "PNG interlace method: #{attrs[6]}"
+      end
+
+      puts "PNG block #{type}"
+      puts "length: #{len}"
+    end
+  end
+
+
+  class Info
+    def self.open( file_name )
+      @parser = Parser.new
+
+      name = File.basename( file_name, ".png" )
+
+      File.open(file_name, "r") do |f|
+        @parser.go!( f )
+      end
+    end
+  end
+end
+
+
+PNG::Info.open( ARGV[0] )
