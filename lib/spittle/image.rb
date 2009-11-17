@@ -35,24 +35,23 @@ module PNG
       end
     end
 
-    def fill_to_height!( desired_height )
+    def fill_to_height( desired_height )
       raise "invalid height" if desired_height < height
       return if desired_height == height
 
-      data = rows.each{ |row| row.unshift(0) }
+      data = @idat.uncompressed
 
       empty_row = [0] + [0] * ( width * pixel_width )
 
 
       ( desired_height -  height ).times do
-        data << empty_row
+        data = data + empty_row
       end
 
-      data.flatten!
-      @ihdr = IHDR.new( width, desired_height, depth, color_type )
-      @idat = IDAT.new( data )
+      ihdr = IHDR.new( width, desired_height, depth, color_type )
+      idat = IDAT.new( data )
 
-      nil
+      Image.new( ihdr, idat, name )
     end
 
     def merge_left( other )
