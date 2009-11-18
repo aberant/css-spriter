@@ -5,23 +5,24 @@
 
 Gem::Specification.new do |s|
   s.name = %q{spittle}
-  s.version = "0.9.1.2"
+  s.version = "0.9.1.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["aberant", "tjennings"]
   s.date = %q{2009-11-17}
-  s.default_executable = %q{spittle}
   s.description = %q{pure ruby PNG}
   s.email = ["qzzzq1@gmail.com", "tyler.jennings@gmail.com"]
-  s.executables = ["spittle"]
+  s.executables = ["png_info", "spittle"]
   s.extra_rdoc_files = [
     "README"
   ]
   s.files = [
     ".gitignore",
+     "MIT-LICENSE",
      "README",
      "Rakefile",
      "VERSION",
+     "bin/png_info",
      "bin/spittle",
      "examples/sprites/README",
      "examples/sprites/apple/apple.png",
@@ -37,6 +38,11 @@ Gem::Specification.new do |s|
      "examples/sprites/apple/support.png",
      "examples/sprites/fragment.css",
      "examples/sprites/index.html",
+     "examples/sprites/many_sized_cats/cat-on-keyboard.png",
+     "examples/sprites/many_sized_cats/darth_cat.png",
+     "examples/sprites/many_sized_cats/fragment.css",
+     "examples/sprites/many_sized_cats/music-keyboard-cat.png",
+     "examples/sprites/many_sized_cats/sprite.png",
      "examples/sprites/server.rb",
      "examples/sprites/sprite.css",
      "examples/sprites/words/fragment.css",
