@@ -1,10 +1,3 @@
-  .apple_itunes {
-    background: transparent url(/apple/sprite.png) -350px 0px no-repeat;
-    width:116;
-    height:38;
-    text-indent:-5000px;
-  }
-
   .apple_mac {
     background: transparent url(/apple/sprite.png) -466px 0px no-repeat;
     width:116;
@@ -19,16 +12,9 @@
     text-indent:-5000px;
   }
 
-  .apple_store {
-    background: transparent url(/apple/sprite.png) -744px 0px no-repeat;
+  .apple_support {
+    background: transparent url(/apple/sprite.png) -860px 0px no-repeat;
     width:116;
-    height:38;
-    text-indent:-5000px;
-  }
-
-  .apple_search {
-    background: transparent url(/apple/sprite.png) -582px 0px no-repeat;
-    width:162;
     height:38;
     text-indent:-5000px;
   }
@@ -40,9 +26,9 @@
     text-indent:-5000px;
   }
 
-  .apple_support {
-    background: transparent url(/apple/sprite.png) -860px 0px no-repeat;
-    width:116;
+  .apple_search {
+    background: transparent url(/apple/sprite.png) -582px 0px no-repeat;
+    width:162;
     height:38;
     text-indent:-5000px;
   }
@@ -61,17 +47,38 @@
     text-indent:-5000px;
   }
 
-  .words_set {
-    background: transparent url(/words/sprite.png) -85px 0px no-repeat;
-    width:26;
-    height:21;
+  .apple_store {
+    background: transparent url(/apple/sprite.png) -744px 0px no-repeat;
+    width:116;
+    height:38;
     text-indent:-5000px;
   }
 
-  .words_specified {
-    background: transparent url(/words/sprite.png) -111px 0px no-repeat;
-    width:70;
-    height:21;
+  .apple_itunes {
+    background: transparent url(/apple/sprite.png) -350px 0px no-repeat;
+    width:116;
+    height:38;
+    text-indent:-5000px;
+  }
+
+  .many_sized_cats_cat-on-keyboard {
+    background: transparent url(/many_sized_cats/sprite.png) 0px 0px no-repeat;
+    width:64;
+    height:48;
+    text-indent:-5000px;
+  }
+
+  .many_sized_cats_music-keyboard-cat {
+    background: transparent url(/many_sized_cats/sprite.png) -304px 0px no-repeat;
+    width:225;
+    height:166;
+    text-indent:-5000px;
+  }
+
+  .many_sized_cats_darth_cat {
+    background: transparent url(/many_sized_cats/sprite.png) -64px 0px no-repeat;
+    width:240;
+    height:320;
     text-indent:-5000px;
   }
 
@@ -85,6 +92,20 @@
   .words_of {
     background: transparent url(/words/sprite.png) -66px 0px no-repeat;
     width:19;
+    height:21;
+    text-indent:-5000px;
+  }
+
+  .words_set {
+    background: transparent url(/words/sprite.png) -85px 0px no-repeat;
+    width:26;
+    height:21;
+    text-indent:-5000px;
+  }
+
+  .words_specified {
+    background: transparent url(/words/sprite.png) -111px 0px no-repeat;
+    width:70;
     height:21;
     text-indent:-5000px;
   }

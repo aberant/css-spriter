@@ -1,27 +1,27 @@
+  .words_latitude {
+    background: transparent url(/words/sprite.png) 0px 0px no-repeat;
+    width:66;
+    height:21;
+    text-indent:-5000px;
+  }
+
   .words_of {
-    background: transparent url(/examples/sprites/words/sprite.png) -66px 0px no-repeat;
+    background: transparent url(/words/sprite.png) -66px 0px no-repeat;
     width:19;
     height:21;
     text-indent:-5000px;
   }
 
   .words_set {
-    background: transparent url(/examples/sprites/words/sprite.png) -85px 0px no-repeat;
+    background: transparent url(/words/sprite.png) -85px 0px no-repeat;
     width:26;
     height:21;
     text-indent:-5000px;
   }
 
   .words_specified {
-    background: transparent url(/examples/sprites/words/sprite.png) -111px 0px no-repeat;
+    background: transparent url(/words/sprite.png) -111px 0px no-repeat;
     width:70;
-    height:21;
-    text-indent:-5000px;
-  }
-
-  .words_latitude {
-    background: transparent url(/examples/sprites/words/sprite.png) 0px 0px no-repeat;
-    width:66;
     height:21;
     text-indent:-5000px;
   }

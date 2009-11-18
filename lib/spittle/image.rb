@@ -26,7 +26,8 @@ module PNG
     # need better checks, because currently compatible is
     # similar color type, or depth.. maybe it doesn't matter...
     def compatible?(image)
-      true
+      self.color_type == image.color_type &&
+      self.depth == image.depth
     end
 
     def write(file_name)
@@ -37,7 +38,7 @@ module PNG
 
     def fill_to_height( desired_height )
       raise "invalid height" if desired_height < height
-      return if desired_height == height
+      return self if desired_height == height
 
       data = @idat.uncompressed
 
@@ -55,7 +56,7 @@ module PNG
     end
 
     def to_s
-      "#{@name} (#{height} x #{width})"
+      "#{@name} (#{height} x #{width}) [color type: #{color_type}, depth: #{depth}]"
     end
 
     def merge_left( other )

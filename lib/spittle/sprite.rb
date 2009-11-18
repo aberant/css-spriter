@@ -11,7 +11,7 @@ module PNG
     def append( image )
       @images.each do |i|
        unless i.compatible? image
-         raise ImageFormatException.new("Incompatible image #{i}")
+         raise ImageFormatException.new("Image #{i} not compatible with #{image}")
        end
       end
 
@@ -31,9 +31,9 @@ module PNG
 
     def write( output_filename )
       return if @images.empty?
-
+      right_sized = @images.map{|i| i.fill_to_height(@max_height)}
       # head is the last image, then we merge left
-      head, *tail = @images.reverse
+      head, *tail = right_sized.reverse
       result = tail.inject( head ){ |head, image| head.merge_left( image ) }
       result.write( output_filename )
     end
