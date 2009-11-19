@@ -1,22 +1,29 @@
 class MtimeTracker
-  def initialize(dir)
+  def initialize(dir, options = {})
     @dir = dir
+    @options = options
   end
 
   def files
-    @files ||= Dir.glob(@dir + "/**/*")
+    return @files if @files
+    @files = without_exclusions(Dir.glob(@dir + "/**/*"))
+    
   end
 
-  def current_mtimes 
-    return @current if @current
-    @current = files.inject({}) do |map, f|
-      map[f] = File.mtime(f).to_i
-      map
+  def without_exclusions(files)
+    return files unless @options[:exclude]
+    exclusions = [@options[:exclude]].flatten
+    files.select{|f| exclusions.none?{|e| f.match e}}
+  end
+
+  def current_mtimes
+    @current ||= files.inject({}) do |map, f|
+      map[f] = File.mtime(f).to_i; map
     end
   end
 
   def file_changed?(file)
-    puts "#{file} #{mtimes[file]} != #{current_mtimes[file]}"
+    #puts "#{file} #{mtimes[file]} != #{current_mtimes[file]}"
     mtimes[file] != current_mtimes[file]
   end
 
@@ -57,5 +64,6 @@ class MtimeTracker
   def reset
     @mtimes = nil
     @current = nil
+    @files = nil
   end
 end
