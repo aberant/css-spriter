@@ -91,23 +91,34 @@ module PNG
     end
 
     def rows
-     uncompressed = @idat.uncompressed
-     out = Array.new(height)
-     offset = 0
+      each_row( @idat.uncompressed ) do |scanline, row, out, pixel_width|
+        decode(scanline, row, out, pixel_width)
+      end
+    end
 
-     height.times do |scanline|
-       end_row = scanline_width + offset
-       row = uncompressed.slice(offset, scanline_width)
-       out[scanline] = decode(scanline, row, out, pixel_width)
-       offset = end_row
-     end
-     out
+    def paeth_encode(data)
+      each_row( data ) do |scanline, row, out, pixel_width|
+        encode(scanline, row, out, pixel_width)
+      end
     end
 
     def inspect
       "name: #{name}, color type: #{color_type}, depth: #{depth}, width: #{width}, height: #{height}"
     end
   private
+
+    def each_row( data )
+      out = Array.new(height)
+      offset = 0
+
+      height.times do |scanline|
+        end_row = scanline_width + offset
+        row = data.slice(offset, scanline_width)
+        out[scanline] = yield( scanline, row, out, pixel_width)
+        offset = end_row
+      end
+      out
+    end
 
     def last_scanline(current, data)
       (current - 1 < 0 ? [] : data[current - 1])
@@ -119,10 +130,24 @@ module PNG
       process_row(row, last_scanline(current, data), filter_type, pixel_width)
     end
 
+    def encode(current, row, data, pixel_width)
+      filter_type = 4 #paeth for now
+
+      process_row(row, last_scanline(current, data), filter_type, pixel_width)
+    end
+
     def process_row(row, last_scanline, filter_type, pixel_width)
       o = Array.new(row.size)
       row.each_with_index do |e, i|
         o[i] = Filters.call(filter_type, e, i, o, last_scanline, pixel_width)
+      end
+      o
+    end
+
+    def encode_row(row, last_scanline, filter_type, pixel_width)
+      o = Array.new(row.size)
+      row.each_with_index do |e, i|
+        o[i] = Filters.encode(filter_type, e, i, o, last_scanline, pixel_width)
       end
       o
     end

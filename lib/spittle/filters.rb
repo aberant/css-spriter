@@ -22,24 +22,47 @@ module PNG
           (value + ( (fetch_pixel(index - record_width, row) + fetch_pixel(index, last_row)) / 2 ).floor) % 256
         when 4
           #paeth
-          a = fetch_pixel(index - record_width, row)
-          b = fetch_pixel(index, last_row)
-          c = fetch_pixel(index - record_width, last_row)
-          p = a + b - c
-          pa = (p - a).abs
-          pb = (p - b).abs
-          pc = (p - c).abs
+          left = fetch_pixel(index - record_width, row)
+          above = fetch_pixel(index, last_row)
+          upper_left = fetch_pixel(index - record_width, last_row)
 
-          pr = c
-          if ( pa <= pb and pa <= pc) 
-            pr = a
-          elsif (pb <= pc)
-            pr = b
-          end
+          pr = paeth_predictor( left, above, upper_left )
+
           (value + pr) % 256
         else
           raise "Invalid filter type (#{filter_type})"
         end
+      end
+      def encode( filter_type, value, index, row, last_row, record_width )
+        case filter_type
+        when 4
+          #paeth
+          left = fetch_pixel(index - record_width, row)
+          above = fetch_pixel(index, last_row)
+          upper_left = fetch_pixel(index - record_width, last_row)
+
+          pr = paeth_predictor( left, above, upper_left )
+          (value - pr) % 256
+        else
+          raise "We can currently only encode to PAETH. Filter type (#{filter_type}) is not supported"
+        end
+      end
+
+      private
+
+      def paeth_predictor( left, above, upper_left )
+        p = left + above - upper_left
+        pa = (p - left).abs
+        pb = (p - above).abs
+        pc = (p - upper_left).abs
+
+        pr = upper_left
+        if ( pa <= pb and pa <= pc)
+          pr = left
+        elsif (pb <= pc)
+          pr = above
+        end
+        pr
       end
     end
   end
