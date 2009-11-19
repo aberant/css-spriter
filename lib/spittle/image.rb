@@ -30,9 +30,10 @@ module PNG
       self.depth == image.depth
     end
 
-    def write(file_name)
+    def write(file_name, options={})
+      filter_type = options[:filter_type] || 4
       File.open(file_name, 'w') do |f|
-        f.write(generate_png)
+        f.write(generate_png( filter_type ))
       end
     end
 
@@ -96,9 +97,9 @@ module PNG
       end
     end
 
-    def paeth_encode(data)
+    def encoded_rows(data, filter_type)
       each_row( data ) do |scanline, row, out, pixel_width|
-        encode(scanline, row, out, pixel_width)
+        encode(scanline, row, out, pixel_width, filter_type)
       end
     end
 
@@ -130,9 +131,7 @@ module PNG
       process_row(row, last_scanline(current, data), filter_type, pixel_width)
     end
 
-    def encode(current, row, data, pixel_width)
-      filter_type = 4 #paeth for now
-
+    def encode(current, row, data, pixel_width, filter_type)
       process_row(row, last_scanline(current, data), filter_type, pixel_width)
     end
 
@@ -152,9 +151,9 @@ module PNG
       o
     end
 
-    def generate_png
+    def generate_png( filter_type )
       file_header = PNG::FileHeader.new.encode
-      raw_data = @idat.uncompressed
+      raw_data = encoded_rows( @idat.uncompressed, filter_type ).flatten
 
       ihdr = PNG::IHDR.new( width, height, depth, color_type ).to_chunk
       idat = PNG::IDAT.new( raw_data ).to_chunk
