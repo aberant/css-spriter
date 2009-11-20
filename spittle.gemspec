@@ -10,10 +10,9 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["aberant", "tjennings"]
   s.date = %q{2009-11-20}
-  s.default_executable = %q{png_info}
   s.description = %q{pure ruby PNG}
   s.email = ["qzzzq1@gmail.com", "tyler.jennings@gmail.com"]
-  s.executables = ["png_info"]
+  s.executables = ["png_info", "sprite"]
   s.extra_rdoc_files = [
     "README.rdoc"
   ]
@@ -24,6 +23,7 @@ Gem::Specification.new do |s|
      "Rakefile",
      "VERSION",
      "bin/png_info",
+     "bin/sprite",
      "examples/sprites/.mtimes",
      "examples/sprites/README",
      "examples/sprites/apple/.mtimes",
