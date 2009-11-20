@@ -1,58 +1,61 @@
-[ PNG, PNG, PNG ]  (°_°)
-[ PNG, PNG, PNG ]  (° )
-[ PNG, PNG, PNG ] )°)
-[ PNG, PNG, )°)
-[ PNG, )°)
-[ )°)
+= Spittle, a sprite generator
 
- \(°_°)/ -> SPRITES!!!
+  [ PNG, PNG, PNG ]  (°_°)
+  [ PNG, PNG, PNG ]  (° )
+  [ PNG, PNG, PNG ] )°)
+  [ PNG, PNG, )°)
+  [ PNG, )°)
+  [ )°)
 
+   \(°_°)/ -> SPRITES!!!
+
+== Description
 
 It takes your PNG's, chews them up and spits out sprites!
 
 point bin/spittle at a directory, and watch it sprite away!
 
-INSTALLATION - standalone
+== Installation - standalone
 
 We're hosted at gemcutter.  I believe 'sudo gem install gemcutter' then 'gem tumble'.
-Then you can run: 
+Then you can run:
 
-> sudo gem install spittle
+  sudo gem install spittle
 
-USAGE - standalone
+=== Usage - standalone
 
-> spittle <directory>
+  spittle <directory>
 
 For a full list of options:
 
-> spittle -h
+  spittle -h
 
-INSTALLATION - Rails plugin
+== Installation - Rails plugin
 
-> 
+  >
 
-USAGE - Rails plugin
+=== Usage - Rails plugin
 
-Spittle assumes all of your sprites are located in the directory public/images/sprites.  This directory should contian sub-directories for each sprite you wish to create.  The css class names for an image in a sprite will take the form <directory_name>_<image_nama>.  Here is an example: 
+Spittle assumes all of your sprites are located in the directory public/images/sprites.  This directory should contian sub-directories for each sprite you wish to create.  The css class names for an image in a sprite will take the form <directory_name>_<image_nama>.  Here is an example:
 
-sprites / 
-  cars / 
-    ford.png
-    chevy.png
-  planes /
-    boeing.png
-    cesna.png
+  sprites /
+    cars /
+      ford.png
+      chevy.png
+    planes /
+      boeing.png
+      cesna.png
 
 Running spittle:generate does all the work. Each sprite directory (cars, planes) will now contain a sprite.png.  Spittle will also generate a sprites.css stylesheet in public/stylesheets/ that you should include in your layout.  If you wished to use the ford image from the cars sprite you would give the 'cars_ford' class to the desired element in the view.  That's it!
 
 Check out examples/sprites if you want to see what spittle can do without doing any work.
 
-LIMITATIONS
+== Limitations
 
 - only supports RGB and RGBA color types (and they must be the same for all images in a sprite)
 - does not support color profiles (can cause a slight change in color from the source image)
 
-FEATURES
+== Features
 
 - automatically generates sprites from a set of PNG images
 - automatically generates css classes to access images within the sprite
@@ -60,13 +63,13 @@ FEATURES
 - Rails plugin & rake tasks (sprite:generate & sprite:cleanup)
 - Supports varying dimensions in source images
 
-ROADMAP - by priority
+== Roadmap - by priority
 
 - Use mtime tracking to prevent regeneration of sprites that have not changed
 - Support global css template override
 - Improve image compression
 
-AUTHORS
+== AUTHORS
 
 aberant - Colin Harris
 tjennings - Tyler Jennings
