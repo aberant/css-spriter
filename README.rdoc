@@ -24,11 +24,13 @@ Then you can run:
 
 === Usage - standalone
 
-  spittle <directory>
+  sprite <directory>
+
+If you point the sprite command at a directory tree by default it will construct sprites for each of the sub directories and generate a single css to access all of the sprites which is placed in the root of the directory tree
 
 For a full list of options:
 
-  spittle -h
+  sprite -h
 
 == Installation - Rails plugin
 
