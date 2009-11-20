@@ -60,6 +60,7 @@ module PNG
     end
 
     def merge_left( other )
+      #puts "merging #{self.name} into #{other.name}"
       l = other.rows
       r = self.rows
 

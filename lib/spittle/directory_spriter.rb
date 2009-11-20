@@ -17,6 +17,8 @@ class DirectoryProcessor
     @sprite = PNG::Sprite.new
     files.each {|f| @sprite.append(PNG::Image.open(f))}
     #puts "#{@dir} #{files.size} files"
+    @tracker = MtimeTracker.new(@dir,
+                                :exclude => ['fragment.css', 'sprite.png'])
   end
 
   def images
@@ -24,15 +26,18 @@ class DirectoryProcessor
   end
 
   def write
+    return unless @tracker.has_changes?
     @sprite.write(sprite_file)
     File.open(css_file, 'w') do |f|
       f.write(css)
     end
+    @tracker.update
   end
 
   def cleanup
     File.delete(sprite_file) rescue {}
     File.delete(css_file) rescue {}
+    @tracker.cleanup
   end
 
   def sprite_file

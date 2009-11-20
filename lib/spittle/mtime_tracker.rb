@@ -4,10 +4,17 @@ class MtimeTracker
     @options = options
   end
 
+  def cleanup
+    File.delete(mtime_file) rescue {}
+  end
+
+  def fresh?
+    not File.exists?(mtime_file)
+  end
+
   def files
     return @files if @files
     @files = without_exclusions(Dir.glob(@dir + "/**/*"))
-    
   end
 
   def without_exclusions(files)
