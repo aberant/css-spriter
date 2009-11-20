@@ -71,5 +71,5 @@ Check out examples/sprites if you want to see what spittle can do without doing 
 
 == AUTHORS
 
-aberant - Colin Harris
-tjennings - Tyler Jennings
+- aberant - Colin Harris
+- tjennings - Tyler Jennings
