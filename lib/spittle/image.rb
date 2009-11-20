@@ -57,7 +57,7 @@ module PNG
     end
 
     def to_s
-      "#{@name} (#{height} x #{width}) [color type: #{color_type}, depth: #{depth}]"
+      inspect
     end
 
     def merge_left( other )
@@ -104,7 +104,7 @@ module PNG
     end
 
     def inspect
-      "name: #{name}, color type: #{color_type}, depth: #{depth}, width: #{width}, height: #{height}"
+      "#{@name} (#{height} x #{width}) [color type: #{color_type}, depth: #{depth}]"
     end
   private
 
