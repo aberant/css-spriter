@@ -154,7 +154,7 @@ module PNG
 
     def generate_png( filter_type )
       file_header = PNG::FileHeader.new.encode
-      raw_data = encoded_rows( @idat.uncompressed, filter_type ).flatten
+      raw_data = @idat.uncompressed
 
       ihdr = PNG::IHDR.new( width, height, depth, color_type ).to_chunk
       idat = PNG::IDAT.new( raw_data ).to_chunk
