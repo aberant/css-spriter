@@ -5,26 +5,28 @@
 
 Gem::Specification.new do |s|
   s.name = %q{spittle}
-  s.version = "0.9.1.3"
+  s.version = "0.9.1.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["aberant", "tjennings"]
-  s.date = %q{2009-11-17}
+  s.date = %q{2009-11-20}
+  s.default_executable = %q{png_info}
   s.description = %q{pure ruby PNG}
   s.email = ["qzzzq1@gmail.com", "tyler.jennings@gmail.com"]
-  s.executables = ["png_info", "spittle"]
+  s.executables = ["png_info"]
   s.extra_rdoc_files = [
-    "README"
+    "README.rdoc"
   ]
   s.files = [
     ".gitignore",
      "MIT-LICENSE",
-     "README",
+     "README.rdoc",
      "Rakefile",
      "VERSION",
      "bin/png_info",
-     "bin/spittle",
+     "examples/sprites/.mtimes",
      "examples/sprites/README",
+     "examples/sprites/apple/.mtimes",
      "examples/sprites/apple/apple.png",
      "examples/sprites/apple/divider.png",
      "examples/sprites/apple/downloads.png",
@@ -38,6 +40,7 @@ Gem::Specification.new do |s|
      "examples/sprites/apple/support.png",
      "examples/sprites/fragment.css",
      "examples/sprites/index.html",
+     "examples/sprites/many_sized_cats/.mtimes",
      "examples/sprites/many_sized_cats/cat-on-keyboard.png",
      "examples/sprites/many_sized_cats/darth_cat.png",
      "examples/sprites/many_sized_cats/fragment.css",
@@ -45,6 +48,7 @@ Gem::Specification.new do |s|
      "examples/sprites/many_sized_cats/sprite.png",
      "examples/sprites/server.rb",
      "examples/sprites/sprite.css",
+     "examples/sprites/words/.mtimes",
      "examples/sprites/words/fragment.css",
      "examples/sprites/words/latitude.png",
      "examples/sprites/words/of.png",
@@ -62,6 +66,7 @@ Gem::Specification.new do |s|
      "lib/spittle/iend.rb",
      "lib/spittle/ihdr.rb",
      "lib/spittle/image.rb",
+     "lib/spittle/mtime_tracker.rb",
      "lib/spittle/parser.rb",
      "lib/spittle/processor.rb",
      "lib/spittle/sprite.rb",
@@ -79,6 +84,7 @@ Gem::Specification.new do |s|
      "spec/lib/image_spec.rb",
      "spec/lib/parser_spec.rb",
      "spec/lib/sprite_spec.rb",
+     "spec/mtime_tracking_spec.rb",
      "spec/spec.opts",
      "spec/spec_helper.rb",
      "spec/sprite_dirs/words/latitude.png",
@@ -104,6 +110,7 @@ Gem::Specification.new do |s|
      "spec/lib/image_spec.rb",
      "spec/lib/parser_spec.rb",
      "spec/lib/sprite_spec.rb",
+     "spec/mtime_tracking_spec.rb",
      "spec/spec_helper.rb",
      "examples/sprites/server.rb"
   ]
