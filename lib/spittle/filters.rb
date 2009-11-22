@@ -50,6 +50,10 @@ module PNG
         end
       end
 
+      def convert( previous_filter, desired_filter, value, index, row, last_row, record_width )
+        decoded = decode( previous_filter, value, index, row, last_row, record_width )
+        encode( desired_filter, decoded, index, row, last_row, record_width )
+      end
       private
 
       def paeth_predictor( left, above, upper_left )
