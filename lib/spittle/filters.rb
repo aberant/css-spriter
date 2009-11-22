@@ -6,7 +6,7 @@ module PNG
       end
 
       #filter methods are inlined here for performance
-      def call( filter_type, value, index, row, last_row, record_width )
+      def decode( filter_type, value, index, row, last_row, record_width )
         case filter_type
         when 0
           #no filter
@@ -35,6 +35,8 @@ module PNG
       end
       def encode( filter_type, value, index, row, last_row, record_width )
         case filter_type
+        when 0
+          value
         when 4
           #paeth
           left = fetch_pixel(index - record_width, row)
@@ -44,7 +46,7 @@ module PNG
           pr = paeth_predictor( left, above, upper_left )
           (value - pr) % 256
         else
-          raise "We can currently only encode to PAETH. Filter type (#{filter_type}) is not supported"
+          raise "We can currently only encode to PAETH or type 0. Filter type (#{filter_type}) is not supported"
         end
       end
 
