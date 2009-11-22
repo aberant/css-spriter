@@ -14,6 +14,6 @@ describe PNG::Filters do
     
     paeth =  PNG::Filters.encode( @filter_type, @value, @index, @row, @last_row, @record_width )
     output = PNG::Filters.convert( @filter_type, 0, paeth, @index, @row, @last_row, @record_width )
-    output.should == 64
+    output.should == @value
   end
 end
