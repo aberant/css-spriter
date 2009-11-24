@@ -64,10 +64,10 @@ Check out examples/sprites if you want to see what spittle can do without doing 
 - customizable css templates
 - Rails plugin & rake tasks (sprite:generate & sprite:cleanup)
 - Supports varying dimensions in source images
+- Does not regenerate sprites that have not changed
 
 == Roadmap - by priority
 
-- Use mtime tracking to prevent regeneration of sprites that have not changed
 - Support global css template override
 - Improve image compression
 

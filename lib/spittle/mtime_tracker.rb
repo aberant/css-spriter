@@ -20,7 +20,7 @@ class MtimeTracker
   def without_exclusions(files)
     return files unless @options[:exclude]
     exclusions = [@options[:exclude]].flatten
-    files.select{|f| exclusions.none?{|e| f.match e}}
+    files.select{|f| not exclusions.any?{|e| f.match e}}
   end
 
   def current_mtimes
