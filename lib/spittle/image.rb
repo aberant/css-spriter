@@ -1,4 +1,5 @@
 module PNG
+
   class Image
 
     def self.open( file_name )
@@ -11,10 +12,11 @@ module PNG
 
     end
 
-    def initialize( ihdr, idat, name )
+    def initialize( ihdr, idat, name, options = {} )
       @ihdr = ihdr
       @idat = idat
       @name = name
+      @rows = options[:rows]
     end
 
     attr_reader :name
@@ -42,19 +44,17 @@ module PNG
       raise "invalid height" if desired_height < height
       return self if desired_height == height
 
-      data = @idat.uncompressed
+      data = rows.clone
 
-      empty_row = [0] + [0] * ( width * pixel_width )
-
+      empty_row = [0] * ( width * pixel_width )
 
       ( desired_height -  height ).times do
-        data = data + empty_row
+        data << empty_row
       end
 
       ihdr = IHDR.new( width, desired_height, depth, color_type )
-      idat = IDAT.new( data )
 
-      Image.new( ihdr, idat, name )
+      Image.new( ihdr, nil, name, :rows => data )
     end
 
     def to_s
@@ -66,17 +66,16 @@ module PNG
       l = other.rows
       r = self.rows
 
-      data = l.zip r
-
-      #prepend the filter byte 0 = no filter
-      data.each { |row| row.unshift(0) }
-      data.flatten!
+      merged = Array.new(l.size)
+      l.each_with_index do |row, idx|
+        merged[idx] = row + r[idx]
+      end
+      data = merged
 
       ihdr = IHDR.new( width + other.width, height, depth, color_type)
-      idat = IDAT.new( data )
       img_name  = "#{name}_#{other.name}"
 
-      Image.new( ihdr, idat, img_name )
+      Image.new( ihdr, nil, img_name, :rows => data )
     end
 
     #color types
@@ -94,6 +93,10 @@ module PNG
     end
 
     def rows
+      @rows ||= to_rows
+    end
+
+    def to_rows
       uncompressed = @idat.uncompressed
 
       out = Array.new(height)
@@ -134,7 +137,9 @@ module PNG
 
     def generate_png( filter_type )
       file_header = PNG::FileHeader.new.encode
-      raw_data = @idat.uncompressed
+      raw_data = rows.clone
+      raw_data.each { |row| row.unshift(0) }
+      raw_data.flatten!
 
       ihdr = PNG::IHDR.new( width, height, depth, color_type ).to_chunk
       idat = PNG::IDAT.new( raw_data ).to_chunk

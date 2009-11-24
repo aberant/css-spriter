@@ -8,7 +8,7 @@ describe PNG::Filters do
     @last_row = [0,32,0,0]
     @record_width = 4
   end
-  
+
   it "should be able to convert between filters" do
     @filter_type = 4
     
