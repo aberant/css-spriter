@@ -46,7 +46,7 @@ describe MtimeTracker do
 
       it "returns true from has_changes" do 
         @tracker.has_changes?.should be_true
-        @tracker.changeset.first.should  include("/spec/images/lightening.png")
+        @tracker.changeset.first.should include("/spec/images/lightening.png")
       end
     end
 

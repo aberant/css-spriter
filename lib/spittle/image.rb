@@ -22,6 +22,7 @@ module PNG
     def height; @ihdr.height end
     def depth; @ihdr.depth end
     def color_type; @ihdr.color_type end
+    def uncompressed; @idat.uncompressed end
 
     # need better checks, because currently compatible is
     # similar color type, or depth.. maybe it doesn't matter...
@@ -93,15 +94,18 @@ module PNG
     end
 
     def rows
-      each_row( @idat.uncompressed ) do |scanline, row, out, pixel_width|
-        decode(scanline, row, out, pixel_width)
-      end
-    end
+      uncompressed = @idat.uncompressed
 
-    def encoded_rows(data, filter_type)
-      each_row( data ) do |scanline, row, out, pixel_width|
-        encode(scanline, row, out, pixel_width, filter_type)
+      out = Array.new(height)
+      offset = 0
+
+      height.times do |scanline|
+        end_row = scanline_width + offset
+        row = uncompressed.slice(offset, scanline_width)
+        out[scanline] = decode(scanline, row, out, pixel_width)
+        offset = end_row
       end
+      out
     end
 
     def inspect
@@ -109,45 +113,21 @@ module PNG
     end
   private
 
-    def each_row( data )
-      out = Array.new(height)
-      offset = 0
-
-      height.times do |scanline|
-        end_row = scanline_width + offset
-        row = data.slice(offset, scanline_width)
-        out[scanline] = yield( scanline, row, out, pixel_width)
-        offset = end_row
-      end
-      out
-    end
-
     def last_scanline(current, data)
-      (current - 1 < 0 ? [] : data[current - 1])
+      last_row_index = current - 1
+      (last_row_index < 0 ? [] : data[last_row_index])
     end
 
     def decode(current, row, data, pixel_width)
       filter_type = row.shift
 
-      process_row(row, last_scanline(current, data), filter_type, pixel_width)
+      decode_row(row, last_scanline(current, data), filter_type, pixel_width)
     end
 
-    def encode(current, row, data, pixel_width, filter_type)
-      process_row(row, last_scanline(current, data), filter_type, pixel_width)
-    end
-
-    def process_row(row, last_scanline, filter_type, pixel_width)
+    def decode_row(row, last_scanline, filter_type, pixel_width)
       o = Array.new(row.size)
-      row.each_with_index do |e, i|
-        o[i] = Filters.call(filter_type, e, i, o, last_scanline, pixel_width)
-      end
-      o
-    end
-
-    def encode_row(row, last_scanline, filter_type, pixel_width)
-      o = Array.new(row.size)
-      row.each_with_index do |e, i|
-        o[i] = Filters.encode(filter_type, e, i, o, last_scanline, pixel_width)
+      row.each_with_index do |byte, i|
+        o[i] = Filters.decode(filter_type, byte, i, o, last_scanline, pixel_width)
       end
       o
     end
