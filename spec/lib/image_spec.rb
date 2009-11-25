@@ -22,4 +22,12 @@ describe PNG::Image do
     result.rows.should == [[1, 2, 3],
                            [0, 0, 0]]
   end
+  
+  it "can encode the rows with filter 0" do
+    result = @image1.fill_to_height(2)
+    result.filter_encoded_rows(0).should == [[0, 1, 2, 3], [0, 0, 0, 0]]
+  end
+  
+  
+  it "can encode the rows with filter 1" 
 end

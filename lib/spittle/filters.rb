@@ -12,7 +12,7 @@ module PNG
           #no filter
           value
         when 1
-          #up
+          #up - left?
           (value + fetch_pixel(index - record_width, row)) % 256
         when 2
           #left
