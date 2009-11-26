@@ -1,3 +1,12 @@
+module Spittle
+  class Image
+    def initialize(properties, data)
+      @properties = properties
+      @data = Data.new(data)
+    end
+  end
+end
+
 module PNG
 
   class Image
@@ -40,18 +49,10 @@ module PNG
       end
     end
 
-    def fill_to_height( desired_height )
+    def fill_to_height( desired_height)
       raise "invalid height" if desired_height < height
       return self if desired_height == height
-
-      data = rows.clone
-
-      empty_row = [0] * ( width * pixel_width )
-
-      ( desired_height -  height ).times do
-        data << empty_row
-      end
-
+      data = rows.fill_to_height(desired_height)
       ihdr = IHDR.new( width, desired_height, depth, color_type )
 
       Image.new( ihdr, nil, name, :rows => data )
@@ -61,21 +62,13 @@ module PNG
       inspect
     end
 
-    def merge_left( other )
-      #puts "merging #{self.name} into #{other.name}"
-      l = other.rows
-      r = self.rows
-
-      merged = Array.new(l.size)
-      l.each_with_index do |row, idx|
-        merged[idx] = row + r[idx]
-      end
-      data = merged
+    def merge_left(other)
+      merged = rows.merge_left(other.rows)
 
       ihdr = IHDR.new( width + other.width, height, depth, color_type)
       img_name  = "#{name}_#{other.name}"
 
-      Image.new( ihdr, nil, img_name, :rows => data )
+      Image.new( ihdr, nil, img_name, :rows => merged )
     end
 
     #color types
@@ -99,32 +92,27 @@ module PNG
     def to_rows
       uncompressed = @idat.uncompressed
 
-      out = Array.new(height)
+      #scanline_width - 1 because we're stripping the filter bit
+      n_out = Spittle::ImageData.new(:scanline_width => scanline_width - 1,
+                                     :pixel_width => pixel_width,
+                                     :data => Array.new(height))
       offset = 0
-
       height.times do |scanline|
         end_row = scanline_width + offset
         row = uncompressed.slice(offset, scanline_width)
-        out[scanline] = decode(scanline, row, out, pixel_width)
+        n_out[scanline] = decode(scanline, row, n_out, pixel_width)
         offset = end_row
       end
-      out
+      n_out
     end
 
     def inspect
       "#{@name} (#{height} x #{width}) [color type: #{color_type}, depth: #{depth}]"
     end
   private
-
-    def last_scanline(current, data)
-      last_row_index = current - 1
-      (last_row_index < 0 ? [] : data[last_row_index])
-    end
-
     def decode(current, row, data, pixel_width)
       filter_type = row.shift
-
-      decode_row(row, last_scanline(current, data), filter_type, pixel_width)
+      decode_row(row, data.last_scanline(current), filter_type, pixel_width)
     end
 
     def decode_row(row, last_scanline, filter_type, pixel_width)
