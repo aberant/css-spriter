@@ -12,7 +12,7 @@ module PNG
           #no filter
           value
         when 1
-          #up
+          #left
           (value + fetch_pixel(index - record_width, row)) % 256
         when 2
           #left
@@ -37,6 +37,9 @@ module PNG
         case filter_type
         when 0
           value
+        when 1
+          #left
+          (value - fetch_pixel(index - record_width, row)) % 256
         when 4
           #paeth
           left = fetch_pixel(index - record_width, row)
@@ -50,11 +53,7 @@ module PNG
         end
       end
 
-      def convert( previous_filter, desired_filter, value, index, row, last_row, record_width )
-        decoded = decode( previous_filter, value, index, row, last_row, record_width )
-        encode( desired_filter, decoded, index, row, last_row, record_width )
-      end
-      private
+    private
 
       def paeth_predictor( left, above, upper_left )
         p = left + above - upper_left

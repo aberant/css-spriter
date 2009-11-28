@@ -22,4 +22,19 @@ describe PNG::Image do
     result.rows.should == [[1, 2, 3],
                            [0, 0, 0]]
   end
+  
+  it "can encode the rows with filter 0" do
+    result = @image1.fill_to_height(2)
+    result.filter_encoded_rows(0).should == [[0, 1, 2, 3], [0, 0, 0, 0]]
+  end
+  
+  
+  it "can encode the rows with filter 1" do
+    image = @builder.build( :width => 2, :height => 1, :name => "image1", :data => [0,1,2,3,4,5,6] )
+
+    # filter byte of 1
+    # first byte of pixel 2 - pixel 1 is 3
+    # second byte of pixel 2 - pixel 1 is 3.. etc
+    image.filter_encoded_rows(1).should == [[1, 1, 2, 3, 3, 3, 3]]
+  end
 end

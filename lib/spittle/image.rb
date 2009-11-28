@@ -89,6 +89,15 @@ module PNG
       @rows ||= to_rows
     end
 
+    def filter_encoded_rows( filter_type )
+      out = Array.new(height)
+      rows.each_with_index do |row, scanline|
+        last_row = rows.last_scanline(scanline)
+        out[scanline] = encode_row( row, last_row, filter_type, pixel_width)
+      end
+      out
+    end
+
     def to_rows
       uncompressed = @idat.uncompressed
 
@@ -110,6 +119,7 @@ module PNG
       "#{@name} (#{height} x #{width}) [color type: #{color_type}, depth: #{depth}]"
     end
   private
+
     def decode(current, row, data, pixel_width)
       filter_type = row.shift
       decode_row(row, data.last_scanline(current), filter_type, pixel_width)
@@ -121,6 +131,14 @@ module PNG
         o[i] = Filters.decode(filter_type, byte, i, o, last_scanline, pixel_width)
       end
       o
+    end
+
+    def encode_row( row, last_scanline, filter_type, pixel_width )
+      o = Array.new(row.size)
+      row.each_with_index do |byte, scanline|
+        o[scanline] = Filters.encode( filter_type, byte, scanline, row, last_scanline, pixel_width)
+      end
+      o.unshift( filter_type )
     end
 
     def generate_png( filter_type )
