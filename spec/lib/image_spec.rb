@@ -37,4 +37,12 @@ describe PNG::Image do
     # second byte of pixel 2 - pixel 1 is 3.. etc
     image.filter_encoded_rows(1).should == [[1, 1, 2, 3, 3, 3, 3]]
   end
+  
+  it "can encode the rows with filter 2" do
+    image = @builder.build( :width => 2, :height => 1, :name => "image1", :data => [0,1,2,3,4,5,6] )
+    result = image.fill_to_height(2)
+    
+    # filter byte of 2
+    result.filter_encoded_rows(2).should == [[2, 1, 2, 3, 4, 5, 6], [2, 255, 254, 253, 252, 251, 250]]
+  end
 end

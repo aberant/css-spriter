@@ -40,6 +40,9 @@ module PNG
         when 1
           #left
           (value - fetch_pixel(index - record_width, row)) % 256
+        when 2
+          #up
+          (value - fetch_pixel(index, last_row)) % 256
         when 4
           #paeth
           left = fetch_pixel(index - record_width, row)
