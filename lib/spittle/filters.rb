@@ -43,6 +43,9 @@ module PNG
         when 2
           #up
           (value - fetch_pixel(index, last_row)) % 256
+        when 3
+          #avg
+          (value - ( (fetch_pixel(index - record_width, row) + fetch_pixel(index, last_row)) / 2 ).floor) % 256
         when 4
           #paeth
           left = fetch_pixel(index - record_width, row)

@@ -10,6 +10,9 @@ end
 module PNG
 
   class Image
+    def self.default_filter_type
+      4 # paeth
+    end
 
     def self.open( file_name )
       name = File.basename( file_name, ".png" )
@@ -43,7 +46,7 @@ module PNG
     end
 
     def write(file_name, options={})
-      filter_type = options[:filter_type] || 4
+      filter_type = options[:filter_type] || Image.default_filter_type
       File.open(file_name, 'w') do |f|
         f.write(generate_png( filter_type ))
       end
@@ -143,8 +146,7 @@ module PNG
 
     def generate_png( filter_type )
       file_header = PNG::FileHeader.new.encode
-      raw_data = rows.clone
-      raw_data.each { |row| row.unshift(0) }
+      raw_data = filter_encoded_rows( filter_type )
       raw_data.flatten!
 
       ihdr = PNG::IHDR.new( width, height, depth, color_type ).to_chunk
