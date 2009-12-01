@@ -21,9 +21,9 @@ class Sprite
   def locations
     @images.inject(0) do |x, image|
       @locations[image.name.to_sym] = { :x => -(x),
-        :width => image.scanline_width,
+        :width => image.width,
         :height => image.height}
-      image.scanline_width + x
+      image.width + x
     end
     @locations
   end

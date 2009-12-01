@@ -1,15 +1,19 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe Spittle::ImageData do 
-before do 
-    data = [[1,2,3], 
-            [4,5,6]]
-    @id = Spittle::ImageData.new(:scanline_width => 10, :pixel_width => 4, :data => data)
-end
+  before do 
+      data = [[1,2,3], 
+              [4,5,6]]
+      @id = Spittle::ImageData.new(:scanline_width => 3, :pixel_width => 3, :data => data)
+  end
 
+  it "can fill to a specified height" do 
+    result = @id.fill_to_height(3)
+    result.should == [[1,2,3], [4,5,6], [0,0,0]]
+  end
   it "has scanline width and pixel width attributes" do 
-    @id.scanline_width.should == 10
-    @id.pixel_width.should == 4
+    @id.scanline_width.should == 3
+    @id.pixel_width.should == 3
   end
 
   it "can give you any arbitrary row in the data set" do 

@@ -15,17 +15,16 @@ describe 'PNG' do
   end
 
   it 'can merge one PNG on the left of another' do 
-    one = PNG::Image.open("#{@img_dir}/lightening.png")
-    two = PNG::Image.open("#{@img_dir}/lightening.png")
+    one = PNG::Image.read("#{@img_dir}/lightening.png")
+    two = PNG::Image.read("#{@img_dir}/lightening.png")
     merged = one.merge_left two
-    merged.write("#{@tmp_dir}/merge_right_test.png", :filter_type => 0)
+    PNG::Image.write("#{@tmp_dir}/merge_right_test.png", merged, :filter_type => 0)
     read("#{@expected_dir}/merge_right_test.png").should == read("#{@tmp_dir}/merge_right_test.png")
   end
-
 end
 
-describe "Dir sprite" do 
-  before :all do 
+describe "Dir sprite" do
+  before :all do
     @dir = File.dirname(__FILE__) + "/sprite_dirs/words"
     @spriter = DirectoryProcessor.new(@dir)
     @sprite_file = @dir + "/sprite.png"

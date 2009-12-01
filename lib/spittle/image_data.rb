@@ -10,7 +10,7 @@ module Spittle
 
     def name; @properties[:name] || "default"; end
     def scanline_width; @properties[:scanline_width]; end
-    def width; scanline_width; end
+    def width; scanline_width / pixel_width; end
     def pixel_width; @properties[:pixel_width]; end
 
     # need better checks, because currently compatible is
@@ -25,7 +25,8 @@ module Spittle
     end
 
     def merge_left( other )
-      merged = ImageData.new(@properties.merge(:name => "#{self.name}_#{other.name}"))
+      merged = ImageData.new(@properties.merge(:scanline_width => self.scanline_width + other.scanline_width,
+                                               :name => "#{self.name}_#{other.name}"))
       other.each_with_index do |row, idx|
         merged[idx] = row + self[idx]
       end

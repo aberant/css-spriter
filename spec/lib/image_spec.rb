@@ -12,20 +12,13 @@ describe PNG::Image do
   end
 
   it "can merge left" do
-    result = @image1.merge_left @image2
+    result = @image1.to_image.merge_left @image2.to_image
     
-    result.rows.should == [[4,5,6,1,2,3]]
-  end
-  
-  it "can insert empty rows to convert an image to a specific height" do
-    result = @image1.fill_to_height(2)
-    result.rows.should == [[1, 2, 3],
-                           [0, 0, 0]]
+    result.should == [[4,5,6,1,2,3]]
   end
   
   it "can encode the rows with filter 0" do
-    result = @image1.fill_to_height(2)
-    result.filter_encoded_rows(0).should == [[0, 1, 2, 3], [0, 0, 0, 0]]
+    @image1.filter_encoded_rows(0).should == [[0, 1, 2, 3]]
   end
   
   
@@ -39,9 +32,10 @@ describe PNG::Image do
   end
   
   it "can encode the rows with filter 2" do
-    image = @builder.build( :width => 2, :height => 1, :name => "image1", :data => [0,1,2,3,4,5,6] )
-    result = image.fill_to_height(2)
-    
+    image = @builder.build( :width => 2, :height => 2, :name => "image1",
+                           :data => [0,1,2,3,4,5,6,
+                                     0,0,0,0,0,0,0])
+    result = image
     # filter byte of 2
     result.filter_encoded_rows(2).should == [[2, 1, 2, 3, 4, 5, 6], [2, 255, 254, 253, 252, 251, 250]]
   end

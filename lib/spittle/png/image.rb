@@ -1,12 +1,3 @@
-module Spittle
-  class Image
-    def initialize(properties, data)
-      @properties = properties
-      @data = Data.new(data)
-    end
-  end
-end
-
 module PNG
 
   class Image
@@ -19,15 +10,16 @@ module PNG
         Image.new( ihdr, idat, name )
       end
     end
-
+    
+    #TODO - rename this 'image_data'
     def self.read( file_name )
       png = open(file_name)
       png.to_image
     end
 
-    def self.write( file_name, data )
-      ihdr = PNG::IHDR.new(data.scanline_width, data.height, 8, color_type_of(data.pixel_width))
-      Image.new(ihdr, nil, file_name, :rows => data).write( file_name )
+    def self.write( file_name, data, options = {} )
+      ihdr = PNG::IHDR.new(data.width, data.height, 8, color_type_of(data.pixel_width))
+      Image.new(ihdr, nil, file_name, :rows => data).write( file_name, options)
     end
 
     #TODO - Nieve We should only store RBGA
@@ -49,13 +41,6 @@ module PNG
     def color_type; @ihdr.color_type end
     def uncompressed; @idat.uncompressed end
 
-    # need better checks, because currently compatible is
-    # similar color type, or depth.. maybe it doesn't matter...
-    def compatible?(image)
-      self.color_type == image.color_type &&
-      self.depth == image.depth
-    end
-
     def write(file_name, options={})
       filter_type = options[:filter_type] || 4
       File.open(file_name, 'w') do |f|
@@ -63,26 +48,8 @@ module PNG
       end
     end
 
-    def fill_to_height( desired_height)
-      raise "invalid height" if desired_height < height
-      return self if desired_height == height
-      data = rows.fill_to_height(desired_height)
-      ihdr = IHDR.new( width, desired_height, depth, color_type )
-
-      Image.new( ihdr, nil, name, :rows => data )
-    end
-
     def to_s
       inspect
-    end
-
-    def merge_left(other)
-      merged = rows.merge_left(other.rows)
-
-      ihdr = IHDR.new( width + other.width, height, depth, color_type)
-      img_name  = "#{name}_#{other.name}"
-
-      Image.new( ihdr, nil, img_name, :rows => merged )
     end
 
     #color types
