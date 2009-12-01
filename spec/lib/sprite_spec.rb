@@ -1,8 +1,8 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe PNG::Sprite do
+describe Sprite do
   before :each do
-    @sprite = PNG::Sprite.new
+    @sprite = Sprite.new
     @builder = ImageBuilder.new
 
     #TODO - We should just create ImageData objects here

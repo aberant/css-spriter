@@ -14,7 +14,7 @@ class DirectoryProcessor
     @options = options
     @dir = dir
     files = images
-    @sprite = PNG::Sprite.new
+    @sprite = Sprite.new
     files.each {|f| @sprite.append(PNG::Image.read(f))}
     #puts "#{@dir} #{files.size} files"
     @tracker = MtimeTracker.new(@dir,

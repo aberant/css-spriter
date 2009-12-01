@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe PNG::Image do
   before :each do
-    @sprite = PNG::Sprite.new
+    @sprite = Sprite.new
     
     @builder = ImageBuilder.new
     
