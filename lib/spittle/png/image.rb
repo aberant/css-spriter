@@ -15,7 +15,7 @@ module PNG
     end
     
     #TODO - rename this 'image_data'
-    def self.read( file_name )
+    def self.image_data( file_name )
       png = open(file_name)
       png.to_image
     end

@@ -55,7 +55,7 @@ module PNG
           pr = paeth_predictor( left, above, upper_left )
           (value - pr) % 256
         else
-          raise "We can currently only encode to PAETH or type 0. Filter type (#{filter_type}) is not supported"
+          raise "Filter type (#{filter_type}) is not supported"
         end
       end
 
