@@ -5,8 +5,9 @@ describe PNG::Sprite do
     @sprite = PNG::Sprite.new
     @builder = ImageBuilder.new
 
-    @image1 = @builder.build( :width => 50, :height => 50, :name => "image1")
-    @image2 = @builder.build( :width => 50, :height => 50, :name => "image2")
+    #TODO - We should just create ImageData objects here
+    @image1 = @builder.build( :width => 50, :height => 50, :name => "image1").to_image
+    @image2 = @builder.build( :width => 50, :height => 50, :name => "image2").to_image
   end
 
   it "can merge an image to the right" do

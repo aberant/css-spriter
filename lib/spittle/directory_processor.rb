@@ -15,7 +15,7 @@ class DirectoryProcessor
     @dir = dir
     files = images
     @sprite = PNG::Sprite.new
-    files.each {|f| @sprite.append(PNG::Image.open(f))}
+    files.each {|f| @sprite.append(PNG::Image.read(f))}
     #puts "#{@dir} #{files.size} files"
     @tracker = MtimeTracker.new(@dir,
                                 :exclude => ['fragment.css', 'sprite.png'])

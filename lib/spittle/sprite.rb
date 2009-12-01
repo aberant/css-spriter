@@ -22,9 +22,9 @@ module PNG
     def locations
       @images.inject(0) do |x, image|
         @locations[image.name.to_sym] = { :x => -(x),
-          :width => image.width,
+          :width => image.scanline_width,
           :height => image.height}
-        image.width + x
+        image.scanline_width + x
       end
       @locations
     end
@@ -35,7 +35,7 @@ module PNG
       # head is the last image, then we merge left
       head, *tail = right_sized.reverse
       result = tail.inject( head ){ |head, image| head.merge_left( image ) }
-      result.write( output_filename )
+      PNG::Image.write( output_filename, result )
     end
   end
 end

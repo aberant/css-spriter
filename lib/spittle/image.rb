@@ -18,7 +18,21 @@ module PNG
         ihdr, idat = Parser.go!( f )
         Image.new( ihdr, idat, name )
       end
+    end
 
+    def self.read( file_name )
+      png = open(file_name)
+      png.to_image
+    end
+
+    def self.write( file_name, data )
+      ihdr = PNG::IHDR.new(data.scanline_width, data.height, 8, color_type_of(data.pixel_width))
+      Image.new(ihdr, nil, file_name, :rows => data).write( file_name )
+    end
+
+    #TODO - Nieve We should only store RBGA
+    def self.color_type_of(pixel_width)
+      pixel_width - 1
     end
 
     def initialize( ihdr, idat, name, options = {} )
@@ -80,16 +94,17 @@ module PNG
       ( color_type == RGB ? 3 : 4)
     end
 
+
     def scanline_width
       # + 1 adds filter byte
       (width * pixel_width) + 1
     end
 
     def rows
-      @rows ||= to_rows
+      @rows ||= to_image
     end
 
-    def filter_encoded_rows( filter_type )
+    def filter_encoded_rows(filter_type)
       out = Array.new(height)
       rows.each_with_index do |row, scanline|
         last_row = rows.last_scanline(scanline)
@@ -98,12 +113,13 @@ module PNG
       out
     end
 
-    def to_rows
+    def to_image
       uncompressed = @idat.uncompressed
 
       #scanline_width - 1 because we're stripping the filter bit
       n_out = Spittle::ImageData.new(:scanline_width => scanline_width - 1,
                                      :pixel_width => pixel_width,
+                                     :name => self.name,
                                      :data => Array.new(height))
       offset = 0
       height.times do |scanline|

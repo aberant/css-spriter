@@ -8,8 +8,16 @@ module Spittle
       @properties = options
     end
 
+    def name; @properties[:name] || "default"; end
     def scanline_width; @properties[:scanline_width]; end
+    def width; scanline_width; end
     def pixel_width; @properties[:pixel_width]; end
+
+    # need better checks, because currently compatible is
+    # similar color type, or depth.. maybe it doesn't matter...
+    def compatible?(image)
+      self.pixel_width == image.pixel_width
+    end
 
     def last_scanline(idx)
       last_row_index = idx - 1
@@ -17,7 +25,7 @@ module Spittle
     end
 
     def merge_left( other )
-      merged = ImageData.new(@properties)
+      merged = ImageData.new(@properties.merge(:name => "#{self.name}_#{other.name}"))
       other.each_with_index do |row, idx|
         merged[idx] = row + self[idx]
       end
