@@ -65,11 +65,11 @@ Check out examples/sprites if you want to see what spittle can do without doing 
 - Rails plugin & rake tasks (sprite:generate & sprite:cleanup)
 - Supports varying dimensions in source images
 - Does not regenerate sprites that have not changed
+- Supports all PNG filter types to improve image compression
 
 == Roadmap - by priority
 
 - Support global css template override
-- Improve image compression
 
 == Authors
 
