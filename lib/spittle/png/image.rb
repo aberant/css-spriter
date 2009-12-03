@@ -27,7 +27,12 @@ module PNG
 
     #TODO - Nieve We should only store RBGA
     def self.color_type_of(pixel_width)
-      pixel_width - 1
+      case pixel_width
+      when 3
+        RGB
+      when 4
+        RGBA
+      end
     end
 
     def initialize( ihdr, idat, name, options = {} )

@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{spittle}
-  s.version = "0.9.1.4"
+  s.version = "0.9.1.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["aberant", "tjennings"]
-  s.date = %q{2009-11-20}
+  s.date = %q{2009-12-01}
   s.description = %q{pure ruby PNG}
   s.email = ["qzzzq1@gmail.com", "tyler.jennings@gmail.com"]
   s.executables = ["png_info", "sprite"]
@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
      "VERSION",
      "bin/png_info",
      "bin/sprite",
+     "examples/filter_util.rb",
      "examples/sprites/.mtimes",
      "examples/sprites/README",
      "examples/sprites/apple/.mtimes",
@@ -58,16 +59,17 @@ Gem::Specification.new do |s|
      "examples/sprites/words/sprite.png",
      "init.rb",
      "lib/spittle.rb",
-     "lib/spittle/chunk.rb",
-     "lib/spittle/directory_spriter.rb",
-     "lib/spittle/file_header.rb",
-     "lib/spittle/filters.rb",
-     "lib/spittle/idat.rb",
-     "lib/spittle/iend.rb",
-     "lib/spittle/ihdr.rb",
-     "lib/spittle/image.rb",
+     "lib/spittle/directory_processor.rb",
+     "lib/spittle/image_data.rb",
      "lib/spittle/mtime_tracker.rb",
-     "lib/spittle/parser.rb",
+     "lib/spittle/png/chunk.rb",
+     "lib/spittle/png/file_header.rb",
+     "lib/spittle/png/filters.rb",
+     "lib/spittle/png/idat.rb",
+     "lib/spittle/png/iend.rb",
+     "lib/spittle/png/ihdr.rb",
+     "lib/spittle/png/image.rb",
+     "lib/spittle/png/parser.rb",
      "lib/spittle/processor.rb",
      "lib/spittle/sprite.rb",
      "lib/spittle/stylesheet_builder.rb",
@@ -76,6 +78,7 @@ Gem::Specification.new do |s|
      "spec/css_fragments/some/fragment.css",
      "spec/expected_output/merge_right_test.png",
      "spec/expected_output/write_test.png",
+     "spec/image_data_spec.rb",
      "spec/images/lightening.png",
      "spec/integration_spec.rb",
      "spec/lib/file_header_spec.rb",
@@ -103,6 +106,7 @@ Gem::Specification.new do |s|
   s.summary = %q{pure ruby PNG}
   s.test_files = [
     "spec/builders/image_builder.rb",
+     "spec/image_data_spec.rb",
      "spec/integration_spec.rb",
      "spec/lib/file_header_spec.rb",
      "spec/lib/idat_spec.rb",
@@ -112,6 +116,7 @@ Gem::Specification.new do |s|
      "spec/lib/sprite_spec.rb",
      "spec/mtime_tracking_spec.rb",
      "spec/spec_helper.rb",
+     "examples/filter_util.rb",
      "examples/sprites/server.rb"
   ]
 
