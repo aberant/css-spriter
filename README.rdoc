@@ -17,9 +17,6 @@ point bin/spittle at a directory, and watch it sprite away!
 
 == Installation - standalone
 
-We're hosted at gemcutter.  I believe 'sudo gem install gemcutter' then 'gem tumble'.
-Then you can run:
-
   sudo gem install spittle
 
 === Usage - standalone
