@@ -17,6 +17,6 @@ class StylesheetBuilder
   end
 
   def cleanup
-    File.delete(@output_file) rescue {}
+    File.delete(@output_file) rescue nil
   end
 end

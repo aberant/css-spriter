@@ -5,7 +5,7 @@ class MtimeTracker
   end
 
   def cleanup
-    File.delete(mtime_file) rescue {}
+    File.delete(mtime_file) rescue nil
   end
 
   def fresh?
@@ -30,7 +30,6 @@ class MtimeTracker
   end
 
   def file_changed?(file)
-    #puts "#{file} #{mtimes[file]} != #{current_mtimes[file]}"
     mtimes[file] != current_mtimes[file]
   end
 

@@ -59,7 +59,7 @@ describe "Dir sprite" do
     end
 
     after do 
-      File.delete(@template) rescue {}
+      File.delete(@template) rescue nil
     end
 
     it "should compose class names" do 

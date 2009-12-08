@@ -10,7 +10,7 @@ describe MtimeTracker do
     end
 
     after do
-      File.delete(@img_dir + "/.mtimes") rescue {}
+      File.delete(@img_dir + "/.mtimes") rescue nil
     end
 
     it "tells me there are changes" do 
@@ -31,7 +31,7 @@ describe MtimeTracker do
     end
 
     after do
-      File.delete(@img_dir + "/.mtimes") rescue {}
+      File.delete(@img_dir + "/.mtimes") rescue nil
     end
 
     it "tells me nothing has changed" do 
@@ -57,7 +57,7 @@ describe MtimeTracker do
       end
 
       after do 
-        File.delete(@img_dir + "/.mtimes") rescue {}
+        File.delete(@img_dir + "/.mtimes") rescue nil
       end
 
       it "does not report excluded files as changed" do 
