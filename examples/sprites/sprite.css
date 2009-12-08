@@ -1,110 +1,110 @@
-  .apple_itunes {
-    background: transparent url(/apple/sprite.png) -350px 0px no-repeat;
-    width:116;
-    height:38;
-    text-indent:-5000px;
-  }
-
-  .apple_mac {
-    background: transparent url(/apple/sprite.png) -466px 0px no-repeat;
-    width:116;
-    height:38;
-    text-indent:-5000px;
-  }
-
   .apple_apple {
-    background: transparent url(/apple/sprite.png) 0px 0px no-repeat;
+    background: transparent url(/apple/spritepng) 0px 0px no-repeat;
     width:117;
     height:38;
     text-indent:-5000px;
   }
 
-  .apple_support {
-    background: transparent url(/apple/sprite.png) -860px 0px no-repeat;
-    width:116;
-    height:38;
-    text-indent:-5000px;
-  }
-
   .apple_divider {
-    background: transparent url(/apple/sprite.png) -117px 0px no-repeat;
+    background: transparent url(/apple/spritepng) -117px 0px no-repeat;
     width:1;
     height:38;
     text-indent:-5000px;
   }
 
   .apple_downloads {
-    background: transparent url(/apple/sprite.png) -118px 0px no-repeat;
+    background: transparent url(/apple/spritepng) -118px 0px no-repeat;
     width:116;
     height:38;
     text-indent:-5000px;
   }
 
-  .apple_store {
-    background: transparent url(/apple/sprite.png) -744px 0px no-repeat;
+  .apple_iphone {
+    background: transparent url(/apple/spritepng) -234px 0px no-repeat;
+    width:116;
+    height:38;
+    text-indent:-5000px;
+  }
+
+  .apple_itunes {
+    background: transparent url(/apple/spritepng) -350px 0px no-repeat;
+    width:116;
+    height:38;
+    text-indent:-5000px;
+  }
+
+  .apple_mac {
+    background: transparent url(/apple/spritepng) -466px 0px no-repeat;
     width:116;
     height:38;
     text-indent:-5000px;
   }
 
   .apple_search {
-    background: transparent url(/apple/sprite.png) -582px 0px no-repeat;
+    background: transparent url(/apple/spritepng) -582px 0px no-repeat;
     width:162;
     height:38;
     text-indent:-5000px;
   }
 
-  .apple_iphone {
-    background: transparent url(/apple/sprite.png) -234px 0px no-repeat;
+  .apple_store {
+    background: transparent url(/apple/spritepng) -744px 0px no-repeat;
     width:116;
     height:38;
     text-indent:-5000px;
   }
 
-  .many_sized_cats_darth_cat {
-    background: transparent url(/many_sized_cats/sprite.png) -64px 0px no-repeat;
-    width:240;
-    height:320;
+  .apple_support {
+    background: transparent url(/apple/spritepng) -860px 0px no-repeat;
+    width:116;
+    height:38;
     text-indent:-5000px;
   }
 
   .many_sized_cats_cat-on-keyboard {
-    background: transparent url(/many_sized_cats/sprite.png) 0px 0px no-repeat;
+    background: transparent url(/many_sized_cats/spritepng) 0px 0px no-repeat;
     width:64;
     height:48;
     text-indent:-5000px;
   }
 
+  .many_sized_cats_darth_cat {
+    background: transparent url(/many_sized_cats/spritepng) -64px 0px no-repeat;
+    width:240;
+    height:320;
+    text-indent:-5000px;
+  }
+
   .many_sized_cats_music-keyboard-cat {
-    background: transparent url(/many_sized_cats/sprite.png) -304px 0px no-repeat;
+    background: transparent url(/many_sized_cats/spritepng) -304px 0px no-repeat;
     width:225;
     height:166;
     text-indent:-5000px;
   }
 
   .words_latitude {
-    background: transparent url(/words/sprite.png) 0px 0px no-repeat;
+    background: transparent url(/words/spritepng) 0px 0px no-repeat;
     width:66;
     height:21;
     text-indent:-5000px;
   }
 
   .words_of {
-    background: transparent url(/words/sprite.png) -66px 0px no-repeat;
+    background: transparent url(/words/spritepng) -66px 0px no-repeat;
     width:19;
     height:21;
     text-indent:-5000px;
   }
 
   .words_set {
-    background: transparent url(/words/sprite.png) -85px 0px no-repeat;
+    background: transparent url(/words/spritepng) -85px 0px no-repeat;
     width:26;
     height:21;
     text-indent:-5000px;
   }
 
   .words_specified {
-    background: transparent url(/words/sprite.png) -111px 0px no-repeat;
+    background: transparent url(/words/spritepng) -111px 0px no-repeat;
     width:70;
     height:21;
     text-indent:-5000px;

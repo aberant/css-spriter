@@ -13,12 +13,9 @@ class DirectoryProcessor
   def initialize(dir, options = {})
     @options = options
     @dir = dir
-    files = images
     @sprite = Sprite.new
-    files.each {|f| @sprite.append(PNG::Image.image_data(f))}
-    #puts "#{@dir} #{files.size} files"
     @tracker = MtimeTracker.new(@dir,
-                                :exclude => ['fragment.css', 'sprite.png'])
+                                :exclude => ['sprite.css', 'fragment.css', 'sprite.png'])
   end
 
   def images
@@ -27,6 +24,7 @@ class DirectoryProcessor
 
   def write
     return unless @tracker.has_changes?
+    images.each {|f| @sprite.append(PNG::Image.image_data(f))}
     @sprite.write(sprite_file)
     File.open(css_file, 'w') do |f|
       f.write(css)
@@ -35,8 +33,8 @@ class DirectoryProcessor
   end
 
   def cleanup
-    File.delete(sprite_file) rescue {}
-    File.delete(css_file) rescue {}
+    File.delete(sprite_file) rescue nil
+    File.delete(css_file) rescue nil
     @tracker.cleanup
   end
 

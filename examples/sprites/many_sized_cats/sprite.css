@@ -1,21 +1,21 @@
-  .._darth_cat {
-    background: transparent url(/sprite.png) -64px 0px no-repeat;
-    width:240;
-    height:320;
-    text-indent:-5000px;
-  }
-
   .._cat-on-keyboard {
-    background: transparent url(/sprite.png) 0px 0px no-repeat;
+    background: transparent url(/spritepng) 0px 0px no-repeat;
     width:64;
     height:48;
     text-indent:-5000px;
   }
 
   .._music-keyboard-cat {
-    background: transparent url(/sprite.png) -304px 0px no-repeat;
+    background: transparent url(/spritepng) -304px 0px no-repeat;
     width:225;
     height:166;
+    text-indent:-5000px;
+  }
+
+  .._darth_cat {
+    background: transparent url(/spritepng) -64px 0px no-repeat;
+    width:240;
+    height:320;
     text-indent:-5000px;
   }
 

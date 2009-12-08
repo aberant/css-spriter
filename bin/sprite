@@ -8,6 +8,10 @@ options = {}
 opts = OptionParser.new do |opts|
   opts.banner = "Usage: spittle [options] directory"
 
+  opts.on("-c", "--cleanup", "Remove all generated files") do |file|
+    options[:cleanup] = true
+  end
+
   opts.on("-o", "--out FILE", "Write css output to an alternate location") do |file|
     options[:css_file] = file
   end
@@ -32,5 +36,10 @@ unless dir
 end
 
 options[:source] = dir
-Spittle::Processor.new(options).write
+processor = Spittle::Processor.new(options)
 
+if options[:cleanup]
+  processor.cleanup
+else
+  processor.write
+end

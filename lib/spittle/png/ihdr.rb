@@ -1,5 +1,6 @@
 module PNG
   class IHDR < Chunk
+    SUPPORTED_COLOR_TYPES = [2,3,6]
     attr_accessor :width, :height, :depth, :color_type
     # attr_accessor :compression_method, :filter_method, :interlace_method
     
@@ -11,7 +12,9 @@ module PNG
     
     def initialize( width, height, depth=8, color_type=2 )
       raise "for now, spittle only supports images with a bit depth of 8" unless depth == 8
-      raise "for now, spittle only supports color type 2 or 6" unless color_type == 2 || color_type == 6
+      unless SUPPORTED_COLOR_TYPES.include? color_type
+        raise "for now, spittle only supports color types #{SUPPORTED_COLOR_TYPES.JOIN(',')} color type was #{color_type}"
+      end
       @width, @height, @depth, @color_type = width, height, depth, color_type
     end
     
