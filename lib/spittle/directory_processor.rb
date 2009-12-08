@@ -54,9 +54,20 @@ class DirectoryProcessor
 
   def image_loc
     #TODO: Lame!
-    base = ("/" + @dir + "/sprite.png").gsub("/./", "/").gsub("//", "/")
+
+    dir = truncate_abs_path
+    base = ("/" + dir + "/sprite.png").gsub("/./", "/").gsub("//", "/")
+    base = base.gsub(@options[:source], "") if @options[:source]
     base = @options[:path_prefix] + base if @options[:path_prefix]
     base
+  end
+
+  def truncate_abs_path
+    return @dir unless @options[:source]
+    path_elements = @options[:source].split('/')
+    path_elements.pop #we want to remove everything above the root 
+    to_truncate = path_elements.join("/")
+    @dir.gsub(to_truncate, "")
   end
 
   def template_file

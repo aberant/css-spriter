@@ -127,7 +127,7 @@ describe "Complete spriting process" do
 
   it "prepends a path prefix to all sprites in the css file" do 
     file = read(@css_file)
-    file.should include("/images/spec/sprite_dirs/words")
+    file.should include("/images/sprite_dirs/words")
   end
 
   it "can find all the sprite directories" do 
