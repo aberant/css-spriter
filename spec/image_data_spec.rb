@@ -37,7 +37,6 @@ describe Spittle::ImageData do
   end
 
   it "behaves like an array" do 
-
     @id << [1,2,3]
     @id.last.should == [1,2,3]
 
@@ -46,9 +45,5 @@ describe Spittle::ImageData do
 
   it "will return the last scanline given a current index" do 
     @id.last_scanline(1).should == [1,2,3]
-  end
-
-  it "always transforms data to Row objects" do 
-    @id
   end
 end
