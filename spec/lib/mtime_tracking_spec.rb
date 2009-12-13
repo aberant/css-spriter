@@ -1,11 +1,10 @@
-require 'benchmark'
 require 'fileutils'
-require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe MtimeTracker do
   describe "on a new directory" do 
     before do 
-      @img_dir = File.dirname(__FILE__) + '/images'
+      @img_dir = File.dirname(__FILE__) + '/../integration/images'
       @tracker = MtimeTracker.new(@img_dir)
     end
 
@@ -25,7 +24,7 @@ describe MtimeTracker do
 
   describe "on an existing directory" do 
     before do 
-      @img_dir = File.dirname(__FILE__) + '/images'
+      @img_dir = File.dirname(__FILE__) + '/../integration/images'
       MtimeTracker.new(@img_dir).update
       @tracker = MtimeTracker.new(@img_dir)
     end
@@ -46,13 +45,13 @@ describe MtimeTracker do
 
       it "returns true from has_changes" do 
         @tracker.has_changes?.should be_true
-        @tracker.changeset.first.should include("/spec/images/lightening.png")
+        @tracker.changeset.first.should include("/integration/images/lightening.png")
       end
     end
 
     describe "file exclustions" do 
       before do 
-        @img_dir = File.dirname(__FILE__) + '/images'
+        @img_dir = File.dirname(__FILE__) + '/../integration/images'
         @tracker = MtimeTracker.new(@img_dir, :exclude => [/lightening/, "tacos"])
       end
 

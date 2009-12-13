@@ -2,9 +2,9 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe 'PNG' do
   before do 
-    @img_dir = File.dirname(__FILE__) + '/../images'
-    @expected_dir = File.dirname(__FILE__) + '/../expected_output'
-    @tmp_dir = File.dirname(__FILE__) + '/../tmp'
+    @img_dir = File.dirname(__FILE__) + '/images'
+    @expected_dir = File.dirname(__FILE__) + '/expected_output'
+    @tmp_dir = File.dirname(__FILE__) + '/tmp'
   end
 
   it 'can read and write a PNG' do 
