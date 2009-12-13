@@ -15,3 +15,7 @@ def chunk(type, data)
   to_check = type + data
   [data.length].pack("N") + to_check + [Zlib.crc32(to_check)].pack("N")
 end
+
+def read(file_name)
+  File.read(file_name)
+end
