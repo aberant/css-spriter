@@ -1,11 +1,10 @@
-require 'benchmark'
-require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe 'PNG' do
   before do 
-    @img_dir = File.dirname(__FILE__) + '/images'
-    @expected_dir = File.dirname(__FILE__) + '/expected_output'
-    @tmp_dir = File.dirname(__FILE__) + '/tmp'
+    @img_dir = File.dirname(__FILE__) + '/../images'
+    @expected_dir = File.dirname(__FILE__) + '/../expected_output'
+    @tmp_dir = File.dirname(__FILE__) + '/../tmp'
   end
 
   it 'can read and write a PNG' do 
@@ -25,7 +24,7 @@ end
 
 describe "Dir sprite" do
   before :all do
-    @dir = File.dirname(__FILE__) + "/sprite_dirs/words"
+    @dir = File.dirname(__FILE__) + "/../sprite_dirs/words"
     @spriter = DirectoryProcessor.new(@dir)
     @sprite_file = @dir + "/sprite.png"
     @css_file = @dir + "/fragment.css"
@@ -85,7 +84,7 @@ end
 
 describe 'Stylesheet generator' do 
   before :all do 
-    @dir = File.dirname(__FILE__) + "/css_fragments"
+    @dir = File.dirname(__FILE__) + "/../css_fragments"
     @out = @dir + "/complete.css"
     @builder = StylesheetBuilder.new(@dir)
     @builder.output_file(@out)
@@ -112,7 +111,7 @@ end
 
 describe "Complete spriting process" do 
   before :all do 
-    @dir = File.dirname(__FILE__) + "/sprite_dirs"
+    @dir = File.dirname(__FILE__) + "/../sprite_dirs"
     @css_file = @dir + "/sprite.css"
     @spittle = Spittle::Processor.new(:path_prefix => "/images", :source => @dir, :css_file => @css_file)
     @spittle.write
