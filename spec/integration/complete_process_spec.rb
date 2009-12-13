@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe "Complete spriting process" do 
   before :all do 
-    @dir = File.dirname(__FILE__) + "/../sprite_dirs"
+    @dir = File.dirname(__FILE__) + "/sprite_dirs"
     @css_file = @dir + "/sprite.css"
     @spittle = Spittle::Processor.new(:path_prefix => "/images", :source => @dir, :css_file => @css_file)
     @spittle.write
