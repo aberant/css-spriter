@@ -1,27 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe 'PNG' do
-  before do 
-    @img_dir = File.dirname(__FILE__) + '/../images'
-    @expected_dir = File.dirname(__FILE__) + '/../expected_output'
-    @tmp_dir = File.dirname(__FILE__) + '/../tmp'
-  end
-
-  it 'can read and write a PNG' do 
-    img = PNG::Image.open("#{@img_dir}/lightening.png")
-    img.write("#{@tmp_dir}/write_test.png", :filter_type => 0)
-    read("#{@expected_dir}/write_test.png").should == read("#{@tmp_dir}/write_test.png")
-  end
-
-  it 'can merge one PNG on the left of another' do 
-    one = PNG::Image.image_data("#{@img_dir}/lightening.png")
-    two = PNG::Image.image_data("#{@img_dir}/lightening.png")
-    merged = one.merge_left two
-    PNG::Image.write("#{@tmp_dir}/merge_right_test.png", merged, :filter_type => 0)
-    read("#{@expected_dir}/merge_right_test.png").should == read("#{@tmp_dir}/merge_right_test.png")
-  end
-end
-
 describe "Dir sprite" do
   before :all do
     @dir = File.dirname(__FILE__) + "/../sprite_dirs/words"
@@ -81,35 +59,3 @@ describe "Dir sprite" do
     end
   end
 end
-
-describe 'Stylesheet generator' do 
-  before :all do 
-    @dir = File.dirname(__FILE__) + "/../css_fragments"
-    @out = @dir + "/complete.css"
-    @builder = StylesheetBuilder.new(@dir)
-    @builder.output_file(@out)
-    @css = @builder.css
-  end
-
-  after :all do 
-    @builder.cleanup
-  end
-
-  it "takes the css fragments and concatonates them into a single stylesheet" do 
-    @css.should include( ".some_style" )
-  end
-
-  it "can handle nested folder structures" do 
-    @css.should include( ".deep" )
-  end
-
-  it "writes the css file to the specified location" do 
-    @builder.write
-    File.exists?(@out).should be_true
-  end
-end
-
-
-
-
-
