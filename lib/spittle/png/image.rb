@@ -89,8 +89,14 @@ module PNG
     end
 
     def to_image
-      uncompressed = @idat.uncompressed
+      decode_non_interlaced_image(@idat.uncompressed)
+    end
 
+    def inspect
+      "#{@name} (#{height} x #{width}) [color type: #{color_type}, depth: #{depth}]"
+    end
+  private
+    def decode_non_interlaced_image( uncompressed )
       #scanline_width - 1 because we're stripping the filter bit
       n_out = Spittle::ImageData.new(:scanline_width => scanline_width - 1,
                                      :pixel_width => pixel_width,
@@ -105,11 +111,6 @@ module PNG
       end
       n_out
     end
-
-    def inspect
-      "#{@name} (#{height} x #{width}) [color type: #{color_type}, depth: #{depth}]"
-    end
-  private
 
     def decode(current, row, data, pixel_width)
       filter_type = row.shift
