@@ -13,7 +13,7 @@ module PNG
         Image.new( ihdr, idat, name )
       end
     end
-    
+
     #TODO - rename this 'image_data'
     def self.image_data( file_name )
       png = open(file_name)

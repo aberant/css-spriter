@@ -1,14 +1,14 @@
 module PNG
   class Parser
     def self.go!(file)
-      #TODO: Wanted to remove instance go! and use initialize, didn't work.  
+      #TODO: Wanted to remove instance go! and use initialize, didn't work.
       #Weird
       Parser.new.go!(file)
     end
     def go!( file )
       check_header( file )
 
-      while(not file.eof?) do 
+      while(not file.eof?) do
         parse_chunk(file)
       end
 
@@ -39,7 +39,7 @@ module PNG
         @width, @height, @depth, @color_type = @ihdr.to_a
       when "IDAT"
         @idat ||= PNG::IDAT.new
-        @idat << data 
+        @idat << data
       when "IEND"
         # NOOP
       else
