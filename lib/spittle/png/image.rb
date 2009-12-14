@@ -89,13 +89,40 @@ module PNG
     end
 
     def to_image
-      decode_non_interlaced_image(@idat.uncompressed)
+      if @ihdr.interlaced?
+        decode_interlaced_image( @idat.uncompressed )
+      else
+        decode_non_interlaced_image( @idat.uncompressed )
+      end
     end
 
     def inspect
       "#{@name} (#{height} x #{width}) [color type: #{color_type}, depth: #{depth}]"
     end
   private
+    # spike spikey spike
+    def decode_interlaced_image( uncompressed )
+      subimage1 = Spittle::ImageData.new(:scanline_width => sub_image_1_width - 1,
+                                     :pixel_width => pixel_width,
+                                     :data => Array.new(sub_image_1_height))
+     offset = 0
+      sub_image_1_height.times do |scanline|
+        end_row = sub_image_1_width + offset
+        row = uncompressed.slice(offset, sub_image_1_width)
+        subimage1[scanline] = decode(scanline, row, subimage1, pixel_width)
+        offset = end_row
+      end
+      subimage1
+    end
+
+    def sub_image_1_width
+      ((width / 8) * pixel_width) + 1
+    end
+
+    def sub_image_1_height
+      (height/8)
+    end
+
     def decode_non_interlaced_image( uncompressed )
       #scanline_width - 1 because we're stripping the filter bit
       n_out = Spittle::ImageData.new(:scanline_width => scanline_width - 1,
