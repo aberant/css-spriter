@@ -45,7 +45,7 @@ Spittle assumes all of your sprites are located in the directory public/images/s
       boeing.png
       cesna.png
 
-Running spittle:generate does all the work. Each sprite directory (cars, planes) will now contain a sprite.png.  Spittle will also generate a sprites.css stylesheet in public/stylesheets/ that you should include in your layout.  If you wished to use the ford image from the cars sprite you would give the 'cars_ford' class to the desired element in the view.  That's it!
+Running sprite:generate does all the work. Each sprite directory (cars, planes) will now contain a sprite.png.  Spittle will also generate a sprites.css stylesheet in public/stylesheets/ that you should include in your layout.  If you wished to use the ford image from the cars sprite you would give the 'cars_ford' class to the desired element in the view.  That's it!
 
 Check out examples/sprites if you want to see what spittle can do without doing any work.
 
@@ -53,6 +53,7 @@ Check out examples/sprites if you want to see what spittle can do without doing 
 
 - supports RGB and RGBA color types only (and they must be the same for all images in a sprite)
 - does not support color profiles (can cause a slight change in color from the source image)
+- does not support reading interlaced PNGs.
 
 == Features
 
