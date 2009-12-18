@@ -5,12 +5,12 @@
 
 Gem::Specification.new do |s|
   s.name = %q{spittle}
-  s.version = "0.9.1.5"
+  s.version = "0.9.1.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["aberant", "tjennings"]
-  s.date = %q{2009-12-01}
-  s.description = %q{pure ruby PNG}
+  s.date = %q{2009-12-17}
+  s.description = %q{Spittle is a pure ruby PNG spriting library. It can be used standalone or as a Rails plugin, see the readme for details.}
   s.email = ["qzzzq1@gmail.com", "tyler.jennings@gmail.com"]
   s.executables = ["png_info", "sprite"]
   s.extra_rdoc_files = [
@@ -27,18 +27,6 @@ Gem::Specification.new do |s|
      "examples/filter_util.rb",
      "examples/sprites/.mtimes",
      "examples/sprites/README",
-     "examples/sprites/apple/.mtimes",
-     "examples/sprites/apple/apple.png",
-     "examples/sprites/apple/divider.png",
-     "examples/sprites/apple/downloads.png",
-     "examples/sprites/apple/fragment.css",
-     "examples/sprites/apple/iphone.png",
-     "examples/sprites/apple/itunes.png",
-     "examples/sprites/apple/mac.png",
-     "examples/sprites/apple/search.png",
-     "examples/sprites/apple/sprite.png",
-     "examples/sprites/apple/store.png",
-     "examples/sprites/apple/support.png",
      "examples/sprites/fragment.css",
      "examples/sprites/index.html",
      "examples/sprites/many_sized_cats/.mtimes",
@@ -46,6 +34,7 @@ Gem::Specification.new do |s|
      "examples/sprites/many_sized_cats/darth_cat.png",
      "examples/sprites/many_sized_cats/fragment.css",
      "examples/sprites/many_sized_cats/music-keyboard-cat.png",
+     "examples/sprites/many_sized_cats/sprite.css",
      "examples/sprites/many_sized_cats/sprite.png",
      "examples/sprites/server.rb",
      "examples/sprites/sprite.css",
@@ -103,7 +92,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
-  s.summary = %q{pure ruby PNG}
+  s.summary = %q{pure ruby PNG spriting library}
   s.test_files = [
     "spec/builders/image_builder.rb",
      "spec/image_data_spec.rb",

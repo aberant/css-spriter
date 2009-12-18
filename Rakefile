@@ -5,8 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "spittle"
-    gem.summary = %Q{pure ruby PNG}
-    gem.description = %Q{pure ruby PNG}
+    gem.summary = %Q{pure ruby PNG spriting library}
+    gem.description = %Q{Spittle is a pure ruby PNG spriting library. It can be used standalone or as a Rails plugin, see the readme for details.}
     gem.email = ["qzzzq1@gmail.com", "tyler.jennings@gmail.com"]
     gem.homepage = "http://github.com/aberant/spittle"
     gem.authors = ["aberant", "tjennings"]
