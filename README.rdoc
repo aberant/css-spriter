@@ -51,7 +51,7 @@ Check out examples/sprites if you want to see what spittle can do without doing 
 
 == Limitations
 
-- only supports RGB and RGBA color types (and they must be the same for all images in a sprite)
+- supports RGB and RGBA color types only (and they must be the same for all images in a sprite)
 - does not support color profiles (can cause a slight change in color from the source image)
 
 == Features
@@ -66,8 +66,9 @@ Check out examples/sprites if you want to see what spittle can do without doing 
 
 == Roadmap - by priority
 
-- Support interlaced images
-- Support global css template override
+- Reading interlaced images
+- allow a global css template override
+- allow per-sprite and global configuration
 
 == Authors
 

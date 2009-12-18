@@ -1,7 +1,4 @@
 module Spittle
-  class Row < Array
-  end
-
   class ImageData
     def initialize(options = {})
       @data = (options.delete :data) || []

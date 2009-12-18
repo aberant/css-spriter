@@ -54,8 +54,9 @@ class DirectoryProcessor
     #TODO: Lame!
 
     dir = truncate_abs_path
-    base = ("/" + dir + "/sprite.png").gsub("/./", "/").gsub("//", "/")
-    base = base.gsub(@options[:source], "") if @options[:source]
+    base = ("/" + dir + "/sprite.png").gsub(/^\/.\//, "/").gsub("//", "/")
+    source = @options[:source]
+    base = base.gsub(source, "") if source && source != "."
     base = @options[:path_prefix] + base if @options[:path_prefix]
     base
   end

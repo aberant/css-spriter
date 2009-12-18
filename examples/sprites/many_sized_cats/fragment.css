@@ -1,21 +1,21 @@
   .many_sized_cats_cat-on-keyboard {
-    background: transparent url(/many_sized_cats/spritepng) 0px 0px no-repeat;
+    background: transparent url(/many_sized_cats/sprite.png) 0px 0px no-repeat;
     width:64;
     height:48;
     text-indent:-5000px;
   }
 
-  .many_sized_cats_darth_cat {
-    background: transparent url(/many_sized_cats/spritepng) -64px 0px no-repeat;
-    width:240;
-    height:320;
+  .many_sized_cats_music-keyboard-cat {
+    background: transparent url(/many_sized_cats/sprite.png) -304px 0px no-repeat;
+    width:225;
+    height:166;
     text-indent:-5000px;
   }
 
-  .many_sized_cats_music-keyboard-cat {
-    background: transparent url(/many_sized_cats/spritepng) -304px 0px no-repeat;
-    width:225;
-    height:166;
+  .many_sized_cats_darth_cat {
+    background: transparent url(/many_sized_cats/sprite.png) -64px 0px no-repeat;
+    width:240;
+    height:320;
     text-indent:-5000px;
   }
 

@@ -36,14 +36,18 @@ class MtimeTracker
   def mtimes
     return @mtimes if @mtimes
     return {} unless File.exists?(mtime_file)
-    @mtimes = {}
+    @mtimes = read_mtimes
+  end
+
+  def read_mtimes
+    mtimes = {}
     File.open(mtime_file) do |f|
       f.each do |line|
-        parts = line.split("\t")
-        @mtimes[parts[0]] = parts[1].to_i
+        name, time = line.split("\t")
+        mtimes[name] = time.to_i
       end
     end
-    @mtimes
+    mtimes
   end
 
   def changeset
@@ -53,7 +57,7 @@ class MtimeTracker
   def has_changes?
     not changeset.empty?
   end
-  
+
   def mtime_file
     @dir + "/.mtimes"
   end
