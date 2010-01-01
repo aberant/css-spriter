@@ -16,6 +16,10 @@ module Spittle
       self.pixel_width == image.pixel_width
     end
 
+    def to_s
+      "#{name} pixel width: #{pixel_width}"
+    end
+
     def last_scanline(idx)
       last_row_index = idx - 1
       (last_row_index < 0 ? [] : @data[last_row_index])
