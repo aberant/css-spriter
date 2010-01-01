@@ -46,4 +46,13 @@ describe Spittle::ImageData do
   it "will return the last scanline given a current index" do 
     @id.last_scanline(1).should == [1,2,3]
   end
+
+  describe "fetch_pixel" do
+    it "can fetch a given pixel" do 
+      @id.fetch_pixel(0).should == [1,2,3]
+    end
+    it "can fetch across all rows" do 
+      @id.fetch_pixel(0, 1).should == [4,5,6]
+    end
+  end
 end

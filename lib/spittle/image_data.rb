@@ -13,6 +13,26 @@ module Spittle
     def width; scanline_width / pixel_width; end
     def pixel_width; @properties[:pixel_width]; end
 
+    def to_a
+      @data.flatten
+    end
+
+    def set_pixel(row, idx, pixel)
+       return unless pixel
+       @data[row] = [] unless @data[row]
+       row = @data[row]
+       offset = idx * pixel_width
+
+       pixel.each_with_index do |v, pidx|
+         row[offset + pidx] = v
+       end
+    end
+
+    def fetch_pixel(idx, row = 0)
+      offset = idx * pixel_width
+      @data[row].slice(offset, pixel_width)
+    end
+
     # need better checks, because currently compatible is
     # similar color type, or depth.. maybe it doesn't matter...
     def compatible?(image)
@@ -71,6 +91,10 @@ module Spittle
 
     def last
       @data.last
+    end
+
+    def rows
+      size
     end
 
     def <<(row)
