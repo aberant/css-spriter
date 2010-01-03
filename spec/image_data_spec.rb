@@ -46,4 +46,18 @@ describe Spittle::ImageData do
   it "will return the last scanline given a current index" do 
     @id.last_scanline(1).should == [1,2,3]
   end
+  
+  describe "RGBA conversion" do
+    it "updates pixel width" do
+      @id.to_rgba.pixel_width.should == 4 # RGBA pixel width
+    end
+    
+    it "updates scanline width" do
+      @id.to_rgba.scanline_width.should == 4
+    end
+    
+    it "puts in an alpha byte with a default value of 255" do
+      @id.to_rgba[0].should == [1,2,3,255]
+    end
+  end
 end

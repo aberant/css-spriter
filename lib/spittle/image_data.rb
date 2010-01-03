@@ -51,7 +51,9 @@ module Spittle
       img
     end
 
-    def to_rgba( alpha_value=0 )
+    def to_rgba( alpha_value=255 )
+      # test that conversion updates pixel width, scanline width
+
       return self if pixel_width == RGBA_WIDTH
 
       # so ruby 1.9 has different ideas then 1.8 on how Enumerable should work
@@ -64,7 +66,10 @@ module Spittle
         pixels.inject([]){|result, pixel| result + pixel + [alpha_value] }
       end
 
-      ImageData.new(@properties.merge(:data => rgba_data))
+      ImageData.new( :data => rgba_data,
+                     :pixel_width => 4,
+                     :scanline_width => (@properties[:scanline_width] / RGB_WIDTH) * RGBA_WIDTH,
+                     :name => name)
     end
 
     def [](row)

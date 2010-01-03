@@ -2,7 +2,7 @@ module PNG
   class Image
     #color types
     RGB = 2
-    RGBA = 3
+    RGBA = 6
 
     class << self
       def image_data( file_name, options={} )
