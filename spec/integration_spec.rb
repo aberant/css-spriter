@@ -15,8 +15,8 @@ describe 'PNG' do
   end
 
   it 'can merge one PNG on the left of another' do 
-    one = PNG::Image.image_data("#{@img_dir}/lightening.png")
-    two = PNG::Image.image_data("#{@img_dir}/lightening.png")
+    one = PNG::Image.image_data("#{@img_dir}/lightening.png", :rgba => false)
+    two = PNG::Image.image_data("#{@img_dir}/lightening.png", :rgba => false)
     merged = one.merge_left two
     PNG::Image.write("#{@tmp_dir}/merge_right_test.png", merged, :filter_type => 0)
     read("#{@expected_dir}/merge_right_test.png").should == read("#{@tmp_dir}/merge_right_test.png")

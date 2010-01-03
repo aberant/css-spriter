@@ -5,9 +5,13 @@ module PNG
     RGBA = 3
 
     class << self
-      def image_data( file_name )
+      def image_data( file_name, options={} )
+        image_options = {:rgba => true}.merge( options )
+
         png = open(file_name)
-        png.to_image
+
+        return png.to_image unless image_options[:rgba]
+        png.to_image.to_rgba
       end
 
       def open( file_name )
@@ -21,6 +25,7 @@ module PNG
 
       def write( file_name, data, options = {} )
         ihdr = PNG::IHDR.new(data.width, data.height, 8, color_type_of(data.pixel_width))
+
         Image.new(ihdr, nil, file_name, :rows => data).write( file_name, options)
       end
 
@@ -102,12 +107,12 @@ module PNG
     end
 
   private
-  
+
     def scanline_width
       # + 1 adds filter byte
       (width * pixel_width) + 1
     end
-  
+
     def rows
       @rows ||= to_image
     end

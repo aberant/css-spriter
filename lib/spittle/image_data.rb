@@ -1,5 +1,10 @@
+require 'enumerator'
+
 module Spittle
   class ImageData
+    RGB_WIDTH = 3
+    RGBA_WIDTH = 4
+
     def initialize(options = {})
       @data = (options.delete :data) || []
       @properties = options
@@ -44,6 +49,17 @@ module Spittle
         img << empty_row
       end
       img
+    end
+
+    def to_rgba( alpha_value=0 )
+      return self if pixel_width == RGBA_WIDTH
+
+      rgba_data = @data.map do |row|
+        pixels = row.enum_slice( RGB_WIDTH )
+        pixels.inject([]){|result, pixel| result + pixel + [alpha_value] }
+      end
+
+      ImageData.new(@properties.merge(:data => rgba_data))
     end
 
     def [](row)
