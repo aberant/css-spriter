@@ -13,7 +13,7 @@
 
 It takes your PNG's, chews them up and spits out sprites!
 
-point bin/spittle at a directory, and watch it sprite away!
+point bin/sprite at a directory, and watch it sprite away!
 
 == Installation - standalone
 
