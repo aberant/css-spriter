@@ -54,8 +54,13 @@ module Spittle
     def to_rgba( alpha_value=0 )
       return self if pixel_width == RGBA_WIDTH
 
+      # so ruby 1.9 has different ideas then 1.8 on how Enumerable should work
+      # 1.9 returns Enumerable object if no block given
+      # 1.8 complains if no block, unless using enum_x methods
+      slice_method = (RUBY_VERSION.include?( "1.9" )) ? :each_slice : :enum_slice
+
       rgba_data = @data.map do |row|
-        pixels = row.enum_slice( RGB_WIDTH )
+        pixels = row.send( slice_method, RGB_WIDTH )
         pixels.inject([]){|result, pixel| result + pixel + [alpha_value] }
       end
 
