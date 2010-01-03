@@ -1,37 +1,38 @@
 module PNG
-
   class Image
-    def self.default_filter_type
-      4 # paeth
-    end
-
-    def self.open( file_name )
-      name = File.basename( file_name, ".png" )
-
-      File.open(file_name, "r") do |f|
-        ihdr, idat = Parser.go!( f )
-        Image.new( ihdr, idat, name )
+    class << self
+      def image_data( file_name )
+        png = open(file_name)
+        png.to_image
       end
-    end
-    
-    #TODO - rename this 'image_data'
-    def self.image_data( file_name )
-      png = open(file_name)
-      png.to_image
-    end
 
-    def self.write( file_name, data, options = {} )
-      ihdr = PNG::IHDR.new(data.width, data.height, 8, color_type_of(data.pixel_width))
-      Image.new(ihdr, nil, file_name, :rows => data).write( file_name, options)
-    end
+      def open( file_name )
+        name = File.basename( file_name, ".png" )
 
-    #TODO - Nieve We should only store RBGA
-    def self.color_type_of(pixel_width)
-      case pixel_width
-      when 3
-        RGB
-      when 4
-        RGBA
+        File.open(file_name, "r") do |f|
+          ihdr, idat = Parser.go!( f )
+          Image.new( ihdr, idat, name )
+        end
+      end
+
+      def write( file_name, data, options = {} )
+        ihdr = PNG::IHDR.new(data.width, data.height, 8, color_type_of(data.pixel_width))
+        Image.new(ihdr, nil, file_name, :rows => data).write( file_name, options)
+      end
+
+      def default_filter_type
+        4 # paeth
+      end
+
+    private # class methods
+
+      def color_type_of(pixel_width)
+        case pixel_width
+        when 3
+          RGB
+        when 4
+          RGBA
+        end
       end
     end
 
