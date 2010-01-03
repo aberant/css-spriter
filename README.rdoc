@@ -51,7 +51,6 @@ Check out examples/sprites if you want to see what spittle can do without doing 
 
 == Limitations
 
-- supports RGB and RGBA color types only (and they must be the same for all images in a sprite)
 - does not support color profiles (can cause a slight change in color from the source image)
 - does not support reading interlaced PNGs.
 
@@ -64,6 +63,7 @@ Check out examples/sprites if you want to see what spittle can do without doing 
 - Supports varying dimensions in source images
 - Does not regenerate sprites that have not changed
 - Supports all PNG filter types to improve image compression
+- supports mixing RGB and RGBA color types
 
 == Roadmap - by priority
 
