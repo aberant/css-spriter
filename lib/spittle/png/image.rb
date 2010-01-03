@@ -1,5 +1,9 @@
 module PNG
   class Image
+    #color types
+    RGB = 2
+    RGBA = 3
+
     class << self
       def image_data( file_name )
         png = open(file_name)
@@ -57,27 +61,9 @@ module PNG
       end
     end
 
-    def to_s
-      inspect
-    end
-
-    #color types
-    RGB = 2
-    RGBA = 3
-
     # check for RGB or RGBA
     def pixel_width
       ( color_type == RGB ? 3 : 4)
-    end
-
-
-    def scanline_width
-      # + 1 adds filter byte
-      (width * pixel_width) + 1
-    end
-
-    def rows
-      @rows ||= to_image
     end
 
     def filter_encoded_rows(filter_type)
@@ -107,10 +93,24 @@ module PNG
       n_out
     end
 
+    def to_s
+      inspect
+    end
+
     def inspect
       "#{@name} (#{height} x #{width}) [color type: #{color_type}, depth: #{depth}]"
     end
+
   private
+  
+    def scanline_width
+      # + 1 adds filter byte
+      (width * pixel_width) + 1
+    end
+  
+    def rows
+      @rows ||= to_image
+    end
 
     def decode(current, row, data, pixel_width)
       filter_type = row.shift
