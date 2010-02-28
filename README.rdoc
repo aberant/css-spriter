@@ -78,4 +78,4 @@ Check out examples/sprites if you want to see what spriter can do without doing 
 
 == Credits
 
-- thanks to mattpuchlerz for the socially acceptable project name
+- thanks to mattpuchlerz[http://github.com/mattpuchlerz] for the socially acceptable project name
