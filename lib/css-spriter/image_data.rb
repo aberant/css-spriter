@@ -1,6 +1,6 @@
 require 'enumerator'
 
-module Spriter
+module CssSpriter
   class ImageData
     RGB_WIDTH = 3
     RGBA_WIDTH = 4

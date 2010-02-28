@@ -1,4 +1,4 @@
-= Spriter, a sprite generator
+= CSS Spriter, a sprite generator
 
   [ PNG, PNG, PNG ]  (°_°)
   [ PNG, PNG, PNG ]  (° )
@@ -13,25 +13,25 @@
 
 It takes your PNG's, chews them up and spits out sprites!
 
-point bin/spriter at a directory, and watch it sprite away!
+point bin/sprite at a directory, and watch it sprite away!
 
 == Installation - standalone
 
-  sudo gem install spriter
+  sudo gem install css-spriter
 
 === Usage - standalone
 
-  spriter <directory>
+  css-spriter <directory>
 
 If you point the sprite command at a directory tree by default it will construct sprites for each of the sub directories and generate a single css to access all of the sprites which is placed in the root of the directory tree
 
 For a full list of options:
 
-  spriter -h
+  css-spriter -h
 
 == Installation - Rails plugin
 
-  script/plugin install git://github.com/aberant/spriter.git
+  script/plugin install git://github.com/aberant/css-spriter.git
 
 === Usage - Rails plugin
 

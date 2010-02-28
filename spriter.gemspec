@@ -84,7 +84,9 @@ Gem::Specification.new do |s|
      "spec/sprite_dirs/words/set.png",
      "spec/sprite_dirs/words/specified.png",
      "spec/tmp/merge_right_test.png",
-     "spec/tmp/write_test.png"
+     "spec/tmp/write_test.png",
+     "spriter.gemspec",
+     "tasks/spriter_tasks.rake"
   ]
   s.homepage = %q{http://github.com/aberant/spriter}
   s.rdoc_options = ["--charset=UTF-8"]

@@ -114,7 +114,7 @@ describe "Complete spriting process" do
   before :all do 
     @dir = File.dirname(__FILE__) + "/sprite_dirs"
     @css_file = @dir + "/sprite.css"
-    @spriter = Spriter::Processor.new(:path_prefix => "/images", :source => @dir, :css_file => @css_file)
+    @spriter = CssSpriter::Processor.new(:path_prefix => "/images", :source => @dir, :css_file => @css_file)
     @spriter.write
   end
 

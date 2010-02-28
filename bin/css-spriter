@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
 
 require 'optparse'
-require File.dirname(__FILE__) + "/../lib/spriter.rb"
+require File.dirname(__FILE__) + "/../lib/css-spriter.rb"
 
 
 options = {}
 opts = OptionParser.new do |opts|
-  opts.banner = "Usage: spriter [options] directory"
+  opts.banner = "Usage: css-spriter [options] directory"
 
   opts.on("-c", "--cleanup", "Remove all generated files") do |file|
     options[:cleanup] = true
@@ -36,7 +36,7 @@ unless dir
 end
 
 options[:source] = dir
-processor = Spriter::Processor.new(options)
+processor = CssSpriter::Processor.new(options)
 
 if options[:cleanup]
   processor.cleanup

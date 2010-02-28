@@ -1,6 +1,6 @@
 # horrible place for this.  just a sanity check for filtering
 
-require File.join( File.dirname( __FILE__ ), '..', 'lib', 'spriter' )
+require File.join( File.dirname( __FILE__ ), '..', 'lib', 'css-spriter' )
 
 image = PNG::Image.open( "sprites/many_sized_cats/darth_cat.png")
 

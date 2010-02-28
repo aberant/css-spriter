@@ -3,7 +3,7 @@
 require 'spec'
 require 'spec/autorun'
 
-require 'spriter'
+require 'css-spriter'
 
 require 'builders/image_builder'
 

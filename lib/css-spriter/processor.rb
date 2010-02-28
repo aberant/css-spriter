@@ -1,4 +1,4 @@
-module Spriter
+module CssSpriter
   class Processor
     def initialize(opts)
       @options = opts

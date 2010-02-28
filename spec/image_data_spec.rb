@@ -1,10 +1,10 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-describe Spriter::ImageData do 
+describe CssSpriter::ImageData do 
   before do 
       data = [[1,2,3], 
               [4,5,6]]
-      @id = Spriter::ImageData.new(:scanline_width => 3, :pixel_width => 3, :data => data)
+      @id = CssSpriter::ImageData.new(:scanline_width => 3, :pixel_width => 3, :data => data)
   end
 
   it "can fill to a specified height" do 
@@ -22,12 +22,12 @@ describe Spriter::ImageData do
   end
 
   it "has an empty array by default" do 
-    id = Spriter::ImageData.new
+    id = CssSpriter::ImageData.new
     id.empty?.should be_true
   end
 
   it "should return nil when asked for an index that doesn't exist" do 
-    id = Spriter::ImageData.new
+    id = CssSpriter::ImageData.new
     id[0].should be_nil
   end
 
