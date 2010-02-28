@@ -75,3 +75,7 @@ Check out examples/sprites if you want to see what spriter can do without doing 
 
 - aberant - Colin Harris
 - tjennings - Tyler Jennings
+
+== Credits
+
+- thanks to mattpuchlerz for the socially acceptable project name
