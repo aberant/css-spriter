@@ -4,15 +4,15 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{spittle}
-  s.version = "0.9.1.6"
+  s.name = %q{spriter}
+  s.version = "0.9.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["aberant", "tjennings"]
-  s.date = %q{2009-12-17}
-  s.description = %q{Spittle is a pure ruby PNG spriting library. It can be used standalone or as a Rails plugin, see the readme for details.}
+  s.date = %q{2010-02-28}
+  s.description = %q{Spriter is a pure ruby PNG spriting library. It can be used standalone or as a Rails plugin, see the readme for details.}
   s.email = ["qzzzq1@gmail.com", "tyler.jennings@gmail.com"]
-  s.executables = ["png_info", "sprite"]
+  s.executables = ["png_info", "spriter"]
   s.extra_rdoc_files = [
     "README.rdoc"
   ]
@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
      "Rakefile",
      "VERSION",
      "bin/png_info",
-     "bin/sprite",
+     "bin/spriter",
      "examples/filter_util.rb",
      "examples/sprites/.mtimes",
      "examples/sprites/README",
@@ -47,21 +47,21 @@ Gem::Specification.new do |s|
      "examples/sprites/words/sprite.css",
      "examples/sprites/words/sprite.png",
      "init.rb",
-     "lib/spittle.rb",
-     "lib/spittle/directory_processor.rb",
-     "lib/spittle/image_data.rb",
-     "lib/spittle/mtime_tracker.rb",
-     "lib/spittle/png/chunk.rb",
-     "lib/spittle/png/file_header.rb",
-     "lib/spittle/png/filters.rb",
-     "lib/spittle/png/idat.rb",
-     "lib/spittle/png/iend.rb",
-     "lib/spittle/png/ihdr.rb",
-     "lib/spittle/png/image.rb",
-     "lib/spittle/png/parser.rb",
-     "lib/spittle/processor.rb",
-     "lib/spittle/sprite.rb",
-     "lib/spittle/stylesheet_builder.rb",
+     "lib/spriter.rb",
+     "lib/spriter/directory_processor.rb",
+     "lib/spriter/image_data.rb",
+     "lib/spriter/mtime_tracker.rb",
+     "lib/spriter/png/chunk.rb",
+     "lib/spriter/png/file_header.rb",
+     "lib/spriter/png/filters.rb",
+     "lib/spriter/png/idat.rb",
+     "lib/spriter/png/iend.rb",
+     "lib/spriter/png/ihdr.rb",
+     "lib/spriter/png/image.rb",
+     "lib/spriter/png/parser.rb",
+     "lib/spriter/processor.rb",
+     "lib/spriter/sprite.rb",
+     "lib/spriter/stylesheet_builder.rb",
      "spec/builders/image_builder.rb",
      "spec/css_fragments/deep/style/fragment.css",
      "spec/css_fragments/some/fragment.css",
@@ -84,11 +84,9 @@ Gem::Specification.new do |s|
      "spec/sprite_dirs/words/set.png",
      "spec/sprite_dirs/words/specified.png",
      "spec/tmp/merge_right_test.png",
-     "spec/tmp/write_test.png",
-     "spittle.gemspec",
-     "tasks/spittle_tasks.rake"
+     "spec/tmp/write_test.png"
   ]
-  s.homepage = %q{http://github.com/aberant/spittle}
+  s.homepage = %q{http://github.com/aberant/spriter}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
