@@ -11,10 +11,10 @@ module PNG
     end
 
     def initialize( width, height, depth=8, color_type=2, compression=0, filter=0, interlace=0 )
-      raise "for now, spittle only supports non-interlaced images" unless interlace == 0
-      raise "for now, spittle only supports images with a bit depth of 8" unless depth == 8
+      raise "for now, spriter only supports non-interlaced images" unless interlace == 0
+      raise "for now, spriter only supports images with a bit depth of 8" unless depth == 8
       unless SUPPORTED_COLOR_TYPES.include? color_type
-        raise "for now, spittle only supports color types #{SUPPORTED_COLOR_TYPES.JOIN(',')} color type was #{color_type}"
+        raise "for now, spriter only supports color types #{SUPPORTED_COLOR_TYPES.JOIN(',')} color type was #{color_type}"
       end
       @width, @height, @depth, @color_type = width, height, depth, color_type
     end

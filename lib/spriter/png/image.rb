@@ -84,7 +84,7 @@ module PNG
       uncompressed = @idat.uncompressed
 
       #scanline_width - 1 because we're stripping the filter bit
-      n_out = Spittle::ImageData.new(:scanline_width => scanline_width - 1,
+      n_out = Spriter::ImageData.new(:scanline_width => scanline_width - 1,
                                      :pixel_width => pixel_width,
                                      :name => self.name,
                                      :data => Array.new(height))

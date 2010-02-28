@@ -1,8 +1,8 @@
 #TODO - make this a rake task instead of a function
-module Spittle
+module Spriter
   def self.setup
      require 'fileutils'
-     require File.dirname(__FILE__)  + "/../lib/spittle.rb"
+     require File.dirname(__FILE__)  + "/../lib/spriter.rb"
 
      FileUtils.cd(RAILS_ROOT + "/public/images")
      opts = {:source =>  "sprites",
@@ -11,15 +11,15 @@ module Spittle
   end
 end
 
-namespace :sprite do 
+namespace :sprite do
   desc "Generates sprite images and stylesheets"
-  task :generate do 
-    opts = Spittle.setup 
-    Spittle::Processor.new(opts).write
+  task :generate do
+    opts = Spriter.setup
+    Spriter::Processor.new(opts).write
   end
   desc "Removes generated sprite images and stylesheets"
-  task :cleanup do 
-    opts = Spittle.setup 
-    Spittle::Processor.new(opts).cleanup
+  task :cleanup do
+    opts = Spriter.setup
+    Spriter::Processor.new(opts).cleanup
   end
 end

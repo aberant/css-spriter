@@ -1,6 +1,6 @@
 require 'enumerator'
 
-module Spittle
+module Spriter
   class ImageData
     RGB_WIDTH = 3
     RGBA_WIDTH = 4

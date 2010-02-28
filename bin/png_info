@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require File.join( File.dirname( __FILE__ ), '..', 'lib', 'spittle' )
+require File.join( File.dirname( __FILE__ ), '..', 'lib', 'spriter' )
 
 module PNG
   class Parser

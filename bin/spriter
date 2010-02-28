@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
 
 require 'optparse'
-require File.dirname(__FILE__) + "/../lib/spittle.rb"
+require File.dirname(__FILE__) + "/../lib/spriter.rb"
 
 
 options = {}
 opts = OptionParser.new do |opts|
-  opts.banner = "Usage: spittle [options] directory"
+  opts.banner = "Usage: spriter [options] directory"
 
   opts.on("-c", "--cleanup", "Remove all generated files") do |file|
     options[:cleanup] = true
@@ -20,7 +20,7 @@ opts = OptionParser.new do |opts|
     options[:path_prefix] = prefix
   end
 
-  opts.on_tail("-h", "--help", "Prints this message") do 
+  opts.on_tail("-h", "--help", "Prints this message") do
     puts opts
     exit
   end
@@ -36,7 +36,7 @@ unless dir
 end
 
 options[:source] = dir
-processor = Spittle::Processor.new(options)
+processor = Spriter::Processor.new(options)
 
 if options[:cleanup]
   processor.cleanup

@@ -114,12 +114,12 @@ describe "Complete spriting process" do
   before :all do 
     @dir = File.dirname(__FILE__) + "/sprite_dirs"
     @css_file = @dir + "/sprite.css"
-    @spittle = Spittle::Processor.new(:path_prefix => "/images", :source => @dir, :css_file => @css_file)
-    @spittle.write
+    @spriter = Spriter::Processor.new(:path_prefix => "/images", :source => @dir, :css_file => @css_file)
+    @spriter.write
   end
 
   after :all do 
-    @spittle.cleanup
+    @spriter.cleanup
     #making sure it cleans things up - shitty place for these
     File.exists?(@css_file).should be_false
     File.exists?(@dir + "/words/sprite.png").should be_false
@@ -131,7 +131,7 @@ describe "Complete spriting process" do
   end
 
   it "can find all the sprite directories" do 
-    dirs = @spittle.directories.map{|d| d.split('/').last}
+    dirs = @spriter.directories.map{|d| d.split('/').last}
     dirs.should include( "words" )
   end
 

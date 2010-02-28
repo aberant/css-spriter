@@ -1,10 +1,10 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-describe Spittle::ImageData do 
+describe Spriter::ImageData do 
   before do 
       data = [[1,2,3], 
               [4,5,6]]
-      @id = Spittle::ImageData.new(:scanline_width => 3, :pixel_width => 3, :data => data)
+      @id = Spriter::ImageData.new(:scanline_width => 3, :pixel_width => 3, :data => data)
   end
 
   it "can fill to a specified height" do 
@@ -22,12 +22,12 @@ describe Spittle::ImageData do
   end
 
   it "has an empty array by default" do 
-    id = Spittle::ImageData.new
+    id = Spriter::ImageData.new
     id.empty?.should be_true
   end
 
   it "should return nil when asked for an index that doesn't exist" do 
-    id = Spittle::ImageData.new
+    id = Spriter::ImageData.new
     id[0].should be_nil
   end
 

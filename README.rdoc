@@ -1,4 +1,4 @@
-= Spittle, a sprite generator
+= Spriter, a sprite generator
 
   [ PNG, PNG, PNG ]  (°_°)
   [ PNG, PNG, PNG ]  (° )
@@ -13,25 +13,25 @@
 
 It takes your PNG's, chews them up and spits out sprites!
 
-point bin/sprite at a directory, and watch it sprite away!
+point bin/spriter at a directory, and watch it sprite away!
 
 == Installation - standalone
 
-  sudo gem install spittle
+  sudo gem install spriter
 
 === Usage - standalone
 
-  sprite <directory>
+  spriter <directory>
 
 If you point the sprite command at a directory tree by default it will construct sprites for each of the sub directories and generate a single css to access all of the sprites which is placed in the root of the directory tree
 
 For a full list of options:
 
-  sprite -h
+  spriter -h
 
 == Installation - Rails plugin
 
-  script/plugin install git://github.com/aberant/spittle.git
+  script/plugin install git://github.com/aberant/spriter.git
 
 === Usage - Rails plugin
 
@@ -47,7 +47,7 @@ Spittle assumes all of your sprites are located in the directory public/images/s
 
 Running sprite:generate does all the work. Each sprite directory (cars, planes) will now contain a sprite.png.  Spittle will also generate a sprites.css stylesheet in public/stylesheets/ that you should include in your layout.  If you wished to use the ford image from the cars sprite you would give the 'cars_ford' class to the desired element in the view.  That's it!
 
-Check out examples/sprites if you want to see what spittle can do without doing any work.
+Check out examples/sprites if you want to see what spriter can do without doing any work.
 
 == Limitations
 

@@ -4,11 +4,11 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "spittle"
+    gem.name = "spriter"
     gem.summary = %Q{pure ruby PNG spriting library}
-    gem.description = %Q{Spittle is a pure ruby PNG spriting library. It can be used standalone or as a Rails plugin, see the readme for details.}
+    gem.description = %Q{Spriter is a pure ruby PNG spriting library. It can be used standalone or as a Rails plugin, see the readme for details.}
     gem.email = ["qzzzq1@gmail.com", "tyler.jennings@gmail.com"]
-    gem.homepage = "http://github.com/aberant/spittle"
+    gem.homepage = "http://github.com/aberant/spriter"
     gem.authors = ["aberant", "tjennings"]
     gem.add_development_dependency "rspec" #, ">= 1.2.9"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings

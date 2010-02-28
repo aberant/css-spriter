@@ -1,4 +1,4 @@
-module Spittle
+module Spriter
   class Processor
     def initialize(opts)
       @options = opts
