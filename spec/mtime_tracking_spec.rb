@@ -50,6 +50,20 @@ describe MtimeTracker do
       end
     end
 
+    describe "when a file is deleted" do 
+      before do 
+        FileUtils.touch(@img_dir + "/a_test.png")
+        File.exists?(@img_dir + "/a_test.png").should be_true
+        @tracker.update
+        File.delete(@img_dir + "/a_test.png")
+      end
+
+      it "returns true from has_changes" do 
+        @tracker.has_changes?.should be_true
+        @tracker.changeset.first.should include("./spec/images/a_test.png")
+      end
+    end
+
     describe "file exclustions" do 
       before do 
         @img_dir = File.dirname(__FILE__) + '/images'

@@ -13,7 +13,6 @@ class MtimeTracker
   end
 
   def files
-    return @files if @files
     @files = without_exclusions(Dir.glob(@dir + "/**/*"))
   end
 
@@ -51,7 +50,9 @@ class MtimeTracker
   end
 
   def changeset
-    files.select{|f| file_changed?(f)}
+    changed = files.select{|f| file_changed?(f)}
+    deleted = without_exclusions(mtimes.keys) - current_mtimes.keys
+    changed + deleted
   end
 
   def has_changes?
