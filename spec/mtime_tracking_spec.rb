@@ -3,8 +3,8 @@ require 'fileutils'
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe MtimeTracker do
-  describe "on a new directory" do 
-    before do 
+  describe "on a new directory" do
+    before do
       @img_dir = File.dirname(__FILE__) + '/images'
       @tracker = MtimeTracker.new(@img_dir)
     end
@@ -13,18 +13,18 @@ describe MtimeTracker do
       File.delete(@img_dir + "/.mtimes") rescue nil
     end
 
-    it "tells me there are changes" do 
+    it "tells me there are changes" do
       @tracker.has_changes?.should be_true
     end
 
-    it "tells me things have not changed after I update the tracking" do 
+    it "tells me things have not changed after I update the tracking" do
       @tracker.update
       @tracker.has_changes?.should be_false
     end
   end
 
-  describe "on an existing directory" do 
-    before do 
+  describe "on an existing directory" do
+    before do
       @img_dir = File.dirname(__FILE__) + '/images'
       MtimeTracker.new(@img_dir).update
       @tracker = MtimeTracker.new(@img_dir)
@@ -34,47 +34,47 @@ describe MtimeTracker do
       File.delete(@img_dir + "/.mtimes") rescue nil
     end
 
-    it "tells me nothing has changed" do 
+    it "tells me nothing has changed" do
       @tracker.has_changes?.should be_false
     end
 
-    describe "when a file has changed" do 
-      before do 
+    describe "when a file has changed" do
+      before do
         FileUtils.touch(@img_dir + "/lightening.png")
         @tracker.reset
       end
 
-      it "returns true from has_changes" do 
+      it "returns true from has_changes" do
         @tracker.has_changes?.should be_true
         @tracker.changeset.first.should include("/spec/images/lightening.png")
       end
     end
 
-    describe "when a file is deleted" do 
-      before do 
+    describe "when a file is deleted" do
+      before do
         FileUtils.touch(@img_dir + "/a_test.png")
         File.exists?(@img_dir + "/a_test.png").should be_true
         @tracker.update
         File.delete(@img_dir + "/a_test.png")
       end
 
-      it "returns true from has_changes" do 
+      it "returns true from has_changes" do
         @tracker.has_changes?.should be_true
-        @tracker.changeset.first.should include("./spec/images/a_test.png")
+        @tracker.changeset.first.should include("/spec/images/a_test.png")
       end
     end
 
-    describe "file exclustions" do 
-      before do 
+    describe "file exclustions" do
+      before do
         @img_dir = File.dirname(__FILE__) + '/images'
         @tracker = MtimeTracker.new(@img_dir, :exclude => [/lightening/, "tacos"])
       end
 
-      after do 
+      after do
         File.delete(@img_dir + "/.mtimes") rescue nil
       end
 
-      it "does not report excluded files as changed" do 
+      it "does not report excluded files as changed" do
         FileUtils.touch(@img_dir + "/lightening.png")
         @tracker.has_changes?.should be_false
       end

@@ -1,4 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require 'stringio'
 
 describe PNG::Parser do
   it "errors out when the file header is wrong" do
