@@ -36,4 +36,10 @@ describe Sprite do
     @sprite.max_height.should == max_height
   end
 
+  it "accepts file names to append to the sprite" do
+    PNG::Image.should_receive(:image_data).with("dog.png").and_return(@image1)
+
+    @sprite.append_file( "dog.png" )
+  end
+
 end

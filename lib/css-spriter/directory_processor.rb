@@ -24,8 +24,10 @@ class DirectoryProcessor
 
   def write
     return unless @tracker.has_changes?
-    images.each {|f| @sprite.append(PNG::Image.image_data(f))}
+    images.each {|f| @sprite.append_file(f)}
+
     @sprite.write(sprite_file)
+
     File.open(css_file, 'w') do |f|
       f.write(css)
     end
@@ -64,7 +66,7 @@ class DirectoryProcessor
   def truncate_abs_path
     return @dir unless @options[:source]
     path_elements = @options[:source].split('/')
-    path_elements.pop #we want to remove everything above the root 
+    path_elements.pop #we want to remove everything above the root
     to_truncate = path_elements.join("/")
     @dir.gsub(to_truncate, "")
   end

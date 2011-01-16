@@ -18,6 +18,10 @@ class Sprite
     @max_height = @images.map{ |i| i.height }.max
   end
 
+  def append_file( filename )
+    append( PNG::Image.image_data( filename ))
+  end
+
   def locations
     @images.inject(0) do |x, image|
       @locations[image.name.to_sym] = { :x => -(x),
