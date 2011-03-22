@@ -4,11 +4,11 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "spriter"
+    gem.name = "css-spriter"
     gem.summary = %Q{pure ruby PNG spriting library}
-    gem.description = %Q{Spriter is a pure ruby PNG spriting library. It can be used standalone or as a Rails plugin, see the readme for details.}
+    gem.description = %Q{CSS-Spriter is a pure ruby PNG spriting library. It can be used standalone or as a Rails plugin, see the readme for details.}
     gem.email = ["qzzzq1@gmail.com", "tyler.jennings@gmail.com"]
-    gem.homepage = "http://github.com/aberant/spriter"
+    gem.homepage = "http://github.com/aberant/css-spriter"
     gem.authors = ["aberant", "tjennings"]
     gem.add_development_dependency "rspec" #, ">= 1.2.9"
     gem.add_dependency "chunky_png", "~> 1.1.0"
@@ -38,7 +38,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "spittle #{version}"
+  rdoc.title = "css-spriter #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
