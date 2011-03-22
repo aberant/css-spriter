@@ -36,7 +36,7 @@ class Sprite
     current_x = 0
 
     images.each do |image|
-      sprite.replace(image, current_x, 0)
+      sprite = sprite.replace(image, current_x, 0)
       current_x += image.width
     end
 

@@ -1,3 +1,4 @@
+require 'chunky_png'
 require 'css-spriter/sprite'
 require 'css-spriter/image'
 require 'css-spriter/directory_processor'
