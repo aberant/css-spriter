@@ -5,9 +5,8 @@ describe Sprite do
     @sprite = Sprite.new
     @builder = ImageBuilder.new
 
-    #TODO - We should just create ImageData objects here
-    @image1 = @builder.build( :width => 50, :height => 50, :name => "image1").to_image
-    @image2 = @builder.build( :width => 50, :height => 50, :name => "image2").to_image
+    @image1 = @builder.build( :width => 50, :height => 50, :name => "image1")
+    @image2 = @builder.build( :width => 50, :height => 50, :name => "image2")
   end
 
   it "can merge an image to the right" do
@@ -35,11 +34,4 @@ describe Sprite do
 
     @sprite.max_height.should == max_height
   end
-
-  it "accepts file names to append to the sprite" do
-    PNG::Image.should_receive(:image_data).with("dog.png").and_return(@image1)
-
-    @sprite.append_file( "dog.png" )
-  end
-
 end

@@ -1,7 +1,9 @@
 require 'rspec'
 require 'rspec/autorun'
 
+require 'chunky_png'
 require 'css-spriter'
+
 
 require 'builders/image_builder'
 

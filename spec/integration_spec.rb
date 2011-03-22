@@ -1,27 +1,4 @@
-require 'benchmark'
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
-
-describe 'PNG' do
-  before do 
-    @img_dir = File.dirname(__FILE__) + '/images'
-    @expected_dir = File.dirname(__FILE__) + '/expected_output'
-    @tmp_dir = File.dirname(__FILE__) + '/tmp'
-  end
-
-  it 'can read and write a PNG' do 
-    img = PNG::Image.open("#{@img_dir}/lightening.png")
-    img.write("#{@tmp_dir}/write_test.png", :filter_type => 0)
-    read("#{@expected_dir}/write_test.png").should == read("#{@tmp_dir}/write_test.png")
-  end
-
-  it 'can merge one PNG on the left of another' do 
-    one = PNG::Image.image_data("#{@img_dir}/lightening.png", :rgba => false)
-    two = PNG::Image.image_data("#{@img_dir}/lightening.png", :rgba => false)
-    merged = one.merge_left two
-    PNG::Image.write("#{@tmp_dir}/merge_right_test.png", merged, :filter_type => 0)
-    read("#{@expected_dir}/merge_right_test.png").should == read("#{@tmp_dir}/merge_right_test.png")
-  end
-end
 
 describe "Dir sprite" do
   before :all do
@@ -32,50 +9,50 @@ describe "Dir sprite" do
     @spriter.write
   end
 
-  after :all do 
+  after :all do
     @spriter.cleanup
   end
 
-  describe "Sprite generation" do 
-    it "provides the correct dir name" do 
+  describe "Sprite generation" do
+    it "provides the correct dir name" do
       @spriter.dir_name.should == 'words'
     end
 
-    it "find all the pngs in a directory" do 
+    it "find all the pngs in a directory" do
       expected = ['latitude.png', 'of.png', 'set.png', 'specified.png']
       images = @spriter.images
       images.map{|f| f.split('/').last}.should == expected
     end
 
-    it "sprites all the images in a directory" do 
+    it "sprites all the images in a directory" do
       File.exists?(@sprite_file).should be_true
     end
   end
 
-  describe "CSS fragments" do 
-    before :all do 
+  describe "CSS fragments" do
+    before :all do
       @template = @dir + "/template.css"
       @css = @spriter.css
     end
 
-    after do 
+    after do
       File.delete(@template) rescue nil
     end
 
-    it "should compose class names" do 
+    it "should compose class names" do
       @css.should include( ".words_latitude")
       @css.should include( ".words_of" )
     end
 
-    it "has the correct image path" do 
+    it "has the correct image path" do
       @css.should include( "/sprite_dirs/words/sprite.png" )
     end
 
-    it "should write css fragments for a sprite" do 
+    it "should write css fragments for a sprite" do
       File.exists?(@css_file).should be_true
     end
 
-    it "can be overidden by including a template.css in the sprite directory" do 
+    it "can be overidden by including a template.css in the sprite directory" do
       File.open(@template, 'w'){|f| f.write("override")}
       @spriter.write
       @spriter.css.should include("override")
@@ -83,8 +60,8 @@ describe "Dir sprite" do
   end
 end
 
-describe 'Stylesheet generator' do 
-  before :all do 
+describe 'Stylesheet generator' do
+  before :all do
     @dir = File.dirname(__FILE__) + "/css_fragments"
     @out = @dir + "/complete.css"
     @builder = StylesheetBuilder.new(@dir)
@@ -92,54 +69,54 @@ describe 'Stylesheet generator' do
     @css = @builder.css
   end
 
-  after :all do 
+  after :all do
     @builder.cleanup
   end
 
-  it "takes the css fragments and concatonates them into a single stylesheet" do 
+  it "takes the css fragments and concatonates them into a single stylesheet" do
     @css.should include( ".some_style" )
   end
 
-  it "can handle nested folder structures" do 
+  it "can handle nested folder structures" do
     @css.should include( ".deep" )
   end
 
-  it "writes the css file to the specified location" do 
+  it "writes the css file to the specified location" do
     @builder.write
     File.exists?(@out).should be_true
   end
 end
 
-describe "Complete spriting process" do 
-  before :all do 
+describe "Complete spriting process" do
+  before :all do
     @dir = File.dirname(__FILE__) + "/sprite_dirs"
     @css_file = @dir + "/sprite.css"
     @spriter = CssSpriter::Processor.new(:path_prefix => "/images", :source => @dir, :css_file => @css_file)
     @spriter.write
   end
 
-  after :all do 
+  after :all do
     @spriter.cleanup
     #making sure it cleans things up - shitty place for these
     File.exists?(@css_file).should be_false
     File.exists?(@dir + "/words/sprite.png").should be_false
   end
 
-  it "prepends a path prefix to all sprites in the css file" do 
+  it "prepends a path prefix to all sprites in the css file" do
     file = read(@css_file)
     file.should include("/images/sprite_dirs/words")
   end
 
-  it "can find all the sprite directories" do 
+  it "can find all the sprite directories" do
     dirs = @spriter.directories.map{|d| d.split('/').last}
     dirs.should include( "words" )
   end
 
-  it "generates the css file at the appropriate location" do 
+  it "generates the css file at the appropriate location" do
     File.exists?(@css_file).should be_true
   end
 
-  it "creates sprites/css for all subfolders" do 
+  it "creates sprites/css for all subfolders" do
     File.exists?(@dir + "/words/sprite.png").should be_true
     File.exists?(@dir + "/words/fragment.css").should be_true
   end

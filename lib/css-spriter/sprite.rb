@@ -1,5 +1,4 @@
 class Sprite
-  class ImageFormatException < Exception; end
   attr_reader :images, :max_height
 
   def initialize
@@ -8,18 +7,12 @@ class Sprite
   end
 
   def append( image )
-    @images.each do |i|
-     unless i.compatible? image
-       raise ImageFormatException.new("Image #{i} not compatible with #{image}")
-     end
-    end
-
     @images << image
     @max_height = @images.map{ |i| i.height }.max
   end
 
   def append_file( filename )
-    append( PNG::Image.image_data( filename ))
+    append( CssSpriter::Image.from_file( filename ))
   end
 
   def locations
@@ -34,10 +27,19 @@ class Sprite
 
   def write( output_filename )
     return if @images.empty?
-    right_sized = @images.map{|i| i.fill_to_height(@max_height)}
-    # head is the last image, then we merge left
-    head, *tail = right_sized.reverse
-    result = tail.inject( head ){ |head, image| head.merge_left( image ) }
-    PNG::Image.write( output_filename, result )
+
+    sprite_height = @images.map{ |i| i.height }.max
+    sprite_width = @images.inject(0){|sum, image| sum + image.width }
+
+    sprite = ChunkyPNG::Image.new(sprite_width, sprite_height)
+
+    current_x = 0
+
+    images.each do |image|
+      sprite.replace(image, current_x, 0)
+      current_x += image.width
+    end
+
+    sprite.save( output_filename, :best_compression )
   end
 end
