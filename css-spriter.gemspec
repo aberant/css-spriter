@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{css-spriter}
-  s.version = "1.0.0"
+  s.version = "1.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["aberant", "tjennings"]
-  s.date = %q{2011-03-22}
+  s.date = %q{2011-03-23}
   s.default_executable = %q{css-spriter}
   s.description = %q{CSS-Spriter is a pure ruby PNG spriting library. It can be used standalone or as a Rails plugin, see the readme for details.}
   s.email = ["qzzzq1@gmail.com", "tyler.jennings@gmail.com"]
@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "bin/css-spriter",
+    "css-spriter.gemspec",
     "examples/sprites/.mtimes",
     "examples/sprites/README",
     "examples/sprites/fragment.css",
