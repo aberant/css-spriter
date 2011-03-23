@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 describe "Dir sprite" do
   before :all do
     @dir = File.dirname(__FILE__) + "/sprite_dirs/words"
-    @spriter = DirectoryProcessor.new(@dir)
+    @spriter = CssSpriter::DirectoryProcessor.new(@dir)
     @sprite_file = @dir + "/sprite.png"
     @css_file = @dir + "/fragment.css"
     @spriter.write
@@ -64,7 +64,7 @@ describe 'Stylesheet generator' do
   before :all do
     @dir = File.dirname(__FILE__) + "/css_fragments"
     @out = @dir + "/complete.css"
-    @builder = StylesheetBuilder.new(@dir)
+    @builder = CssSpriter::StylesheetBuilder.new(@dir)
     @builder.output_file(@out)
     @css = @builder.css
   end

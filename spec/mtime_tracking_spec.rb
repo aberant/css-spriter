@@ -2,11 +2,11 @@ require 'benchmark'
 require 'fileutils'
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-describe MtimeTracker do
+describe CssSpriter::MtimeTracker do
   describe "on a new directory" do
     before do
       @img_dir = File.dirname(__FILE__) + '/images'
-      @tracker = MtimeTracker.new(@img_dir)
+      @tracker = CssSpriter::MtimeTracker.new(@img_dir)
     end
 
     after do
@@ -26,8 +26,8 @@ describe MtimeTracker do
   describe "on an existing directory" do
     before do
       @img_dir = File.dirname(__FILE__) + '/images'
-      MtimeTracker.new(@img_dir).update
-      @tracker = MtimeTracker.new(@img_dir)
+      CssSpriter::MtimeTracker.new(@img_dir).update
+      @tracker = CssSpriter::MtimeTracker.new(@img_dir)
     end
 
     after do
@@ -67,7 +67,7 @@ describe MtimeTracker do
     describe "file exclustions" do
       before do
         @img_dir = File.dirname(__FILE__) + '/images'
-        @tracker = MtimeTracker.new(@img_dir, :exclude => [/lightening/, "tacos"])
+        @tracker = CssSpriter::MtimeTracker.new(@img_dir, :exclude => [/lightening/, "tacos"])
       end
 
       after do

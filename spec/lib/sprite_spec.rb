@@ -1,8 +1,8 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe Sprite do
+describe CssSpriter::Sprite do
   before :each do
-    @sprite = Sprite.new
+    @sprite = CssSpriter::Sprite.new
     @builder = ImageBuilder.new
 
     @image1 = @builder.build( :width => 50, :height => 50, :name => "image1")
