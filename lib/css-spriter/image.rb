@@ -8,6 +8,10 @@ module CssSpriter
       image = super
       image.name = name
       image
+    rescue => e
+      raise LoadingError, "Error loading #{filename}: #{e.message}"
     end
+    
+    class LoadingError < StandardError; end
   end
 end
