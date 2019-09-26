@@ -11,7 +11,7 @@ begin
     gem.homepage = "http://github.com/aberant/css-spriter"
     gem.authors = ["aberant", "tjennings"]
     gem.add_development_dependency "rspec" #, ">= 1.2.9"
-    gem.add_dependency "chunky_png", "~> 1.1.0"
+    gem.add_dependency "chunky_png", "~> 1.3.11"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
